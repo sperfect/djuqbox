@@ -1,0 +1,2 @@
+serviceClass: gr.sperfect.djuqbox.webapp.client.GreetingService
+path: 0492D99CB89B42D71357C7181DC5148F.gwt.rpc

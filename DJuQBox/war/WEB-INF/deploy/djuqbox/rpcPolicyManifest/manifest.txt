@@ -1,0 +1,3 @@
+# Module djuqbox
+# RPC service class, partial path of RPC policy file
+gr.sperfect.djuqbox.webapp.client.GreetingService, 0492D99CB89B42D71357C7181DC5148F.gwt.rpc
