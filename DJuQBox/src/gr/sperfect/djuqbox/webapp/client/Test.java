@@ -32,7 +32,7 @@ public class Test extends Composite implements HasText {
 
 	@UiHandler("button")
 	void onClick(ClickEvent e) {
-		Window.alert("Hello!");
+		Window.alert("Hello test!");
 	}
 
 	public void setText(String text) {
