@@ -1,5 +1,7 @@
 package gr.sperfect.test.restygwy.client;
 
+import java.util.List;
+
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
@@ -37,7 +39,8 @@ public class TestRestyGWT implements EntryPoint {
 			+ "attempting to contact the server. Please check your network " + "connection and try again.";
 
 	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
+	 * Create a remote service proxy to talk to the server-side Greeting
+	 * service.
 	 */
 	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
@@ -45,9 +48,9 @@ public class TestRestyGWT implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		
-		Defaults.setServiceRoot(GWT.getHostPageBaseURL()+ "rest/");
-		
+
+		Defaults.setServiceRoot(GWT.getHostPageBaseURL() + "rest/");
+
 		final Button sendButton = new Button("Send4");
 		final TextBox nameField = new TextBox();
 		nameField.setText("GWT User");
@@ -100,26 +103,40 @@ public class TestRestyGWT implements EntryPoint {
 			 * Fired when the user clicks on the sendButton.
 			 */
 			public void onClick(ClickEvent event) {
-				//sendNameToServer();
+				// sendNameToServer();
 				TestSevice ts = GWT.create(TestSevice.class);
-				
-				
+
 				TestOrder to = new TestOrder("t1");
 				ts.order(to, new MethodCallback<TestOrderConfirmation>() {
-					
+
 					@Override
 					public void onSuccess(Method method, TestOrderConfirmation response) {
-						// TODO Auto-generated method stub
+
 						Window.alert(response.getName());
 					}
-					
+
 					@Override
 					public void onFailure(Method method, Throwable exception) {
-						// TODO Auto-generated method stub
+
 						Window.alert(exception.getMessage());
 					}
 				});
-				
+
+				ts.getAll(new MethodCallback<List<TestOrderConfirmation>>() {
+
+					@Override
+					public void onSuccess(Method method, List<TestOrderConfirmation> response) {
+
+						Window.alert(response.get(1).getName());
+					}
+
+					@Override
+					public void onFailure(Method method, Throwable exception) {
+
+						Window.alert(exception.getMessage());
+					}
+				});
+
 			}
 
 			/**
@@ -132,7 +149,8 @@ public class TestRestyGWT implements EntryPoint {
 			}
 
 			/**
-			 * Send the name from the nameField to the server and wait for a response.
+			 * Send the name from the nameField to the server and wait for a
+			 * response.
 			 */
 			private void sendNameToServer() {
 				// First, we validate the input.
