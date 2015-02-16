@@ -18,6 +18,9 @@
 
 	<!-- Other module inherits -->
 
+	<!--<inherits name="com.bramosystems.gwt.player.BSTPlayer" /> -->
+	<inherits name="com.bramosystems.oss.player.youtube.YouTube" />
+
 	<inherits name="org.fusesource.restygwt.RestyGWT" />
 	<!-- Specify the app entry point class. -->
 	<entry-point class='gr.sperfect.test.restygwy.client.TestRestyGWT' />

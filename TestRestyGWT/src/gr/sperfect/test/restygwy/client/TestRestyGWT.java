@@ -1,15 +1,21 @@
 package gr.sperfect.test.restygwy.client;
 
+import gr.sperfect.test.restygwy.shared.FieldVerifier;
+import gr.sperfect.test.restygwy.shared.TestOrder;
+import gr.sperfect.test.restygwy.shared.TestOrderConfirmation;
+
 import java.util.List;
 
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
-import gr.sperfect.test.restygwy.shared.FieldVerifier;
-import gr.sperfect.test.restygwy.shared.TestOrder;
-import gr.sperfect.test.restygwy.shared.TestOrderConfirmation;
-
+import com.bramosystems.oss.player.core.client.AbstractMediaPlayer;
+import com.bramosystems.oss.player.core.client.PlayException;
+import com.bramosystems.oss.player.core.client.PlayerUtil;
+import com.bramosystems.oss.player.core.client.PluginNotFoundException;
+import com.bramosystems.oss.player.core.client.PluginVersionException;
+import com.bramosystems.oss.player.youtube.client.ChromelessPlayer;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,6 +23,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.logical.shared.AttachEvent;
+import com.google.gwt.event.logical.shared.AttachEvent.Handler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -24,6 +32,7 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -47,6 +56,9 @@ public class TestRestyGWT implements EntryPoint {
 	/**
 	 * This is the entry point method.
 	 */
+
+	private AbstractMediaPlayer player = null;
+
 	public void onModuleLoad() {
 
 		Defaults.setServiceRoot(GWT.getHostPageBaseURL() + "rest/");
@@ -104,6 +116,18 @@ public class TestRestyGWT implements EntryPoint {
 			 */
 			public void onClick(ClickEvent event) {
 				// sendNameToServer();
+				
+				Window.alert("pre");
+				try {
+					player.playMedia();
+					Window.alert("ok");
+				} catch (PlayException e) {
+				
+					// e.printStackTrace();
+					Window.alert(e.getMessage());
+				}
+				Window.alert("after");
+				
 				TestSevice ts = GWT.create(TestSevice.class);
 
 				TestOrder to = new TestOrder("t1");
@@ -113,8 +137,8 @@ public class TestRestyGWT implements EntryPoint {
 					public void onSuccess(Method method, TestOrderConfirmation response) {
 
 						Window.alert(response.getName());
-						//test
-						//test2
+						// test
+						// test2
 					}
 
 					@Override
@@ -192,5 +216,51 @@ public class TestRestyGWT implements EntryPoint {
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
 		nameField.addKeyUpHandler(handler);
+
+		SimplePanel panel = new SimplePanel(); // create panel to hold the
+												// player
+
+		RootPanel.get("playerPanel").add(panel);
+
+		try {
+
+			// create the player, specifing URL of media
+			// player = new YouTubePlayer("video-id", "width", "height");
+			// player = new YouTubeIPlayer("JlYXp_3A64k", "100%", "350px");
+			player = new ChromelessPlayer("JlYXp_3A64k", "100%", "100%");
+
+			player.addAttachHandler(new Handler() {
+
+				@Override
+				public void onAttachOrDetach(AttachEvent event) {
+					// TODO Auto-generated method stub
+					Window.alert("pre");
+					try {
+						player.playMedia();
+					} catch (PlayException e) {
+						// TODO Auto-generated catch block
+						// e.printStackTrace();
+						Window.alert(e.getMessage());
+					}
+					Window.alert("after");
+				}
+			});
+
+			panel.setWidget(player); // add player to panel.
+
+		} catch (PluginVersionException e) {
+			// required Flash plugin version is not available,
+			// alert user possibly providing a link to the plugin download page.
+			panel.setWidget(new HTML(".. some nice message telling the " + "user to download plugin first .."));
+		} catch (PluginNotFoundException e) {
+			// required Flash plugin not found, display a friendly notice.
+			panel.setWidget(PlayerUtil.getMissingPluginNotice(e.getPlugin()));
+		} catch (Exception e) {
+			// required Flash plugin version is not available,
+			// alert user possibly providing a link to the plugin download page.
+			panel.setWidget(new HTML(".. some nice message telling the " + "user to download plugin first . . "
+					+ e.getMessage()));
+		}
 	}
+
 }
