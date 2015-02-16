@@ -1,0 +1,2 @@
+serviceClass: gr.sperfect.test.restygwy.client.GreetingService
+path: 209A39072CA0DFDD482ECE51992D1229.gwt.rpc
