@@ -113,6 +113,7 @@ public class TestRestyGWT implements EntryPoint {
 					public void onSuccess(Method method, TestOrderConfirmation response) {
 
 						Window.alert(response.getName());
+						//test
 					}
 
 					@Override
