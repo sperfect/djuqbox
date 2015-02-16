@@ -114,6 +114,7 @@ public class TestRestyGWT implements EntryPoint {
 
 						Window.alert(response.getName());
 						//test
+						//test2
 					}
 
 					@Override
