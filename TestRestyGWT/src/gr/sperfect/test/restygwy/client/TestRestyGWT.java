@@ -15,7 +15,9 @@ import com.bramosystems.oss.player.core.client.PlayException;
 import com.bramosystems.oss.player.core.client.PlayerUtil;
 import com.bramosystems.oss.player.core.client.PluginNotFoundException;
 import com.bramosystems.oss.player.core.client.PluginVersionException;
-import com.bramosystems.oss.player.youtube.client.ChromelessPlayer;
+import com.bramosystems.oss.player.core.event.client.PlayerStateEvent;
+import com.bramosystems.oss.player.core.event.client.PlayerStateHandler;
+import com.bramosystems.oss.player.youtube.client.YouTubeIPlayer;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -220,37 +222,101 @@ public class TestRestyGWT implements EntryPoint {
 		sendButton.addClickHandler(handler);
 		nameField.addKeyUpHandler(handler);
 
-		SimplePanel panel = new SimplePanel(); // create panel to hold the
+		final SimplePanel panel = new SimplePanel(); // create panel to hold the
 												// player
 
-		RootPanel.get("playerPanel").add(panel);
+		
 
 		try {
 
 			// create the player, specifing URL of media
 			// player = new YouTubePlayer("video-id", "width", "height");
 			// player = new YouTubeIPlayer("JlYXp_3A64k", "100%", "350px");
-			player = new ChromelessPlayer("JlYXp_3A64k", "100%", "100%");
-
+			//player = new ChromelessPlayer("JlYXp_3A64k", "100%", "100%");
+			//QbwZL-EK6CY
+			player = new YouTubeIPlayer("I-2i2SR_OsU", "350px", "350px");
+			//player = new YouTubePlayer("I-2i2SR_OsU", "100%", "100%");
+			
+			YouTubeIPlayer iplayer = (YouTubeIPlayer) player;
+			player.addPlayerStateHandler(new PlayerStateHandler() {
+				
+				@Override
+				public void onPlayerStateChanged(PlayerStateEvent event) {
+					if (event.getPlayerState() == PlayerStateEvent.State.Ready)
+					{
+						
+						//Window.alert("PlayerStateEvent pre");
+						try {
+							player.playMedia();
+						} catch (PlayException e) {
+						
+							Window.alert(e.getMessage());
+						}
+						//Window.alert("after");
+					
+					}
+					
+				}
+			});
+			
 			player.addAttachHandler(new Handler() {
 
 				@Override
 				public void onAttachOrDetach(AttachEvent event) {
-					// TODO Auto-generated method stub
-					Window.alert("pre");
-					try {
-						player.playMedia();
-					} catch (PlayException e) {
-						// TODO Auto-generated catch block
-						// e.printStackTrace();
-						Window.alert(e.getMessage());
-					}
-					Window.alert("after");
+		
+					//Window.alert(event.toDebugString() + " att");
+//					Window.alert("pre");
+//					try {
+//						player.playMedia();
+//					} catch (PlayException e) {
+//					
+//						Window.alert(e.getMessage());
+//					}
+//					Window.alert("after");
+				
 				}
 			});
 
-			panel.setWidget(player); // add player to panel.
+			
+			//Window.alert("setWidget pre");
+			//panel.setWidget(player); // add player to panel.
+			//Window.alert("setWidget after");
+		
+			panel.addAttachHandler(new Handler() {
+				
+				@Override
+				public void onAttachOrDetach(AttachEvent event) {
+		
+					//Window.alert("setWidget pre");
+					panel.setWidget(player); // add player to panel.
+					//Window.alert("setWidget after");
+				}
+			});
+			
+			
+			
+			Button b = new Button("test");
+			RootPanel.get("playerPanel").add(b);
+			b.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					//Window.alert("pre");
+					try {
+						player.playMedia();
+					} catch (PlayException e) {
+					
+						// e.printStackTrace();
+						Window.alert(e.getMessage());
+					}
+					//Window.alert("after");
+				}
+			});
 
+			RootPanel.get("playerPanel").add(panel);
+			
+			
+			
 		} catch (PluginVersionException e) {
 			// required Flash plugin version is not available,
 			// alert user possibly providing a link to the plugin download page.
@@ -264,6 +330,8 @@ public class TestRestyGWT implements EntryPoint {
 			panel.setWidget(new HTML(".. some nice message telling the " + "user to download plugin first . . "
 					+ e.getMessage()));
 		}
+		
+		//Window.alert("end");
 	}
 
 }
