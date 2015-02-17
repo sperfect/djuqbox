@@ -57,6 +57,9 @@ public class TestRestyGWT implements EntryPoint {
 	 * This is the entry point method.
 	 */
 
+	
+	
+	
 	private AbstractMediaPlayer player = null;
 
 	public void onModuleLoad() {
