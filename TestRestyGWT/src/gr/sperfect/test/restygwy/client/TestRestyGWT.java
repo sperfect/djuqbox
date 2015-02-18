@@ -15,9 +15,14 @@ import com.bramosystems.oss.player.core.client.PlayException;
 import com.bramosystems.oss.player.core.client.PlayerUtil;
 import com.bramosystems.oss.player.core.client.PluginNotFoundException;
 import com.bramosystems.oss.player.core.client.PluginVersionException;
+import com.bramosystems.oss.player.core.client.spi.PlayerWidget;
+import com.bramosystems.oss.player.core.event.client.DebugEvent;
+import com.bramosystems.oss.player.core.event.client.DebugHandler;
+import com.bramosystems.oss.player.core.event.client.LoadingProgressEvent;
+import com.bramosystems.oss.player.core.event.client.LoadingProgressHandler;
 import com.bramosystems.oss.player.core.event.client.PlayerStateEvent;
 import com.bramosystems.oss.player.core.event.client.PlayerStateHandler;
-import com.bramosystems.oss.player.youtube.client.YouTubeIPlayer;
+import com.bramosystems.oss.player.youtube.client.YouTubePlayer;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -27,7 +32,7 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.event.logical.shared.AttachEvent.Handler;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -59,12 +64,11 @@ public class TestRestyGWT implements EntryPoint {
 	 * This is the entry point method.
 	 */
 
-	
-	
-	
 	private AbstractMediaPlayer player = null;
 
 	public void onModuleLoad() {
+
+		// Window.alert("onModuleLoad start");
 
 		Defaults.setServiceRoot(GWT.getHostPageBaseURL() + "rest/");
 
@@ -121,18 +125,18 @@ public class TestRestyGWT implements EntryPoint {
 			 */
 			public void onClick(ClickEvent event) {
 				// sendNameToServer();
-				
-				Window.alert("pre");
+
+				// Window.alert("pre");
 				try {
 					player.playMedia();
-					Window.alert("ok");
+					// Window.alert("ok");
 				} catch (PlayException e) {
-				
+
 					// e.printStackTrace();
-					Window.alert(e.getMessage());
+					// Window.alert(e.getMessage());
 				}
-				Window.alert("after");
-				
+				// Window.alert("after");
+
 				TestSevice ts = GWT.create(TestSevice.class);
 
 				TestOrder to = new TestOrder("t1");
@@ -141,7 +145,7 @@ public class TestRestyGWT implements EntryPoint {
 					@Override
 					public void onSuccess(Method method, TestOrderConfirmation response) {
 
-						Window.alert(response.getName());
+						// Window.alert(response.getName());
 						// test
 						// test2
 					}
@@ -149,7 +153,7 @@ public class TestRestyGWT implements EntryPoint {
 					@Override
 					public void onFailure(Method method, Throwable exception) {
 
-						Window.alert(exception.getMessage());
+						// Window.alert(exception.getMessage());
 					}
 				});
 
@@ -158,13 +162,13 @@ public class TestRestyGWT implements EntryPoint {
 					@Override
 					public void onSuccess(Method method, List<TestOrderConfirmation> response) {
 
-						Window.alert(response.get(1).getName());
+						// Window.alert(response.get(1).getName());
 					}
 
 					@Override
 					public void onFailure(Method method, Throwable exception) {
 
-						Window.alert(exception.getMessage());
+						// Window.alert(exception.getMessage());
 					}
 				});
 
@@ -222,101 +226,168 @@ public class TestRestyGWT implements EntryPoint {
 		sendButton.addClickHandler(handler);
 		nameField.addKeyUpHandler(handler);
 
-		final SimplePanel panel = new SimplePanel(); // create panel to hold the
-												// player
+		AddPlayer();
 
-		
+		// //Window.alert("end");
+	}
+
+	Timer t;
+
+	private void AddPlayer() {
+
+		final SimplePanel panel = new SimplePanel(); // create panel to hold the
+		// player
 
 		try {
 
 			// create the player, specifing URL of media
 			// player = new YouTubePlayer("video-id", "width", "height");
 			// player = new YouTubeIPlayer("JlYXp_3A64k", "100%", "350px");
-			//player = new ChromelessPlayer("JlYXp_3A64k", "100%", "100%");
-			//QbwZL-EK6CY
-			player = new YouTubeIPlayer("I-2i2SR_OsU", "350px", "350px");
-			//player = new YouTubePlayer("I-2i2SR_OsU", "100%", "100%");
+			// player = new ChromelessPlayer("JlYXp_3A64k", "100%", "100%");
+			// QbwZL-EK6CY
+			//player = new YouTubeIPlayer("I-2i2SR_OsU", "350px", "350px");
 			
-			YouTubeIPlayer iplayer = (YouTubeIPlayer) player;
-			player.addPlayerStateHandler(new PlayerStateHandler() {
+			//player = new YouTubePlayer("I-2i2SR_OsU", "350px", "350px");
+			player = new YouTubePlayer("", "350px", "350px");
+			
+			PlayerWidget pw ;
+			//player.
+
+			//PlayerInfo pi = PlayerUtil.getPlayerInfo("bst.youtube", "IYouTube");
+
+			//player = PlayerUtil.getPlayer(pi, "I-2i2SR_OsU", false, "350px", "350px");
+
+			// player.
+			// player.add
+
+			// t = new Timer() {
+			//
+			// @Override
+			// public void run() {
+			// if (player.getClass() == YouTubeIPlayer.class) {
+			// //Window.alert("YouTubeIPlayer ");
+			//
+			// YouTubePlayerProvider p = new YouTubePlayerProvider();
+			//
+			// if (p.isIFrameAPIReady())
+			// {
+			// //Window.alert("YouTubeIPlayer isIFrameAPIReady");
+			// }
+			// else {
+			// //Window.alert("YouTubeIPlayer not isIFrameAPIReady");
+			// t.schedule(1);
+			// }
+			// }
+			// }
+			// };
+			// t.schedule(1);
+
+			// YouTubeIPlayer iplayer = (YouTubeIPlayer) player;
+			
+			player.addDebugHandler(new DebugHandler() {
 				
 				@Override
-				public void onPlayerStateChanged(PlayerStateEvent event) {
-					if (event.getPlayerState() == PlayerStateEvent.State.Ready)
-					{
-						
-						//Window.alert("PlayerStateEvent pre");
-						try {
-							player.playMedia();
-						} catch (PlayException e) {
-						
-							Window.alert(e.getMessage());
-						}
-						//Window.alert("after");
-					
-					}
-					
+				public void onDebug(DebugEvent event) {
+					// TODO Auto-generated method stub
+					 //System.out.println("This should print something here " + event.toDebugString());
+					// Window.alert("This should print something here " + event.toDebugString());
+					 GWT.log(event.toDebugString() + " " + event.getMessage());
 				}
 			});
 			
+
+			player.addPlayerStateHandler(new PlayerStateHandler() {
+
+				@Override
+				public void onPlayerStateChanged(PlayerStateEvent event) {
+
+					// Window.alert( event.toDebugString() +
+					// " PlayerStateEvent pre");
+
+					if (event.getPlayerState() == PlayerStateEvent.State.Ready) {
+
+						// //Window.alert("PlayerStateEvent pre");
+						try {
+							player.playMedia();
+						} catch (PlayException e) {
+
+							// Window.alert(e.getMessage());
+						}
+						// //Window.alert("after");
+
+					}
+
+				}
+			});
+
 			player.addAttachHandler(new Handler() {
 
 				@Override
 				public void onAttachOrDetach(AttachEvent event) {
-		
-					//Window.alert(event.toDebugString() + " att");
-//					Window.alert("pre");
-//					try {
-//						player.playMedia();
-//					} catch (PlayException e) {
-//					
-//						Window.alert(e.getMessage());
-//					}
-//					Window.alert("after");
-				
+
+					// Window.alert(event.toDebugString() + " att");
+					// //Window.alert("pre");
+					// try {
+					// player.playMedia();
+					// } catch (PlayException e) {
+					//
+					// //Window.alert(e.getMessage());
+					// }
+					// //Window.alert("after");
+
 				}
 			});
 
-			
-			//Window.alert("setWidget pre");
-			//panel.setWidget(player); // add player to panel.
-			//Window.alert("setWidget after");
-		
-			panel.addAttachHandler(new Handler() {
-				
+			player.addLoadingProgressHandler(new LoadingProgressHandler() {
+
 				@Override
-				public void onAttachOrDetach(AttachEvent event) {
-		
-					//Window.alert("setWidget pre");
-					panel.setWidget(player); // add player to panel.
-					//Window.alert("setWidget after");
+				public void onLoadingProgress(LoadingProgressEvent event) {
+
+					// Window.alert(event.toDebugString() + " setWidget pre");
 				}
 			});
-			
-			
-			
+
+			panel.addAttachHandler(new Handler() {
+
+				@Override
+				public void onAttachOrDetach(AttachEvent event) {
+
+					// RootPanel.get("playerPanel").add(panel);
+
+					// Window.alert("panel.addAttachHandler");
+					// panel.setWidget(player); // add player to panel.
+					// //Window.alert("setWidget after");
+				}
+			});
+
 			Button b = new Button("test");
 			RootPanel.get("playerPanel").add(b);
 			b.addClickHandler(new ClickHandler() {
-				
+
 				@Override
 				public void onClick(ClickEvent event) {
-					//Window.alert("pre");
+					// //Window.alert("pre");
 					try {
+						//player.loadMedia(mediaURL);
+						
 						player.playMedia();
 					} catch (PlayException e) {
-					
+
 						// e.printStackTrace();
-						Window.alert(e.getMessage());
+						// Window.alert(e.getMessage());
 					}
-					//Window.alert("after");
+					// //Window.alert("after");
 				}
 			});
 
+			// //Window.alert("setWidget pre");
+			panel.setWidget(player); // add player to panel.
+			// //Window.alert("setWidget after");
+
+			// //Window.alert("add panel pre");
 			RootPanel.get("playerPanel").add(panel);
-			
-			
-			
+			// Window.alert("add panel after");
+
 		} catch (PluginVersionException e) {
 			// required Flash plugin version is not available,
 			// alert user possibly providing a link to the plugin download page.
@@ -330,8 +401,6 @@ public class TestRestyGWT implements EntryPoint {
 			panel.setWidget(new HTML(".. some nice message telling the " + "user to download plugin first . . "
 					+ e.getMessage()));
 		}
-		
-		//Window.alert("end");
-	}
 
+	}
 }
