@@ -1,6 +1,13 @@
 package gr.sperfect.djuqbox.webapp.client;
 
+import java.util.List;
+
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
+
 import gr.sperfect.djuqbox.webapp.shared.FieldVerifier;
+import gr.sperfect.djuqbox.webapp.shared.data.Room;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -8,6 +15,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -29,7 +37,8 @@ public class DJuQBox implements EntryPoint {
 			+ "attempting to contact the server. Please check your network " + "connection and try again.";
 
 	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
+	 * Create a remote service proxy to talk to the server-side Greeting
+	 * service.
 	 */
 	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
@@ -37,6 +46,10 @@ public class DJuQBox implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+
+		// set RestyGWT roor url
+		Defaults.setServiceRoot(GWT.getHostPageBaseURL() + "rest/");
+
 		final Button sendButton = new Button("Send test3");
 		final TextBox nameField = new TextBox();
 		nameField.setText("GWT User");
@@ -89,7 +102,33 @@ public class DJuQBox implements EntryPoint {
 			 * Fired when the user clicks on the sendButton.
 			 */
 			public void onClick(ClickEvent event) {
+
+				// test Resty
+				testResty();
+
 				sendNameToServer();
+
+			}
+
+			private void testResty() {
+				RestApiService api = GWT.create(RestApiService.class);
+
+				api.getAll(new MethodCallback<List<Room>>() {
+
+					@Override
+					public void onSuccess(Method method, List<Room> response) {
+						// all ok
+						Window.alert("OK");
+					}
+
+					@Override
+					public void onFailure(Method method, Throwable exception) {
+						// error
+						Window.alert("error: " + exception.getMessage());
+
+					}
+				});
+
 			}
 
 			/**
@@ -102,7 +141,8 @@ public class DJuQBox implements EntryPoint {
 			}
 
 			/**
-			 * Send the name from the nameField to the server and wait for a response.
+			 * Send the name from the nameField to the server and wait for a
+			 * response.
 			 */
 			private void sendNameToServer() {
 				// First, we validate the input.
