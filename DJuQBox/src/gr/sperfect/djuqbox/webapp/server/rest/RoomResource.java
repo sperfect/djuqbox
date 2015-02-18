@@ -21,12 +21,15 @@ public class RoomResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Room> getUserRooms(/*@Context HttpHeaders headers*/) {
+	public List<Room> getUserRooms(@Context HttpHeaders headers) {
 		
 		List<Room>  ret = new ArrayList<Room>();
 		ret.add(new Room("room0"));
 		ret.add(new Room("room1"));
 		
+		for(String header : headers.getRequestHeaders().keySet()){
+			System.out.println(header +": " + headers.getRequestHeader(header));
+		}
 
 		return ret; 
 	}

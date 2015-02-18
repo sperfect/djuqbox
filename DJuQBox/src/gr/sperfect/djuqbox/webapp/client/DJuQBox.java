@@ -107,7 +107,7 @@ public class DJuQBox implements EntryPoint {
 				// test Resty
 				testResty();
 
-				sendNameToServer();
+				//sendNameToServer();
 
 			}
 
@@ -119,7 +119,7 @@ public class DJuQBox implements EntryPoint {
 					@Override
 					public void onSuccess(Method method, List<Room> response) {
 						// all ok
-						Window.alert("OK");
+						Window.alert("OK " + response.get(0).getName());
 					}
 
 					@Override
