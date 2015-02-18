@@ -50,6 +50,9 @@ public class DJuQBox implements EntryPoint {
 
 		// set RestyGWT roor url
 		Defaults.setServiceRoot(GWT.getHostPageBaseURL() + "rest/");
+		
+		//loading splash screen
+		//https://turbomanage.wordpress.com/2009/10/13/how-to-create-a-splash-screen-while-gwt-loads/
 
 		final Button sendButton = new Button("Send test3");
 		final TextBox nameField = new TextBox();
