@@ -1,8 +1,12 @@
 package gr.sperfect.djuqbox.webapp.shared.data;
 
-public class Room extends BaseDataClass{
+public class Room extends BaseDataClass {
 
 	private String name;
+
+	public Room() {
+		// needed by json
+	}
 
 	public Room(String aName) {
 		name = aName;
@@ -16,5 +20,4 @@ public class Room extends BaseDataClass{
 		this.name = name;
 	}
 
-	
 }
