@@ -21,7 +21,7 @@ public class RoomResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Room> getUserRooms(@Context HttpHeaders headers) {
+	public List<Room> getUserRooms(/*@Context HttpHeaders headers*/) {
 		
 		List<Room>  ret = new ArrayList<Room>();
 		ret.add(new Room("room0"));
