@@ -4,14 +4,15 @@ public class BaseDataClass {
 
 	public BaseDataClass() {
 		//needed by json converter
+		id = "test";
 	}
 	private String id;
 
-	String getId() {
+	public String getId() {
 		return id;
 	}
 
-	void setId(String id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 }
