@@ -10,6 +10,8 @@ import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
 
@@ -19,7 +21,7 @@ public class RoomResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Room> getUserRooms() {
+	public List<Room> getUserRooms(@Context HttpHeaders headers) {
 		
 		List<Room>  ret = new ArrayList<Room>();
 		ret.add(new Room("room0"));
