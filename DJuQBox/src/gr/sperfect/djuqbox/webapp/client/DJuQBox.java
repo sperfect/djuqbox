@@ -2,6 +2,7 @@ package gr.sperfect.djuqbox.webapp.client;
 
 import java.util.List;
 
+import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
