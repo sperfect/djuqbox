@@ -7,7 +7,9 @@ import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
@@ -32,5 +34,14 @@ public class RoomResource {
 		}
 
 		return ret; 
+	}
+	
+	@POST	
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Room createRoom (Room aRoomParam) {
+		Room newRoom = new Room(aRoomParam.getName());
+		//save assign...
+		return newRoom;
 	}
 }
