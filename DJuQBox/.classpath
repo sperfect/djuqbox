@@ -35,6 +35,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-jaxrs-base-2.3.2.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-jaxrs-json-provider-2.3.2.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-module-jaxb-annotations-2.3.2.jar"/>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (4)"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
