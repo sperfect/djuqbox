@@ -10,6 +10,7 @@ public class BaseDataClass {
 	
 	public BaseDataClass(String aName) {
 		name = aName;
+		id = "test2";
 	}
 
 	
