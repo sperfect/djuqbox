@@ -7,8 +7,8 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.RestService;
@@ -39,5 +39,15 @@ public interface RestApiService extends RestService {
 //	@Path("room/users") 
 //	public void addUserToRoom(RoomUser ru,  MethodCallback<Room> callback);
 
+	
+	@GET
+	@Path("user")  // prepei na einai javax.ws.rs.Path !!!!!
+	public void getUsers( MethodCallback<List<User>> callback);
+	
+	
+	@GET
+	@Path("user/{id}")  // prepei na einai javax.ws.rs.Path !!!!!
+	public void getUser(@PathParam("id") String aUserId,  MethodCallback<List<Room>> callback);
+	
 }
 
