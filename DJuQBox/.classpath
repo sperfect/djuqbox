@@ -3,7 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/gwt-2.7.0"/>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (3)"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jaxb-api-2.2.7.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/javax.annotation-api-1.2.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jersey-common.jar"/>
@@ -36,5 +35,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-jaxrs-base-2.3.2.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-jaxrs-json-provider-2.3.2.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-module-jaxb-annotations-2.3.2.jar"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (4)"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
