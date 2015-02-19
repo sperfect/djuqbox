@@ -5,6 +5,7 @@ public class BaseDataClass {
 	public BaseDataClass() {
 		//needed by json converter
 		id = "test";
+		
 	}
 	
 	public BaseDataClass(String aName) {

@@ -9,7 +9,7 @@ public class Room extends BaseDataClass {
 	}
 
 	public Room(String aName) {
-		setName(aName);
+		super("Room "+ aName);
 		
 	}
 

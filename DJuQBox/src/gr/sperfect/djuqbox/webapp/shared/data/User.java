@@ -6,7 +6,7 @@ public class User extends BaseDataClass {
 		// json needed
 	}
 	public User(String aName) {
-		setName(aName);
+		super("User "+ aName);
 		
 	}
 }
