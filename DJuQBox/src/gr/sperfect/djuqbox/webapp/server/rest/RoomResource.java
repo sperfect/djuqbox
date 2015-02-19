@@ -3,6 +3,7 @@ package gr.sperfect.djuqbox.webapp.server.rest;
 
 
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
+import gr.sperfect.djuqbox.webapp.shared.data.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,17 +22,18 @@ import javax.ws.rs.core.MediaType;
 public class RoomResource {
 
 	
+	
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Room> getUserRooms(@Context HttpHeaders headers) {
+	@Produces(MediaType.APPLICATION_JSON)	
+	public List<Room> getRooms(@Context HttpHeaders headers) {
 		
 		List<Room>  ret = new ArrayList<Room>();
 		ret.add(new Room("room0"));
 		ret.add(new Room("room1"));
 		
-		for(String header : headers.getRequestHeaders().keySet()){
-			System.out.println(header +": " + headers.getRequestHeader(header));
-		}
+//		for(String header : headers.getRequestHeaders().keySet()){
+//			System.out.println(header +": " + headers.getRequestHeader(header));
+//		}
 
 		return ret; 
 	}
@@ -43,5 +45,20 @@ public class RoomResource {
 		Room newRoom = new Room(aRoomParam.getName());
 		//save assign...
 		return newRoom;
+	}
+	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/users")
+	public List<User> getRoomUsers(@Context HttpHeaders headers, Room r) {
+		
+		List<User> ret = new ArrayList<User>();
+		ret.add(new User("user0"));
+		ret.add(new User("user1"));
+		
+		
+
+		return ret; 
 	}
 }

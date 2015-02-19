@@ -6,7 +6,15 @@ public class BaseDataClass {
 		//needed by json converter
 		id = "test";
 	}
-	private String id;
+	
+	public BaseDataClass(String aName) {
+		name = aName;
+	}
+
+	
+	
+	protected String id;
+	protected String name;
 
 	public String getId() {
 		return id;
@@ -14,5 +22,13 @@ public class BaseDataClass {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
