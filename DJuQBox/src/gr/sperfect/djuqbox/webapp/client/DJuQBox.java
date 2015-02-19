@@ -143,6 +143,7 @@ public class DJuQBox implements EntryPoint {
 			
 			//test conflicts 2
 			//test branch acs
+			//paizei wraia ftanei na kaneis Fetch, Pull kai meta Push (sou bgazei oti de mporei na gine push non-fast-forward) kai kanei automatata merge kai sta idia ta files
 
 			private void testResty() {
 				RestApiService api = GWT.create(RestApiService.class);
