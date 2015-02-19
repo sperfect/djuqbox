@@ -5,8 +5,10 @@ import java.util.List;
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
+import org.fusesource.restygwt.client.REST;
 
 import gr.sperfect.djuqbox.webapp.shared.FieldVerifier;
+import gr.sperfect.djuqbox.webapp.shared.RestApiInterface;
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -50,9 +52,11 @@ public class DJuQBox implements EntryPoint {
 
 		// set RestyGWT roor url
 		Defaults.setServiceRoot(GWT.getHostPageBaseURL() + "rest/");
-		
-		//loading splash screen
-		//https://turbomanage.wordpress.com/2009/10/13/how-to-create-a-splash-screen-while-gwt-loads/
+		Defaults.setDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		// Defaults.setDateFormat(null);
+
+		// loading splash screen
+		// https://turbomanage.wordpress.com/2009/10/13/how-to-create-a-splash-screen-while-gwt-loads/
 
 		final Button sendButton = new Button("Send test3");
 		final TextBox nameField = new TextBox();
@@ -101,16 +105,38 @@ public class DJuQBox implements EntryPoint {
 		});
 
 		// Create a handler for the sendButton and nameField
-		class MyHandler implements ClickHandler, KeyUpHandler {
+		class MyHandler implements ClickHandler, KeyUpHandler, MethodCallback {
 			/**
 			 * Fired when the user clicks on the sendButton.
 			 */
 			public void onClick(ClickEvent event) {
 
 				// test Resty
-				testResty();
+				//testResty();
 
-				//sendNameToServer();
+				testRestyIntf();
+
+				// sendNameToServer();
+
+			}
+
+			private void testRestyIntf() {
+				RestApiInterface api = GWT.create(RestApiInterface.class);
+				REST.withCallback(null).call(api).getRooms();
+			}
+
+			@Override
+			public void onFailure(Method method, Throwable ex) {
+				// TODO Auto-generated method stub
+				Window.alert("error: " + ex.getMessage());
+			}
+
+			@Override
+			public void onSuccess(Method method, Object response) {
+
+				// mallon den ginetai, de mou dinei kati to method gia na tis
+				// jexwrisw.ektos an mprow na parw kapws to url?
+				Window.alert("OK " + method);
 
 			}
 
@@ -132,15 +158,15 @@ public class DJuQBox implements EntryPoint {
 
 					}
 				});
-				
+
 				api.getRoomUsers(new Room("restroom"), new MethodCallback<List<Room>>() {
-					
+
 					@Override
 					public void onSuccess(Method method, List<Room> response) {
 						// TODO Auto-generated method stub
 						Window.alert("OK " + response.get(0).getId());
 					}
-					
+
 					@Override
 					public void onFailure(Method method, Throwable ex) {
 						// TODO Auto-generated method stub
@@ -195,6 +221,7 @@ public class DJuQBox implements EntryPoint {
 					}
 				});
 			}
+
 		}
 
 		// Add a handler to send the name to the server
