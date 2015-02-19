@@ -153,6 +153,7 @@ public class DJuQBox implements EntryPoint {
 					public void onSuccess(Method method, List<Room> response) {
 						// all ok
 						Window.alert("OK " + response.get(0).getId());
+						//test coflict
 					}
 
 					@Override
