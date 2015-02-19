@@ -30,7 +30,14 @@ public interface RestApiService extends RestService {
 	@Path("room")  
 	public void createRoom(Room r, MethodCallback<Room> callback);
 	
-	@PUT
-	@Path("room/users") 
-	public void createRoom(Room r, User u,  MethodCallback<Room> callback);
+//	@PUT
+//	@Path("room/users") 
+//	public void createRoom(Room r, User u,  MethodCallback<Room> callback);
+	//den ginetai Methods can optionally declare one method argument before the callback to pass via the request body
+	
+//	@PUT
+//	@Path("room/users") 
+//	public void addUserToRoom(RoomUser ru,  MethodCallback<Room> callback);
+
 }
+
