@@ -105,40 +105,40 @@ public class DJuQBox implements EntryPoint {
 		});
 
 		// Create a handler for the sendButton and nameField
-		class MyHandler implements ClickHandler, KeyUpHandler, MethodCallback {
+		class MyHandler implements ClickHandler, KeyUpHandler /*, MethodCallback*/ {
 			/**
 			 * Fired when the user clicks on the sendButton.
 			 */
 			public void onClick(ClickEvent event) {
 
 				// test Resty
-				//testResty();
+				testResty();
 
-				testRestyIntf();
+				//testRestyIntf();
 
 				// sendNameToServer();
 
 			}
 
-			private void testRestyIntf() {
-				RestApiInterface api = GWT.create(RestApiInterface.class);
-				REST.withCallback(null).call(api).getRooms();
-			}
-
-			@Override
-			public void onFailure(Method method, Throwable ex) {
-				// TODO Auto-generated method stub
-				Window.alert("error: " + ex.getMessage());
-			}
-
-			@Override
-			public void onSuccess(Method method, Object response) {
-
-				// mallon den ginetai, de mou dinei kati to method gia na tis
-				// jexwrisw.ektos an mprow na parw kapws to url?
-				Window.alert("OK " + method);
-
-			}
+//			private void testRestyIntf() {
+//				RestApiInterface api = GWT.create(RestApiInterface.class);
+//				REST.withCallback(null).call(api).getRooms();
+//			}
+//
+//			@Override
+//			public void onFailure(Method method, Throwable ex) {
+//				// TODO Auto-generated method stub
+//				Window.alert("error: " + ex.getMessage());
+//			}
+//
+//			@Override
+//			public void onSuccess(Method method, Object response) {
+//
+//				// mallon den ginetai, de mou dinei kati to method gia na tis
+//				// jexwrisw.ektos an mprow na parw kapws to url?
+//				Window.alert("OK " + method);
+//
+//			}
 
 			private void testResty() {
 				RestApiService api = GWT.create(RestApiService.class);
