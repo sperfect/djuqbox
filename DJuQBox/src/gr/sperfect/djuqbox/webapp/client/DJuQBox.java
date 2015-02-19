@@ -139,6 +139,9 @@ public class DJuQBox implements EntryPoint {
 //				Window.alert("OK " + method);
 //
 //			}
+			
+			
+			//test conflicts 2
 
 			private void testResty() {
 				RestApiService api = GWT.create(RestApiService.class);
