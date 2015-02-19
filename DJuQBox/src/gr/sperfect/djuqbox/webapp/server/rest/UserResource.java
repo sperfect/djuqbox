@@ -1,6 +1,5 @@
 package gr.sperfect.djuqbox.webapp.server.rest;
 
-import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
 
 import java.util.ArrayList;
@@ -21,8 +20,8 @@ public class UserResource {
 	public List<User> getUsers(@Context HttpHeaders headers) {
 		
 		List<User>  ret = new ArrayList<User>();
-		ret.add(new User("room0"));
-		ret.add(new User("room1"));
+		ret.add(new User("user0"));
+		ret.add(new User("user1"));
 		
 
 
