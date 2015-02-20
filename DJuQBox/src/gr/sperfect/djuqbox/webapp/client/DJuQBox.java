@@ -164,21 +164,40 @@ public class DJuQBox implements EntryPoint {
 					}
 				});
 
-				api.addUserToRoom("aRoomId", new User("1234"), new MethodCallback<User>() {
-
+				
+				
+				api.addUserToRoom("aRoomId", new User("1234"), new MethodCallback<Void>() {
+					
 					@Override
-					public void onSuccess(Method method, User response) {
-
-						Window.alert("OK2 " + response.getName());
-
+					public void onSuccess(Method method, Void response) {
+						// TODO Auto-generated method stub
+						Window.alert("OK2 Void "  + method.builder.getUser() );
 					}
-
+					
 					@Override
 					public void onFailure(Method method, Throwable exception) {
+						// TODO Auto-generated method stub
 						Window.alert("error2: " + exception.getMessage());
-
 					}
 				});
+
+				
+				
+//				api.addUserToRoom("aRoomId", new User("1234"), new MethodCallback<Void>() {
+//
+//					@Override
+//					public void onSuccess(Method method) {
+//
+//						Window.alert("OK2 ");// + response.getName());
+//
+//					}
+//
+//					@Override
+//					public void onFailure(Method method, Throwable exception) {
+//						Window.alert("error2: " + exception.getMessage());
+//
+//					}
+//				});
 
 				// api.getRooms(new MethodCallback<List<Room>>() {
 				//

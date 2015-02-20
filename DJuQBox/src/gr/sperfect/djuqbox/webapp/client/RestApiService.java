@@ -45,10 +45,10 @@ public interface RestApiService extends RestService {
 	
 	
 	
-	//check an ginetai?
+	//paizei!!
 	@POST
 	@Path("room/{id}/users")  
-	public void addUserToRoom(@PathParam("id") String aRoomId, User r, MethodCallback<User> callback );
+	public void addUserToRoom(@PathParam("id") String aRoomId, User r, MethodCallback<Void> callback );
 	
 	
 	

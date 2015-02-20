@@ -3,9 +3,11 @@ package gr.sperfect.djuqbox.webapp.server.rest;
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -50,7 +52,7 @@ public class RoomResource {
 	public List<User> getRoomUsers(@Context HttpHeaders headers, @PathParam("id") String aRoomId) {
 
 		List<User> ret = new ArrayList<User>();
-		ret.add(new User(aRoomId + " user0"));
+		ret.add(new User(aRoomId + " user123"));
 		ret.add(new User(aRoomId + " user1"));
 
 		return ret;
@@ -67,13 +69,31 @@ public class RoomResource {
 	}
 	
 	//check pws 8a ginei otan pataei to link / room/id sto url
-//
+	//epistrefei sto /room/
+	//argotera to blepoume an xreaizetai
 //	@GET
 //	@Produces(MediaType.TEXT_HTML)
 //	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-//	public void newTodo(@PathParam("id") String id, @Context javax.ws.rs.core.Response servletResponse) {
-//		//servletResponse.sendRedirect("../create_todo.html");
-//		//servletResponse.seeOther("../teset.html");
+//	@Path("{id}")
+//	public void getRoomHTML(@PathParam("id") String id, @Context HttpServletResponse servletResponse) {
+//		try {
+//			servletResponse.sendRedirect("http://127.0.0.1:8888/DJuQBox.html");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		//response.seeOther("../teset.html");
+//	
 //		
 //	}
+	
+	@GET
+	@Path("{id}")	
+	@Produces(MediaType.APPLICATION_JSON)	
+	public Room getRoom(@PathParam("id") String id,  @Context HttpHeaders headers) {
+
+		
+		return new Room("room0 "+ id);
+	}
+	
 }
