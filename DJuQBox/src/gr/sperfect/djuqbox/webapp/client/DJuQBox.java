@@ -1,15 +1,14 @@
 package gr.sperfect.djuqbox.webapp.client;
 
+import gr.sperfect.djuqbox.webapp.shared.FieldVerifier;
+import gr.sperfect.djuqbox.webapp.shared.data.Room;
+import gr.sperfect.djuqbox.webapp.shared.data.User;
+
 import java.util.List;
 
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
-import org.fusesource.restygwt.client.REST;
-
-import gr.sperfect.djuqbox.webapp.shared.FieldVerifier;
-import gr.sperfect.djuqbox.webapp.shared.RestApiInterface;
-import gr.sperfect.djuqbox.webapp.shared.data.Room;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -165,17 +164,15 @@ public class DJuQBox implements EntryPoint {
 					}
 				});
 
-				api.getRoomUsers(new Room("restroom"), new MethodCallback<List<Room>>() {
+				api.getRoomUsers(new Room("restroom"), new MethodCallback<List<User>>() {
 
 					@Override
-					public void onSuccess(Method method, List<Room> response) {
-						// TODO Auto-generated method stub
+					public void onSuccess(Method method, List<User> response) {
 						Window.alert("OK " + response.get(0).getId());
 					}
 
 					@Override
 					public void onFailure(Method method, Throwable ex) {
-						// TODO Auto-generated method stub
 						Window.alert("error: " + ex.getMessage());
 					}
 				});
