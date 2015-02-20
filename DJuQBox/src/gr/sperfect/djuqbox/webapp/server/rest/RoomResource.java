@@ -17,9 +17,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/room")
 public class RoomResource {
+
+	@Context
+	HttpHeaders headers;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -49,7 +53,7 @@ public class RoomResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	// @Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}/users")
-	public List<User> getRoomUsers(@Context HttpHeaders headers, @PathParam("id") String aRoomId) {
+	public List<User> getRoomUsers(@PathParam("id") String aRoomId) {
 
 		List<User> ret = new ArrayList<User>();
 		ret.add(new User(aRoomId + " user123"));
@@ -57,43 +61,41 @@ public class RoomResource {
 
 		return ret;
 	}
-	
-	
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	//@Consumes(MediaType.APPLICATION_JSON)
+	// @Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}/users")
 	public void addUserToRoom(@PathParam("id") String aRoomId, User aUser) {
-		Room newRoom = new Room(aRoomId +" "+aUser.getName());
-		
-	}
-	
-	//check pws 8a ginei otan pataei to link / room/id sto url
-	//epistrefei sto /room/
-	//argotera to blepoume an xreaizetai
-//	@GET
-//	@Produces(MediaType.TEXT_HTML)
-//	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-//	@Path("{id}")
-//	public void getRoomHTML(@PathParam("id") String id, @Context HttpServletResponse servletResponse) {
-//		try {
-//			servletResponse.sendRedirect("http://127.0.0.1:8888/DJuQBox.html");
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		//response.seeOther("../teset.html");
-//	
-//		
-//	}
-	
-	@GET
-	@Path("{id}")	
-	@Produces(MediaType.APPLICATION_JSON)	
-	public Room getRoom(@PathParam("id") String id,  @Context HttpHeaders headers) {
+		Room newRoom = new Room(aRoomId + " " + aUser.getName());
 
-		
-		return new Room("room0 "+ id);
 	}
-	
+
+	// check pws 8a ginei otan pataei to link / room/id sto url
+	// epistrefei sto /room/
+	// argotera to blepoume an xreaizetai
+	// @GET
+	// @Produces(MediaType.TEXT_HTML)
+	// @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	// @Path("{id}")
+	// public void getRoomHTML(@PathParam("id") String id, @Context
+	// HttpServletResponse servletResponse) {
+	// try {
+	// servletResponse.sendRedirect("http://127.0.0.1:8888/DJuQBox.html");
+	//
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	// // response.seeOther("../teset.html");
+	//
+	// }
+
+	@GET
+	@Path("{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Room getRoom(@PathParam("id") String id) {
+
+		return new Room("room0 " + id);
+	}
+
 }

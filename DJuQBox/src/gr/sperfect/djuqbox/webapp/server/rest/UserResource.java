@@ -20,9 +20,12 @@ import javax.ws.rs.core.MediaType;
 @Path("/user")
 public class UserResource {
 
+	@Context
+	HttpHeaders headers;
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getUsers(@Context HttpHeaders headers) {
+	public List<User> getUsers() {
 
 		List<User> ret = new ArrayList<User>();
 		ret.add(new User("user0"));
@@ -34,13 +37,13 @@ public class UserResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{user_id}")
-	public User getUser(@Context HttpHeaders headers, @PathParam("user_id") String aUserId) {
+	public User getUser(@PathParam("user_id") String aUserId) {
 
-		User u =  new User("user0" + aUserId);
+		User u = new User("user0" + aUserId);
 		u.setId(aUserId);
 		return u;
 	}
-	
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -49,7 +52,7 @@ public class UserResource {
 		// save assign...
 		return newUser;
 	}
-	
+
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -58,12 +61,11 @@ public class UserResource {
 		// save assign...
 		return aUserParam;
 	}
-	
-	@DELETE	
+
+	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteUser(User aUserParam) {
-		//delete
+		// delete
 	}
-
 
 }
