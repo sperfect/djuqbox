@@ -1,15 +1,14 @@
 package gr.sperfect.djuqbox.webapp.client;
 
+import gr.sperfect.djuqbox.webapp.shared.FieldVerifier;
+import gr.sperfect.djuqbox.webapp.shared.data.Room;
+import gr.sperfect.djuqbox.webapp.shared.data.User;
+
 import java.util.List;
 
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
-import org.fusesource.restygwt.client.REST;
-
-import gr.sperfect.djuqbox.webapp.shared.FieldVerifier;
-import gr.sperfect.djuqbox.webapp.shared.RestApiInterface;
-import gr.sperfect.djuqbox.webapp.shared.data.Room;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -105,7 +104,7 @@ public class DJuQBox implements EntryPoint {
 		});
 
 		// Create a handler for the sendButton and nameField
-		class MyHandler implements ClickHandler, KeyUpHandler /*, MethodCallback*/ {
+		class MyHandler implements ClickHandler, KeyUpHandler /* , MethodCallback */{
 			/**
 			 * Fired when the user clicks on the sendButton.
 			 */
@@ -114,71 +113,122 @@ public class DJuQBox implements EntryPoint {
 				// test Resty
 				testResty();
 
-				//testRestyIntf();
+				// testRestyIntf();
 
 				// sendNameToServer();
 
 			}
 
-//			private void testRestyIntf() {
-//				RestApiInterface api = GWT.create(RestApiInterface.class);
-//				REST.withCallback(null).call(api).getRooms();
-//			}
-//
-//			@Override
-//			public void onFailure(Method method, Throwable ex) {
-//				// TODO Auto-generated method stub
-//				Window.alert("error: " + ex.getMessage());
-//			}
-//
-//			@Override
-//			public void onSuccess(Method method, Object response) {
-//
-//				// mallon den ginetai, de mou dinei kati to method gia na tis
-//				// jexwrisw.ektos an mprow na parw kapws to url?
-//				Window.alert("OK " + method);
-//
-//			}
-			
-			
-			//test conflicts 2
-			//test branch acs
-			//paizei wraia ftanei na kaneis Fetch, Pull kai meta Push (sou bgazei oti de mporei na gine push non-fast-forward) kai kanei automatata merge kai sta idia ta files
+			// private void testRestyIntf() {
+			// RestApiInterface api = GWT.create(RestApiInterface.class);
+			// REST.withCallback(null).call(api).getRooms();
+			// }
+			//
+			// @Override
+			// public void onFailure(Method method, Throwable ex) {
+			// // TODO Auto-generated method stub
+			// Window.alert("error: " + ex.getMessage());
+			// }
+			//
+			// @Override
+			// public void onSuccess(Method method, Object response) {
+			//
+			// // mallon den ginetai, de mou dinei kati to method gia na tis
+			// // jexwrisw.ektos an mprow na parw kapws to url?
+			// Window.alert("OK " + method);
+			//
+			// }
+
+			// test conflicts 2
+			// test branch acs
+			// paizei wraia ftanei na kaneis Fetch, Pull kai meta Push (sou
+			// bgazei oti de mporei na gine push non-fast-forward) kai kanei
+			// automatata merge kai sta idia ta files
 
 			private void testResty() {
 				RestApiService api = GWT.create(RestApiService.class);
 
-				api.getRooms(new MethodCallback<List<Room>>() {
+				api.getRoomUsers(new Room("test55 "), new MethodCallback<List<User>>() {
 
 					@Override
-					public void onSuccess(Method method, List<Room> response) {
-						// all ok
-						Window.alert("OK " + response.get(0).getId());
-						//test coflict
+					public void onSuccess(Method method, List<User> response) {
+
+						Window.alert("OK " + response.get(0).getName());
+
 					}
 
 					@Override
-					public void onFailure(Method method, Throwable ex) {
-						// error
-						Window.alert("error: " + ex.getMessage());
-
+					public void onFailure(Method method, Throwable exception) {
+						// TODO Auto-generated method stub
+						Window.alert("error: " + exception.getMessage());
 					}
 				});
 
-				api.getRoomUsers(new Room("restroom"), new MethodCallback<List<Room>>() {
-
+				
+				
+				api.addUserToRoom("aRoomId", new User("1234"), new MethodCallback<Void>() {
+					
 					@Override
-					public void onSuccess(Method method, List<Room> response) {
+					public void onSuccess(Method method, Void response) {
 						// TODO Auto-generated method stub
-						Window.alert("OK " + response.get(0).getId());
+						Window.alert("OK2 Void "  + method.builder.getUser() );
 					}
-
+					
 					@Override
-					public void onFailure(Method method, Throwable ex) {
+					public void onFailure(Method method, Throwable exception) {
 						// TODO Auto-generated method stub
-						Window.alert("error: " + ex.getMessage());
+						Window.alert("error2: " + exception.getMessage());
 					}
 				});
+
+				
+				
+//				api.addUserToRoom("aRoomId", new User("1234"), new MethodCallback<Void>() {
+//
+//					@Override
+//					public void onSuccess(Method method) {
+//
+//						Window.alert("OK2 ");// + response.getName());
+//
+//					}
+//
+//					@Override
+//					public void onFailure(Method method, Throwable exception) {
+//						Window.alert("error2: " + exception.getMessage());
+//
+//					}
+//				});
+
+				// api.getRooms(new MethodCallback<List<Room>>() {
+				//
+				// @Override
+				// public void onSuccess(Method method, List<Room> response) {
+				// // all ok
+				// Window.alert("OK " + response.get(0).getId());
+				// //test coflict
+				// }
+				//
+				// @Override
+				// public void onFailure(Method method, Throwable ex) {
+				// // error
+				// Window.alert("error: " + ex.getMessage());
+				//
+				// }
+				// });
+				//
+				// api.getRoomUsers(new Room("restroom"), new
+				// MethodCallback<List<User>>() {
+				//
+				// @Override
+				// public void onSuccess(Method method, List<User> response) {
+				// Window.alert("OK " + response.get(0).getId());
+				// }
+				//
+				// @Override
+				// public void onFailure(Method method, Throwable ex) {
+				// Window.alert("error: " + ex.getMessage());
+				// }
+				// });
 
 			}
 

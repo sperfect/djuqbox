@@ -7,9 +7,11 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
+import org.fusesource.restygwt.client.Attribute;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.RestService;
 
@@ -23,12 +25,32 @@ public interface RestApiService extends RestService {
 	public void getRooms( MethodCallback<List<Room>> callback);
 	
 	@GET
-	@Path("room/users")  
-	public void getRoomUsers(Room r, MethodCallback<List<Room>> callback );
+	@Path("room/{id}")  // prepei na einai javax.ws.rs.Path !!!!!
+	public void getRoom(@PathParam("id") String aRoomId,  MethodCallback<List<Room>> callback);
+	
 	
 	@POST
 	@Path("room")  
 	public void createRoom(Room r, MethodCallback<Room> callback);
+	
+	@PUT
+	@Path("room")  
+	public void updateRoom(Room r, MethodCallback<Room> callback);
+	
+	
+		
+	@GET
+	@Path("room/{id}/users")  
+	public void getRoomUsers(@PathParam("id") @Attribute("id") Room r, MethodCallback<List<User>> callback );
+	
+	
+	
+	//paizei!!
+	@POST
+	@Path("room/{id}/users")  
+	public void addUserToRoom(@PathParam("id") String aRoomId, User r, MethodCallback<Void> callback );
+	
+	
 	
 //	@PUT
 //	@Path("room/users") 
@@ -47,7 +69,7 @@ public interface RestApiService extends RestService {
 	
 	@GET
 	@Path("user/{id}")  // prepei na einai javax.ws.rs.Path !!!!!
-	public void getUser(@PathParam("id") String aUserId,  MethodCallback<List<Room>> callback);
+	public void getUser(@PathParam("id") String aUserId,  MethodCallback<User> callback);
 	
 }
 

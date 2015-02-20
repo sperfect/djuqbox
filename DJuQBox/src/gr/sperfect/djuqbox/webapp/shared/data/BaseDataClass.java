@@ -1,5 +1,7 @@
 package gr.sperfect.djuqbox.webapp.shared.data;
 
+import org.fusesource.restygwt.client.Attribute;
+
 public class BaseDataClass {
 
 	public BaseDataClass() {
@@ -15,7 +17,8 @@ public class BaseDataClass {
 
 	
 	
-	protected String id;
+	//protected String id;
+	public String id; //prepei na einai public gia na to balw san @Attribute("id") sto RestApiService.getRoomUsers()
 	protected String name;
 
 	public String getId() {
