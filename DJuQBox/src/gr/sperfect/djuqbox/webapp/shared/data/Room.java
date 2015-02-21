@@ -9,7 +9,7 @@ import com.googlecode.objectify.annotation.Entity;
 @Entity
 public class Room extends BaseDataClass {
 
-	//test dates
+	//test dates //baraei 
 	private Date d ;
 
 	public Room() {
