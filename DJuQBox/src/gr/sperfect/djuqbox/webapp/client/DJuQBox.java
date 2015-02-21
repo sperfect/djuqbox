@@ -147,6 +147,24 @@ public class DJuQBox implements EntryPoint {
 
 			private void testResty() {
 				RestApiService api = GWT.create(RestApiService.class);
+				
+				
+				api.getRoom("testId", new MethodCallback<List<Room>>() {
+					
+					@Override
+					public void onSuccess(Method method, List<Room> response) {
+						// TODO Auto-generated method stub
+						Window.alert("OK3 method  "  + method.builder.getUrl() );
+						Window.alert("OK3 name  "  + response.get(0).getName()  );
+						Window.alert("OK3 name  "  + response.get(0).d.toString()  );
+					}
+					
+					@Override
+					public void onFailure(Method method, Throwable exception) {
+						// TODO Auto-generated method stub
+						Window.alert("error: " + exception.getMessage());
+					}
+				});
 
 				api.getRoomUsers(new Room("test55 "), new MethodCallback<List<User>>() {
 

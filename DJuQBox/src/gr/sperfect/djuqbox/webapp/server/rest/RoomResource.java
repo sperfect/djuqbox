@@ -5,6 +5,7 @@ import gr.sperfect.djuqbox.webapp.shared.data.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -95,7 +96,9 @@ public class RoomResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Room getRoom(@PathParam("id") String id) {
 
-		return new Room("room0 " + id);
+		Room r = new Room("room0 " + id);
+		r.d = new Date();
+		return r;
 	}
 
 }
