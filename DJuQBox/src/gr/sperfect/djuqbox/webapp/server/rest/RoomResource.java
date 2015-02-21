@@ -97,7 +97,7 @@ public class RoomResource {
 	public Room getRoom(@PathParam("id") String id) {
 
 		Room r = new Room("room0 " + id);
-		r.d = new Date();
+		r.setDate1(new Date());
 		return r;
 	}
 

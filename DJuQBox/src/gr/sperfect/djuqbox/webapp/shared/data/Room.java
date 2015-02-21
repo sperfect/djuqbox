@@ -10,7 +10,7 @@ import com.googlecode.objectify.annotation.Entity;
 public class Room extends BaseDataClass {
 
 	//test dates
-	public Date d ;
+	private Date d ;
 
 	public Room() {
 		// needed by json
@@ -19,6 +19,14 @@ public class Room extends BaseDataClass {
 	public Room(String aName) {
 		super("Room "+ aName);
 		
+	}
+
+	public Date getDate1() {
+		return d;
+	}
+
+	public void setDate1(Date d) {
+		this.d = d;
 	}
 
 	
