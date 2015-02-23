@@ -14,6 +14,7 @@ public class Room extends BaseDataClass {
 
 	public Room() {
 		// needed by json
+		// needed by Objectify
 	}
 
 	public Room(String aName) {
@@ -28,6 +29,8 @@ public class Room extends BaseDataClass {
 	public void setDate1(Date d) {
 		this.d = d;
 	}
+
+	
 
 	
 

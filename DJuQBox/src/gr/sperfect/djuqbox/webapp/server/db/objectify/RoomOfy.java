@@ -7,11 +7,13 @@ import com.googlecode.objectify.annotation.Index;
 @Entity
 public class RoomOfy {
 
-	@Id public Long id;
-    @Index public String name;
+	@Id
+	public Long id;
+	@Index
+	public String name;
 
-	public RoomOfy(String name) {		
-	
+	public RoomOfy(String name) {
+
 	}
-	
+
 }

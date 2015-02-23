@@ -18,8 +18,8 @@ public class OfyService {
 
 		factory().register(Room.class);
 		factory().register(User.class);
-		factory().register(Song.class);
-		factory().register(Playlist.class);
+//		factory().register(Song.class);
+//		factory().register(Playlist.class);
 
 		// ...etc
 	}

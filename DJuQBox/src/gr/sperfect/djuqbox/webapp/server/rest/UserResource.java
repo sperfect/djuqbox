@@ -40,7 +40,7 @@ public class UserResource {
 	public User getUser(@PathParam("user_id") String aUserId) {
 
 		User u = new User("user0" + aUserId);
-		u.setId(aUserId);
+		//u.setId(aUserId);
 		return u;
 	}
 

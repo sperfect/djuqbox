@@ -1,5 +1,7 @@
 package gr.sperfect.djuqbox.webapp.server.rest;
 
+import gr.sperfect.djuqbox.webapp.server.db.IDB;
+import gr.sperfect.djuqbox.webapp.server.db.objectify.DbOjectify;
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
 
@@ -29,6 +31,12 @@ public class RoomResource {
 		//logger.log(Level.INFO,  "");
 		//ola null edw
 	}
+	
+	private static IDB db = DbOjectify.getInstance();
+//			IDB GetDB() {
+//		//make it super
+//		return DbOjectify.getInstance();
+//	}
 
 	private static final Logger logger = java.util.logging.Logger.getLogger("RoomResource");
 
@@ -110,10 +118,32 @@ public class RoomResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Room getRoom(@PathParam("id") String id) {
 
-		logger.log(Level.INFO,  uri.getPath());
+		Log(id.toString());
+		
+		
+		
 		Room r = new Room("room0 " + id);
-		r.setDate1(new Date());
+		 r = db.CreateRoom(r);
+		 
+		 Long idL = r.id;
+		 
+		 Room rr = (Room) db.GetObject(r);
+		 
+		 //Room rGen = db.GetObjectGeneric(r);
+		  
+		 r = db.UpdateRoom(r);		 
+		 r = db.GetRoom(idL);
+		 
+		 db.DeleteRoom(r);
+	
+		
+		
 		return r;
+	}
+
+	private void Log(String message) {
+		// TODO Auto-generated method stub
+		logger.log(Level.INFO, req.getMethod() + " " +  message);
 	}
 
 }
