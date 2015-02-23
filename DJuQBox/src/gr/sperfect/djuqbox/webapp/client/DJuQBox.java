@@ -60,7 +60,7 @@ public class DJuQBox implements EntryPoint {
 		// set RestyGWT roor url
 		Defaults.setServiceRoot(GWT.getHostPageBaseURL() + "rest/");
 		//Defaults.setDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		//Defaults.setDateFormat(null);
+		Defaults.setDateFormat(null);
 
 		// loading splash screen
 		// https://turbomanage.wordpress.com/2009/10/13/how-to-create-a-splash-screen-while-gwt-loads/
@@ -157,14 +157,15 @@ public class DJuQBox implements EntryPoint {
 				RestApiService api = GWT.create(RestApiService.class);
 				
 				
-				api.getRoom("testId", new MethodCallback<List<Room>>() {
+				
+				api.getRoom("testId", new MethodCallback<Room>() {
 					
 					@Override
-					public void onSuccess(Method method, List<Room> response) {
+					public void onSuccess(Method method, Room response) {
 						// TODO Auto-generated method stub
 						Window.alert("OK3 method  "  + method.builder.getUrl() );
-						Window.alert("OK3 name  "  + response.get(0).getName()  );
-						Window.alert("OK3 name  "  + response.get(0).getDate1().toString()  );
+						Window.alert("OK3 name  "  + response.getName()  );
+						Window.alert("OK3 name  "  + response.getDate1().toString()  );
 					}
 					
 					@Override

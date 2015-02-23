@@ -26,7 +26,7 @@ public interface RestApiService extends RestService {
 	
 	@GET
 	@Path("room/{id}")  // prepei na einai javax.ws.rs.Path !!!!!
-	public void getRoom(@PathParam("id") String aRoomId,  MethodCallback<List<Room>> callback);
+	public void getRoom(@PathParam("id") String aRoomId,  MethodCallback<Room> callback);
 	
 	
 	@POST
