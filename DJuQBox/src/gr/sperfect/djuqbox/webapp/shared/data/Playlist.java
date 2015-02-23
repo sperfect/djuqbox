@@ -9,6 +9,7 @@ public class Playlist extends BaseDataClass {
 
 	}
 
+	Room roomOwner;
 	
 	List<Song> songs = new ArrayList<Song>();
 
