@@ -3,12 +3,12 @@ package gr.sperfect.djuqbox.webapp.server.rest;
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,13 +18,27 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Request;
+import javax.ws.rs.core.UriInfo;
 
 @Path("/room")
 public class RoomResource {
+	
+	public RoomResource() {
+		
+		//logger.log(Level.INFO,  "");
+		//ola null edw
+	}
+
+	private static final Logger logger = java.util.logging.Logger.getLogger("RoomResource");
 
 	@Context
 	HttpHeaders headers;
+	@Context
+	Request req;
+	@Context
+	UriInfo uri;
+	
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -96,6 +110,7 @@ public class RoomResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Room getRoom(@PathParam("id") String id) {
 
+		logger.log(Level.INFO,  uri.getPath());
 		Room r = new Room("room0 " + id);
 		r.setDate1(new Date());
 		return r;
