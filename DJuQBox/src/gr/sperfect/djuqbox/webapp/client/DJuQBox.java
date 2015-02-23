@@ -44,6 +44,14 @@ public class DJuQBox implements EntryPoint {
 	 */
 	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
+	//http://blog.javaforge.net/post/30469901979/gwt-rest
+	static {
+        // if you don't do this, on JSON response you'll get something like
+        // this:
+        // "Could not parse response: org.fusesource.restygwt.client.ResponseFormatException: Response was NOT a valid JSON document"
+        Defaults.setDateFormat(null);
+    }
+	
 	/**
 	 * This is the entry point method.
 	 */
@@ -52,7 +60,7 @@ public class DJuQBox implements EntryPoint {
 		// set RestyGWT roor url
 		Defaults.setServiceRoot(GWT.getHostPageBaseURL() + "rest/");
 		//Defaults.setDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		Defaults.setDateFormat(null);
+		//Defaults.setDateFormat(null);
 
 		// loading splash screen
 		// https://turbomanage.wordpress.com/2009/10/13/how-to-create-a-splash-screen-while-gwt-loads/
