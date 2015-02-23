@@ -39,6 +39,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/core-player-provider-2.0.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/youtube-player-provider-2.0.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/objectify-5.1.5.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-18.0.jar"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
