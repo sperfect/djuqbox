@@ -12,7 +12,7 @@ public class DBHelper<T extends BaseDataClass> {
 		// edw h parametropoihsh ths db
 		//if..
 		//
-		DbOjectify<T> db = new DbOjectify<T>();
+		DbOjectify<T> db = new DbOjectify<T>(type);
 		
 		
 		return db;

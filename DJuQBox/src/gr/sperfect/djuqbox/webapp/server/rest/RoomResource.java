@@ -38,6 +38,8 @@ public class RoomResource {
 	// }
 
 	private static final Logger logger = java.util.logging.Logger.getLogger("RoomResource");
+	
+	IDB<Room> db  = DBHelper.getDB(Room.class);
 
 	@Context
 	HttpHeaders headers;
@@ -50,13 +52,16 @@ public class RoomResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Room> getRooms(@Context HttpHeaders headers) {
 
-		List<Room> ret = new ArrayList<Room>();
-		ret.add(new Room("room0"));
-		ret.add(new Room("room1"));
-
-		// for(String header : headers.getRequestHeaders().keySet()){
-		// System.out.println(header +": " + headers.getRequestHeader(header));
-		// }
+		
+		List<Room> ret = db.getAllObjects(null);
+		
+//		List<Room> ret = new ArrayList<Room>();
+//		ret.add(new Room("room0"));
+//		ret.add(new Room("room1"));
+//
+//		// for(String header : headers.getRequestHeaders().keySet()){
+//		// System.out.println(header +": " + headers.getRequestHeader(header));
+//		// }
 
 		return ret;
 	}
@@ -118,13 +123,13 @@ public class RoomResource {
 
 		Log(id.toString());
 
-		IDB<Room> db = DBHelper.getDB(Room.class);
+		 
 
 		Room r = new Room("room0 " + id);
 		r = db.createObject(r);
 
 		Long idL = r.id;
-		// null!!!!
+		//OK??
 		Room rr = db.getObjectById(idL);
 
 		r = db.getObject(r);
@@ -136,11 +141,7 @@ public class RoomResource {
 		return r;
 	}
 
-	private int getDB() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
 	private void Log(String message) {
 		// TODO Auto-generated method stub
 		logger.log(Level.INFO, req.getMethod() + " " + message);
