@@ -97,11 +97,14 @@ public class RoomResource {
 	@Path("{id}/users")
 	public List<User> getRoomUsers(@PathParam("id") String aRoomId) {
 
-		List<User> ret = new ArrayList<User>();
-		ret.add(new User(aRoomId + " user123"));
-		ret.add(new User(aRoomId + " user1"));
-
-		return ret;
+		return getRoom(aRoomId).getUsers();
+//		List<User> ret = new ArrayList<User>();
+//		ret.add(new User(aRoomId + " user123"));
+//		ret.add(new User(aRoomId + " user1"));
+//
+//		//UserResource ur = new UserResource();
+//		//ur.getUsers("room_id")
+//		return ret;
 	}
 
 	@POST
