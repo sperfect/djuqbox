@@ -54,6 +54,8 @@ public class UserResource extends BaseResource {
 	public User createUser(User aUserParam) {
 		User newUser = db.createObject(aUserParam);
 		// save assign...
+		
+		servletResponse.setStatus(201);
 		return newUser;
 	}
 	

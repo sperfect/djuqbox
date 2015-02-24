@@ -24,6 +24,7 @@ public abstract class BaseResource {
 
 	protected void Log() {
 		Log(null);
+		
 	}
 
 	protected void Log(String message) {

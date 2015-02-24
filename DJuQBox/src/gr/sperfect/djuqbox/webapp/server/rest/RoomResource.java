@@ -66,6 +66,8 @@ public class RoomResource extends BaseResource {
 		Room newRoom = db.createObject(aRoomParam);
 
 		// save assign...
+		
+		servletResponse.setStatus(201);
 		return newRoom;
 	}
 
