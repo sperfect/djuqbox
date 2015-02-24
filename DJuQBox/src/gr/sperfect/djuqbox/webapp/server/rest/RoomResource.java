@@ -145,7 +145,7 @@ public class RoomResource {
 		r = db.createObject(r);
 
 		Long idL = r.id;
-		//OK??
+		
 		Room rr = db.getObjectById(idL);
 
 		r = db.getObject(r);
