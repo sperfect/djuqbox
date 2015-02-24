@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -26,12 +27,10 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.UriInfo;
 
 @Path("/rooms")
-public class RoomResource {
+public class RoomResource extends BaseResource {
 
 	public RoomResource() {
 
-		// logger.log(Level.INFO, "");
-		// ola null edw
 	}
 
 	// private static IDB db = DbOjectify.getInstance();
@@ -44,17 +43,14 @@ public class RoomResource {
 
 	IDB<Room> db = DBHelper.getDB(Room.class);
 
-	@Context
-	HttpHeaders headers;
-	@Context
-	Request req;
-	@Context
-	UriInfo uri;
+	
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Room> getRooms(@Context HttpHeaders headers) {
 
+		Log();
+		
 		List<Room> ret = db.getAllObjects(null);
 
 		return ret;
@@ -65,6 +61,8 @@ public class RoomResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Room createRoom(Room aRoomParam) {
 
+		Log();
+		
 		Room newRoom = db.createObject(aRoomParam);
 
 		// save assign...
@@ -74,8 +72,11 @@ public class RoomResource {
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("{id}")
 	public Room updateRoom(Room aRoomParam) {
 
+		Log();
+		
 		Room newRoom = db.updateObject(aRoomParam);
 
 		// save assign...
@@ -87,16 +88,19 @@ public class RoomResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteRoom(Room aRoomParam) {
 
+		Log();
+		
 		db.deleteObject(aRoomParam);
 
 	}
 
 	@DELETE
-	// @Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void deleteRoom() {
+	@Path("{id}")
+	public void deleteRoom(@PathParam("id") Long aRoomId) {
 
-		// forbidden
+		Log();
+		
+		db.deleteObject(db.getObjectById(aRoomId));
 
 	}
 
@@ -106,6 +110,8 @@ public class RoomResource {
 	@Path("{id}/users")
 	public List<User> getRoomUsers(@PathParam("id") String aRoomId) {
 
+		Log();
+		
 		return getRoom(aRoomId).getUsers();
 		// List<User> ret = new ArrayList<User>();
 		// ret.add(new User(aRoomId + " user123"));
@@ -121,6 +127,9 @@ public class RoomResource {
 	// @Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}/users")
 	public void addUserToRoom(@PathParam("id") Long aRoomId, User aUser) {
+		
+		Log();
+		
 		Room r = db.getObjectById(aRoomId);
 		r.getUsers().add(aUser);
 		db.updateObject(r);
@@ -132,6 +141,8 @@ public class RoomResource {
 	@Path("{id}/users/{user_id}/roles")
 	public List<UserRoomRole> getUserRoomRoles(@PathParam("id") Long aRoomId, @PathParam("user_id") Long aUserId) {
 
+		Log();
+		
 		UserRoomRole urr = new UserRoomRole();
 		urr.setRoomId(aRoomId);
 		urr.setUserId(aUserId);
@@ -161,12 +172,14 @@ public class RoomResource {
 	//
 	// }
 
+
+
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Room getRoom(@PathParam("id") String id) {
 
-		Log(id.toString());
+		Log();
 
 		Room r = new Room("room0 " + id);
 		r = db.createObject(r);
@@ -184,9 +197,6 @@ public class RoomResource {
 		return r;
 	}
 
-	private void Log(String message) {
-		// TODO Auto-generated method stub
-		logger.log(Level.INFO, req.getMethod() + " " + message);
-	}
+	
 
 }

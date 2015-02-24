@@ -25,7 +25,7 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.UriInfo;
 
 @Path("/users")
-public class UserResource {
+public class UserResource extends BaseResource {
 
 	private static final Logger logger = java.util.logging.Logger.getLogger("RoomResource");
 
@@ -96,12 +96,5 @@ public class UserResource {
 	}
 
 	
-
-
-	
-	private void Log(String message) {
-		// TODO Auto-generated method stub
-		logger.log(Level.INFO, req.getMethod() + " " + message);
-	}
 
 }
