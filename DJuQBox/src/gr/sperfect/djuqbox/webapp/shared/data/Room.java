@@ -1,5 +1,6 @@
 package gr.sperfect.djuqbox.webapp.shared.data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +13,8 @@ public class Room extends BaseDataClass {
 	// test dates //baraei
 	private Date d;
 
-	List<User> users;
+	private List<User> users;
+	private User userCreator;
 
 	public Room() {
 		// needed by json
@@ -34,12 +36,24 @@ public class Room extends BaseDataClass {
 
 	public List<User> getUsers() {
 
+		if (users == null)
+		{
+			users = new ArrayList<User>();
+		}
 		return users;
 	}
 
 	public void setUsers(List<User> aUsers) {
 
 		users = aUsers;
+	}
+
+	User getUserCreator() {
+		return userCreator;
+	}
+
+	void setUserCreator(User userCreator) {
+		this.userCreator = userCreator;
 	}
 
 }
