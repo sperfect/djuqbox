@@ -56,7 +56,7 @@ public class DJuQBox implements EntryPoint {
 	public void onModuleLoad() {
 
 		// set RestyGWT roor url
-		Defaults.setServiceRoot(GWT.getHostPageBaseURL() + "rest/");
+		Defaults.setServiceRoot(GWT.getHostPageBaseURL() + "api/v1/");
 		//Defaults.setDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		Defaults.setDateFormat(null);
 
