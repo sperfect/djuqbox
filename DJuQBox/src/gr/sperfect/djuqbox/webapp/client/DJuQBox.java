@@ -38,18 +38,14 @@ public class DJuQBox implements EntryPoint {
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network " + "connection and try again.";
 
-	
-	
-	
-
-	//http://blog.javaforge.net/post/30469901979/gwt-rest
+	// http://blog.javaforge.net/post/30469901979/gwt-rest
 	static {
-        // if you don't do this, on JSON response you'll get something like
-        // this:
-        // "Could not parse response: org.fusesource.restygwt.client.ResponseFormatException: Response was NOT a valid JSON document"
-        Defaults.setDateFormat(null);
-    }
-	
+		// if you don't do this, on JSON response you'll get something like
+		// this:
+		// "Could not parse response: org.fusesource.restygwt.client.ResponseFormatException: Response was NOT a valid JSON document"
+		Defaults.setDateFormat(null);
+	}
+
 	/**
 	 * This is the entry point method.
 	 */
@@ -57,7 +53,7 @@ public class DJuQBox implements EntryPoint {
 
 		// set RestyGWT roor url
 		Defaults.setServiceRoot(GWT.getHostPageBaseURL() + "api/v1/");
-		//Defaults.setDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		// Defaults.setDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		Defaults.setDateFormat(null);
 
 		// loading splash screen
@@ -81,7 +77,6 @@ public class DJuQBox implements EntryPoint {
 		nameField.setFocus(true);
 		nameField.selectAll();
 
-		
 		// Create a handler for the sendButton and nameField
 		class MyHandler implements ClickHandler, KeyUpHandler /* , MethodCallback */{
 			/**
@@ -91,13 +86,39 @@ public class DJuQBox implements EntryPoint {
 
 				GWT.log(event.getSource().toString());
 
+				TestResty();
+
+			}
+
+			private void TestResty() {
+				RestApiService api = GWT.create(RestApiService.class);
+				
+				User u = new User("test");
+				u.id = 2L;
+
+				api.addUserToRoom("1",u , new MethodCallback<Void>() {
+
+					@Override
+					public void onSuccess(Method method, Void response) {
+						Window.alert("OK");
+
+					}
+
+					@Override
+					public void onFailure(Method method, Throwable exception) {
+						Window.alert("error " + exception.getMessage());
+						Window.alert("error " + method.builder.getHTTPMethod() + " " + method.builder.getUrl() + " "
+								+ method.builder.getRequestData() );
+
+					}
+				});
+
 			}
 
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
-			
-				
-			}			
+
+			}
 
 		}
 

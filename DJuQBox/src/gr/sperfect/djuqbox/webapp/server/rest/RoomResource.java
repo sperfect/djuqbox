@@ -125,14 +125,14 @@ public class RoomResource extends BaseResource {
 	}
 
 	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	// @Consumes(MediaType.APPLICATION_JSON)
+	//@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}/users")
-	public void addUserToRoom(@PathParam("id") Long aRoomId, User aUser) {
+	public void addUserToRoom(@PathParam("id") String aRoomId, User aUser) {
 		
 		Log();
 		
-		Room r = db.getObjectById(aRoomId);
+		Room r = db.getObjectById(1L);
 		r.getUsers().add(aUser);
 		db.updateObject(r);
 	}
