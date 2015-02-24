@@ -111,9 +111,10 @@ public class RoomResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	// @Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}/users")
-	public void addUserToRoom(@PathParam("id") String aRoomId, User aUser) {
-		Room newRoom = new Room(aRoomId + " " + aUser.getName());
-
+	public void addUserToRoom(@PathParam("id") Long aRoomId, User aUser) {
+		Room r = db.getObjectById(aRoomId);
+		r.getUsers().add(aUser);
+		db.updateObject(r);
 	}
 
 	// check pws 8a ginei otan pataei to link / room/id sto url
