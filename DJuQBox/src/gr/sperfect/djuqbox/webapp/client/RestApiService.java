@@ -21,33 +21,33 @@ public interface RestApiService extends RestService {
 	//http://resty-gwt.github.io/documentation/restygwt-user-guide.html
 	
 	@GET
-	@Path("room")  // prepei na einai javax.ws.rs.Path !!!!!
+	@Path("rooms")  // prepei na einai javax.ws.rs.Path !!!!!
 	public void getRooms( MethodCallback<List<Room>> callback);
 	
 	@GET
-	@Path("room/{id}")  // prepei na einai javax.ws.rs.Path !!!!!
+	@Path("rooms/{id}")  // prepei na einai javax.ws.rs.Path !!!!!
 	public void getRoom(@PathParam("id") String aRoomId,  MethodCallback<Room> callback);
 	
 	
 	@POST
-	@Path("room")  
+	@Path("rooms")  
 	public void createRoom(Room r, MethodCallback<Room> callback);
 	
 	@PUT
-	@Path("room")  
+	@Path("rooms")  
 	public void updateRoom(Room r, MethodCallback<Room> callback);
 	
 	
 		
 	@GET
-	@Path("room/{id}/users")  
+	@Path("rooms/{id}/users")  
 	public void getRoomUsers(@PathParam("id") @Attribute("id") Room r, MethodCallback<List<User>> callback );
 	
 	
 	
 	//paizei!!
 	@POST
-	@Path("room/{id}/users")  
+	@Path("rooms/{id}/users")  
 	public void addUserToRoom(@PathParam("id") String aRoomId, User r, MethodCallback<Void> callback );
 	
 	
@@ -63,12 +63,12 @@ public interface RestApiService extends RestService {
 
 	
 	@GET
-	@Path("user")  // prepei na einai javax.ws.rs.Path !!!!!
+	@Path("users")  // prepei na einai javax.ws.rs.Path !!!!!
 	public void getUsers( MethodCallback<List<User>> callback);
 	
 	
 	@GET
-	@Path("user/{id}")  // prepei na einai javax.ws.rs.Path !!!!!
+	@Path("users/{id}")  // prepei na einai javax.ws.rs.Path !!!!!
 	public void getUser(@PathParam("id") String aUserId,  MethodCallback<User> callback);
 	
 }

@@ -24,7 +24,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/user")
+@Path("/users")
 public class UserResource {
 
 	private static final Logger logger = java.util.logging.Logger.getLogger("RoomResource");
