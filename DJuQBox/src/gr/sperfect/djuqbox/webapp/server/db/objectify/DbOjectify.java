@@ -87,7 +87,7 @@ public class DbOjectify<T extends BaseDataClass> implements IDB<T> {
 	@Override
 	public T updateObject(T o) {
 
-		o.setDateUpdat(new Date());
+		o.setDateUpdate(new Date());
 		ofy().save().entity(o).now();
 		return o;
 	}

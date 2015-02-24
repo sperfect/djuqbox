@@ -55,7 +55,7 @@ public class BaseDataClass {
 		date_insert = date;		
 	}
 	
-	public void setDateUpdat(Date date) {
+	public void setDateUpdate(Date date) {
 		date_insert = date;
 		
 	}

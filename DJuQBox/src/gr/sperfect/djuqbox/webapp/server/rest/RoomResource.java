@@ -11,8 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -53,15 +55,7 @@ public class RoomResource {
 	public List<Room> getRooms(@Context HttpHeaders headers) {
 
 		
-		List<Room> ret = db.getAllObjects(null);
-		
-//		List<Room> ret = new ArrayList<Room>();
-//		ret.add(new Room("room0"));
-//		ret.add(new Room("room1"));
-//
-//		// for(String header : headers.getRequestHeaders().keySet()){
-//		// System.out.println(header +": " + headers.getRequestHeader(header));
-//		// }
+		List<Room> ret = db.getAllObjects(null);		
 
 		return ret;
 	}
@@ -70,9 +64,31 @@ public class RoomResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Room createRoom(Room aRoomParam) {
-		Room newRoom = new Room(aRoomParam.getName());
+		
+		Room newRoom =  db.createObject(aRoomParam);
+		
 		// save assign...
 		return newRoom;
+	}
+	
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Room updateRoom(Room aRoomParam) {
+		
+		Room newRoom =  db.updateObject(aRoomParam);
+		
+		// save assign...
+		return newRoom;
+	}
+	
+	@DELETE
+	//@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteRoom(Room aRoomParam) {
+		
+		db.deleteObject(aRoomParam);
+		
 	}
 
 	@GET
