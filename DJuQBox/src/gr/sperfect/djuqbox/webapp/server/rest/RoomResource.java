@@ -124,6 +124,7 @@ public class RoomResource extends BaseResource {
 		// return ret;
 	}
 
+	//den thn briskei h Resty
 	@POST
 	//@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
