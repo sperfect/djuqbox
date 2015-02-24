@@ -11,81 +11,84 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Result;
 
 
-public class DbOjectify/*<T extends BaseDataClass>*/ implements IDB {
+public class DbOjectify<T extends BaseDataClass> implements IDB<T> {
  
-	static DbOjectify inst = new  DbOjectify();
-	//static Ofy()
+	//static DbOjectify<?> inst ;//= new  DbOjectify<?>();
 	
-	public static DbOjectify getInstance()
-	{
-		ofy();
-		return inst;
+
+//	
+//	
+//	public static DbOjectify<T> getInstance()
+//	{
+//		//ofy();
+//		inst = new DbOjectify<T>();
+//		return inst;
+//	}
+
+	
+
+	//@Override
+	public T getObjectById(Long id) {
+	
+		return null; //???pws 8a dwsw ton typo?
+		
+//		Result<T> result = (Result<T>) ofy().load().key(Key.create(????,id));  // Result is async
+//		T fetched1 = result.now();    // Materialize the async value
+//		
+//		return fetched1;
 	}
 
-	@Override
-	public Room CreateRoom(Room r) {
-		
-		r.setDateInsert(new Date());
-		ofy().save().entity(r).now();
-				
-		return r;
-	}
-
-	@Override
-	public Room GetRoom(Long id) {
 	
-		Result<Room> result = ofy().load().key(Key.create(Room.class,id));  // Result is async
-		Room fetched1 = result.now();    // Materialize the async value
+
+
+	//@Override
+	public T getObject(T o) {
 		
+		ofy().save().entity(o).now();
+		
+		if (o.id == null){
+			 LogError("id is null. Type " + o.getClass());
+			 return null;
+		}
+		
+		@SuppressWarnings("unchecked")
+		Result<T> result = (Result<T>) ofy().load().key(Key.create(o.getClass(),o.id));  // Result is async
+		
+		T fetched1 = result.now();
 		return fetched1;
 	}
 
-	@Override
-	public Room UpdateRoom(Room r) {
-	
-		r.setDateUpdat(new Date());
-		ofy().save().entity(r).now();
-		return r;
+	private void LogError(String err) {
+		System.out.println("ERROR: "+err);
+		
 	}
 
 	@Override
-	public void DeleteRoom(Room r) {
-
-		ofy().delete().entity(r).now();
-	}
-	
-	public BaseDataClass GetObject(BaseDataClass o) {
+	public T createObject(T o) {
 		
-		Result<BaseDataClass> result = ofy().load().key(Key.create(o.getClass(),o.id));  // Result is async
-		BaseDataClass fetched1 = result.now();    // Materialize the async value
-		
-		return fetched1; 
+		o.setDateInsert(new Date());
+		ofy().save().entity(o).now();
+				
+		return o;
 	}
 
-//	@Override
-//	public Object GetObjectGeneric(Object o) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public T updateObject(T o) {
 
+		o.setDateUpdat(new Date());
+		ofy().save().entity(o).now();
+		return o;
+	}
+
+	@Override
+	public void deleteObject(T o) {
+		ofy().delete().entity(o).now();
+		
+	}
 
 	
-//	public T GetObjectGeneric(T o) {
-//		
-//		Result<BaseDataClass> result = ofy().load().key(Key.create(o.getClass(),o.id));  // Result is async
-//		BaseDataClass fetched1 = result.now();    // Materialize the async value
-//		
-//		return (T) fetched1; 
-//	}
 
-//	@Override
-//	public T GetObjectGeneric(T o) {
-//		
-//		Result<BaseDataClass> result = ofy().load().key(Key.create(o.getClass(),o.id));  // Result is async
-//		BaseDataClass fetched1 = result.now();    // Materialize the async value
-//		
-//		return (BaseDataClass) fetched1; 
-//	}
+
 
 	
 	

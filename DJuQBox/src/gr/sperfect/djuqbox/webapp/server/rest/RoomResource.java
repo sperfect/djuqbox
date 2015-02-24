@@ -1,12 +1,11 @@
 package gr.sperfect.djuqbox.webapp.server.rest;
 
+import gr.sperfect.djuqbox.webapp.server.db.DBHelper;
 import gr.sperfect.djuqbox.webapp.server.db.IDB;
-import gr.sperfect.djuqbox.webapp.server.db.objectify.DbOjectify;
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,18 +24,18 @@ import javax.ws.rs.core.UriInfo;
 
 @Path("/room")
 public class RoomResource {
-	
+
 	public RoomResource() {
-		
-		//logger.log(Level.INFO,  "");
-		//ola null edw
+
+		// logger.log(Level.INFO, "");
+		// ola null edw
 	}
-	
-	private static IDB db = DbOjectify.getInstance();
-//			IDB GetDB() {
-//		//make it super
-//		return DbOjectify.getInstance();
-//	}
+
+	// private static IDB db = DbOjectify.getInstance();
+	// IDB GetDB() {
+	// //make it super
+	// return DbOjectify.getInstance();
+	// }
 
 	private static final Logger logger = java.util.logging.Logger.getLogger("RoomResource");
 
@@ -46,7 +45,6 @@ public class RoomResource {
 	Request req;
 	@Context
 	UriInfo uri;
-	
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -119,31 +117,33 @@ public class RoomResource {
 	public Room getRoom(@PathParam("id") String id) {
 
 		Log(id.toString());
-		
-		
-		
+
+		IDB<Room> db = DBHelper.getDB(Room.class);
+
 		Room r = new Room("room0 " + id);
-		 r = db.CreateRoom(r);
-		 
-		 Long idL = r.id;
-		 
-		 Room rr = (Room) db.GetObject(r);
-		 
-		 //Room rGen = db.GetObjectGeneric(r);
-		  
-		 r = db.UpdateRoom(r);		 
-		 r = db.GetRoom(idL);
-		 
-		 db.DeleteRoom(r);
-	
-		
-		
+		r = db.createObject(r);
+
+		Long idL = r.id;
+		// null!!!!
+		Room rr = db.getObjectById(idL);
+
+		r = db.getObject(r);
+
+		r = db.updateObject(r);
+
+		db.deleteObject(r);
+
 		return r;
+	}
+
+	private int getDB() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	private void Log(String message) {
 		// TODO Auto-generated method stub
-		logger.log(Level.INFO, req.getMethod() + " " +  message);
+		logger.log(Level.INFO, req.getMethod() + " " + message);
 	}
 
 }

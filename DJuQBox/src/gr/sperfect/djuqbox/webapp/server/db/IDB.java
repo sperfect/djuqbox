@@ -1,24 +1,17 @@
 package gr.sperfect.djuqbox.webapp.server.db;
 
 import gr.sperfect.djuqbox.webapp.shared.data.BaseDataClass;
-import gr.sperfect.djuqbox.webapp.shared.data.Room;
 
-public interface IDB/*<T>*/ {
+public interface IDB<T extends BaseDataClass> {
 
-	
-	Room CreateRoom(Room r);
-	
-	Room GetRoom(Long id);
+	T createObject(T r);
 
-	Room UpdateRoom(Room r);	
+	T getObject(T o);
 
-	void DeleteRoom(Room r);
+	T getObjectById(Long id);
 
-	BaseDataClass GetObject(BaseDataClass o);
-	
-	//<T> BaseDataClass  GetObjectGeneric(T o);
+	T updateObject(T r);
 
-//	T GetObjectGeneric(T o);
- 
+	void deleteObject(T r);
 
 }
