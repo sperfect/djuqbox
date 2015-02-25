@@ -92,11 +92,11 @@ public class DJuQBox implements EntryPoint {
 
 			private void TestResty() {
 				RestApiService api = GWT.create(RestApiService.class);
-				
+
 				User u = new User("test");
 				u.id = 2L;
 
-				api.addUserToRoom("1",u , new MethodCallback<Void>() {
+				api.addUserToRoom("1", u, new MethodCallback<Void>() {
 
 					@Override
 					public void onSuccess(Method method, Void response) {
@@ -106,11 +106,11 @@ public class DJuQBox implements EntryPoint {
 
 					@Override
 					public void onFailure(Method method, Throwable exception) {
-						Window.alert("error " + exception.getMessage());
-						Window.alert("error " + method.builder.getHTTPMethod() + " " + method.builder.getUrl() + " "
-								+ method.builder.getRequestData() );
+
+						Log("test ", method, exception);
 
 					}
+
 				});
 
 			}
@@ -126,5 +126,27 @@ public class DJuQBox implements EntryPoint {
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
 		nameField.addKeyUpHandler(handler);
+
+	}
+
+	private void Log(String message, Method method, Throwable ex) {
+		// TODO Auto-generated method stub
+		GWT.log("ERROR: "+ex.toString()+" message=" + message + " METHOD= " + method.builder.getHTTPMethod() + " "
+				+ method.builder.getUrl() + " " + method.builder.getRequestData());
+	}
+	
+	private void Log(String message, Method method) {
+		// TODO Auto-generated method stub
+		GWT.log("INFO: message=" + message + " METHOD= " + method.builder.getHTTPMethod() + " "
+				+ method.builder.getUrl() + " " + method.builder.getRequestData());
+	}
+
+	private void Log(String message) {
+		GWT.log(message);
+	}
+
+	private void Log(String message, Throwable ex) {
+
+		GWT.log(message, ex);
 	}
 }

@@ -24,6 +24,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Path("/rooms")
@@ -43,14 +44,12 @@ public class RoomResource extends BaseResource {
 
 	IDB<Room> db = DBHelper.getDB(Room.class);
 
-	
-
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Room> getRooms(@Context HttpHeaders headers) {
 
 		Log();
-		
+
 		List<Room> ret = db.getAllObjects(null);
 
 		return ret;
@@ -62,11 +61,11 @@ public class RoomResource extends BaseResource {
 	public Room createRoom(Room aRoomParam) {
 
 		Log();
-		
+
 		Room newRoom = db.createObject(aRoomParam);
 
 		// save assign...
-		
+
 		servletResponse.setStatus(201);
 		return newRoom;
 	}
@@ -78,7 +77,7 @@ public class RoomResource extends BaseResource {
 	public Room updateRoom(Room aRoomParam) {
 
 		Log();
-		
+
 		Room newRoom = db.updateObject(aRoomParam);
 
 		// save assign...
@@ -91,7 +90,7 @@ public class RoomResource extends BaseResource {
 	public void deleteRoom(Room aRoomParam) {
 
 		Log();
-		
+
 		db.deleteObject(aRoomParam);
 
 	}
@@ -101,7 +100,7 @@ public class RoomResource extends BaseResource {
 	public void deleteRoom(@PathParam("id") Long aRoomId) {
 
 		Log();
-		
+
 		db.deleteObject(db.getObjectById(aRoomId));
 
 	}
@@ -113,7 +112,7 @@ public class RoomResource extends BaseResource {
 	public List<User> getRoomUsers(@PathParam("id") String aRoomId) {
 
 		Log();
-		
+
 		return getRoom(aRoomId).getUsers();
 		// List<User> ret = new ArrayList<User>();
 		// ret.add(new User(aRoomId + " user123"));
@@ -124,16 +123,20 @@ public class RoomResource extends BaseResource {
 		// return ret;
 	}
 
-	//den thn briskei h Resty
+	// den thn briskei h Resty
 	@POST
-	//@Produces(MediaType.APPLICATION_JSON)
+	// @Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}/users")
-	public void addUserToRoom(@PathParam("id") String aRoomId, User aUser) {
-		
+	public void addUserToRoom(@PathParam("id") String aRoomId, User aUser) throws Exception {
+
 		Log();
-		
+
 		Room r = db.getObjectById(1L);
+		if (r == null) {
+			
+			throw new Exception("room not exists " + aRoomId);
+		}
 		r.getUsers().add(aUser);
 		db.updateObject(r);
 	}
@@ -145,7 +148,7 @@ public class RoomResource extends BaseResource {
 	public List<UserRoomRole> getUserRoomRoles(@PathParam("id") Long aRoomId, @PathParam("user_id") Long aUserId) {
 
 		Log();
-		
+
 		UserRoomRole urr = new UserRoomRole();
 		urr.setRoomId(aRoomId);
 		urr.setUserId(aUserId);
@@ -175,8 +178,6 @@ public class RoomResource extends BaseResource {
 	//
 	// }
 
-
-
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -199,7 +200,5 @@ public class RoomResource extends BaseResource {
 
 		return r;
 	}
-
-	
 
 }
