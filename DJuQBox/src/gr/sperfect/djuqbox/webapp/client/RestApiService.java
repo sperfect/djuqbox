@@ -5,6 +5,7 @@ import gr.sperfect.djuqbox.webapp.shared.data.User;
 
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -34,9 +35,12 @@ public interface RestApiService extends RestService {
 	public void createRoom(Room r, MethodCallback<Room> callback);
 	
 	@PUT
-	@Path("rooms")  
-	public void updateRoom(Room r, MethodCallback<Room> callback);
+	@Path("rooms/{id}")  
+	public void updateRoom(@PathParam("id") @Attribute("id") Room r, MethodCallback<Room> callback);
 	
+	@DELETE
+	@Path("rooms/{id}")  
+	public void deleteRoom(@PathParam("id") @Attribute("id") Room r, MethodCallback<Void> callback );
 	
 		
 	@GET
@@ -49,6 +53,8 @@ public interface RestApiService extends RestService {
 	@POST
 	@Path("rooms/{id}/users")  
 	public void addUserToRoom(@PathParam("id") String aRoomId, User r, MethodCallback<Void> callback );
+	
+	
 	
 	
 	
