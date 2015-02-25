@@ -1,5 +1,7 @@
 package gr.sperfect.djuqbox.webapp.server.youtube;
 
+
+//http://developers.google.com/apis-explorer/?hl=en_US#p/youtube/v3/
 public class YoutubeSearcher {
 //
 //	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -17,7 +19,7 @@ public class YoutubeSearcher {
 //
 //			String queryTerm = "radiohead";
 //
-//			search.setKey("AIzaSyC1lpLnlmQjy7PO_YuOYhzxzPUq83pvi3k");
+//			search.setKey("AIzaSyBUfgJRmOS7loeG1EPaK9gLxdSqXltCfGg"); //created on 25/02/2015
 //			search.setQ(queryTerm);
 //
 //			search.setType("video");
