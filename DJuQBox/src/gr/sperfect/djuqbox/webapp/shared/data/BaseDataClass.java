@@ -15,8 +15,8 @@ public class BaseDataClass {
 	@Index
 	public String name;
 	
-	Date date_insert;
-	Date date_update;
+	private Date date_insert;
+	private Date date_update;
 	
 	public BaseDataClass() {
 		//needed by json converter
@@ -51,12 +51,21 @@ public class BaseDataClass {
 		this.name = name;
 	}
 	
+	
+	public Date getDateInsert() {
+		return date_insert;
+	}
+	
 	public void setDateInsert(Date date) {
 		date_insert = date;		
 	}
 	
+	public Date getDateUpdate() {
+		return date_update;
+	}
+	
 	public void setDateUpdate(Date date) {
-		date_insert = date;
+		date_update = date;
 		
 	}
 	
