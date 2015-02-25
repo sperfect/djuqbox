@@ -2,9 +2,6 @@ package gr.sperfect.djuqbox.webapp.shared.data;
 
 import java.util.Date;
 
-import org.fusesource.restygwt.client.Json;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
@@ -12,7 +9,7 @@ public class BaseDataClass {
 
 	
 	@Id
-	public Long id;
+	private Long id;
 	//prepei na einai public gia na to balw san @Attribute("id") den ginetai me getter se klhsh tou Resty
 	
 	@Index
@@ -45,15 +42,15 @@ public class BaseDataClass {
 	
 
 	 
+	//java.lang.IllegalAccessError: tried to access field gr.sperfect.djuqbox.webapp.shared.data.BaseDataClass.id from class gr.sperfect.djuqbox.webapp.server.rest.RoomResource
+	public Long getID() {
+		return id;
+	}
+
 	
-//	public Long getID() {
-//		return id;
-//	}
-//
-//	
-//	public void setID(Long id) {
-//		this.id = id;
-//	}
+	public void setID(Long id) {
+		this.id = id;
+	}
 	
 	public String getName() {
 		return name;

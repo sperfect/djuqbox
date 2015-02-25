@@ -79,7 +79,7 @@ public class DJuQBox implements EntryPoint {
 				RestApiService api = GWT.create(RestApiService.class);
 
 				User u = new User("test");
-				u.id = 2L;
+				u.setID(2L);
 
 				api.addUserToRoom(1L, u, new MethodCallback<Void>() {
 

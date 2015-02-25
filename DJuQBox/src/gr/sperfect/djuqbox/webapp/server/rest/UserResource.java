@@ -83,7 +83,7 @@ public class UserResource extends BaseResource {
 		
 		User u = new User("testuser "+ aUserId);
 		u = db.createObject(u);
-		Long idL = u.id;
+		Long idL = u.getID();
 		u  = db.getObjectById(idL);
 		u = db.updateObject(u);
 
