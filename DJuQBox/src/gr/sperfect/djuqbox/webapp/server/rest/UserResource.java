@@ -2,13 +2,9 @@ package gr.sperfect.djuqbox.webapp.server.rest;
 
 import gr.sperfect.djuqbox.webapp.server.db.DBHelper;
 import gr.sperfect.djuqbox.webapp.server.db.IDB;
-import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -27,9 +23,8 @@ import javax.ws.rs.core.UriInfo;
 @Path("/users")
 public class UserResource extends BaseResource {
 
-	private static final Logger logger = java.util.logging.Logger.getLogger("RoomResource");
-
-	IDB<User> db = DBHelper.getDB(User.class);
+	
+	static final IDB<User> db = DBHelper.getDB(User.class);
 
 	@Context
 	HttpHeaders headers;
@@ -82,13 +77,13 @@ public class UserResource extends BaseResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{user_id}")
-	public User getUser(@PathParam("user_id") String aUserId) {
+	public User getUser(@PathParam("user_id") Long aUserId) {
 
 		Log(aUserId.toString());
 		
-		User u = new User(aUserId);
+		User u = new User("testuser "+ aUserId);
 		u = db.createObject(u);
-		Long idL = u.id;
+		Long idL = u.getID();
 		u  = db.getObjectById(idL);
 		u = db.updateObject(u);
 

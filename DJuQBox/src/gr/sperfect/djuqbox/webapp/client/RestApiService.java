@@ -26,8 +26,8 @@ public interface RestApiService extends RestService {
 	public void getRooms( MethodCallback<List<Room>> callback);
 	
 	@GET
-	@Path("rooms/{id}")  // prepei na einai javax.ws.rs.Path !!!!!
-	public void getRoom(@PathParam("id") String aRoomId,  MethodCallback<Room> callback);
+	@Path("rooms/{room_id}")  // prepei na einai javax.ws.rs.Path !!!!!
+	public void getRoom(@PathParam("room_id") Long aRoomId,  MethodCallback<Room> callback);
 	
 	
 	@POST
@@ -35,47 +35,37 @@ public interface RestApiService extends RestService {
 	public void createRoom(Room r, MethodCallback<Room> callback);
 	
 	@PUT
-	@Path("rooms/{id}")  
-	public void updateRoom(@PathParam("id") @Attribute("id") Room r, MethodCallback<Room> callback);
+	@Path("rooms/{room_id}")  
+	public void updateRoom(@PathParam("room_id") @Attribute("ID") Room r, MethodCallback<Room> callback);
 	
 	@DELETE
-	@Path("rooms/{id}")  
-	public void deleteRoom(@PathParam("id") @Attribute("id") Room r, MethodCallback<Void> callback );
+	@Path("rooms/{room_id}")  
+	public void deleteRoom(@PathParam("room_id") @Attribute("ID") Room r, MethodCallback<Void> callback );
 	
 		
 	@GET
-	@Path("rooms/{id}/users")  
-	public void getRoomUsers(@PathParam("id") @Attribute("id") Room r, MethodCallback<List<User>> callback );
+	@Path("rooms/{room_id}/users")  
+	public void getRoomUsers(@PathParam("room_id") @Attribute("ID") Room r, MethodCallback<List<User>> callback );
 	
 	
 	
 	//paizei!!
 	@POST
-	@Path("rooms/{id}/users")  
-	public void addUserToRoom(@PathParam("id") String aRoomId, User r, MethodCallback<Void> callback );
+	@Path("rooms/{room_id}/users")  
+	public void addUserToRoom(@PathParam("room_id") Long aRoomId, User r, MethodCallback<Void> callback );
 	
 	
 	
 	
-	
-//	@PUT
-//	@Path("room/users") 
-//	public void createRoom(Room r, User u,  MethodCallback<Room> callback);
-	//den ginetai Methods can optionally declare one method argument before the callback to pass via the request body
-	
-//	@PUT
-//	@Path("room/users") 
-//	public void addUserToRoom(RoomUser ru,  MethodCallback<Room> callback);
-
 	
 	@GET
-	@Path("users")  // prepei na einai javax.ws.rs.Path !!!!!
+	@Path("users") 
 	public void getUsers( MethodCallback<List<User>> callback);
 	
 	
 	@GET
-	@Path("users/{id}")  // prepei na einai javax.ws.rs.Path !!!!!
-	public void getUser(@PathParam("id") String aUserId,  MethodCallback<User> callback);
+	@Path("users/{user_id}") 
+	public void getUser(@PathParam("user_id") Long aUserId,  MethodCallback<User> callback);
 	
 }
 

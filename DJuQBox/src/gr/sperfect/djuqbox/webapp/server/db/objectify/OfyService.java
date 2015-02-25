@@ -1,8 +1,6 @@
 package gr.sperfect.djuqbox.webapp.server.db.objectify;
 
-import gr.sperfect.djuqbox.webapp.shared.data.Playlist;
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
-import gr.sperfect.djuqbox.webapp.shared.data.Song;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
 
 import com.googlecode.objectify.Objectify;

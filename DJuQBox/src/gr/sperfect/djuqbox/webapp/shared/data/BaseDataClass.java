@@ -2,8 +2,6 @@ package gr.sperfect.djuqbox.webapp.shared.data;
 
 import java.util.Date;
 
-import org.fusesource.restygwt.client.Attribute;
-
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
@@ -11,9 +9,12 @@ public class BaseDataClass {
 
 	
 	@Id
-	public Long id;
+	private Long id;
 	@Index
-	public String name;
+	private String name;
+	
+	@Index
+	private String code;
 	
 	private Date date_insert;
 	private Date date_update;
@@ -40,11 +41,11 @@ public class BaseDataClass {
 	//public String id; //prepei na einai public gia na to balw san @Attribute("id") sto RestApiService.getRoomUsers()
 	//protected String name;
 
-	public Long getId() {
+	public Long getID() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setID(Long id) {
 		this.id = id;
 	}
 	
@@ -76,14 +77,26 @@ public class BaseDataClass {
 
 
 
-	private HATEOASLink getLink() {
+	public HATEOASLink getLink() {
 		return link;
 	}
 
 
 
-	private void setLink(HATEOASLink link) {
+	public void setLink(HATEOASLink link) {
 		this.link = link;
+	}
+
+
+
+	public String getCode() {
+		return code;
+	}
+
+
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 }

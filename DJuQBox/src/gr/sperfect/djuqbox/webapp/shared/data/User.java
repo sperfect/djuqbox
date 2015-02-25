@@ -14,6 +14,4 @@ public class User extends BaseDataClass {
 	}
 	
 	
-	//test git
-	//test conflicts
 }

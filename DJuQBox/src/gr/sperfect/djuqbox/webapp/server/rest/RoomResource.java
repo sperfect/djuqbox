@@ -8,10 +8,7 @@ import gr.sperfect.djuqbox.webapp.shared.data.UserRoomRole;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -20,12 +17,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 @Path("/rooms")
 public class RoomResource extends BaseResource {
@@ -40,13 +32,11 @@ public class RoomResource extends BaseResource {
 	// return DbOjectify.getInstance();
 	// }
 
-	private static final Logger logger = java.util.logging.Logger.getLogger("RoomResource");
-
-	IDB<Room> db = DBHelper.getDB(Room.class);
+	static final IDB<Room> db = DBHelper.getDB(Room.class);
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Room> getRooms(@Context HttpHeaders headers) {
+	public List<Room> getRooms() {
 
 		Log();
 
@@ -109,7 +99,7 @@ public class RoomResource extends BaseResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	// @Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}/users")
-	public List<User> getRoomUsers(@PathParam("id") String aRoomId) {
+	public List<User> getRoomUsers(@PathParam("id") Long aRoomId) {
 
 		Log();
 
@@ -128,13 +118,13 @@ public class RoomResource extends BaseResource {
 	// @Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}/users")
-	public void addUserToRoom(@PathParam("id") String aRoomId, User aUser) throws Exception {
+	public void addUserToRoom(@PathParam("id") Long aRoomId, User aUser) throws Exception {
 
 		Log();
 
 		Room r = db.getObjectById(1L);
 		if (r == null) {
-			
+
 			throw new Exception("room not exists " + aRoomId);
 		}
 		r.getUsers().add(aUser);
@@ -181,14 +171,14 @@ public class RoomResource extends BaseResource {
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Room getRoom(@PathParam("id") String id) {
+	public Room getRoom(@PathParam("id") Long id) {
 
 		Log();
 
 		Room r = new Room("room0 " + id);
 		r = db.createObject(r);
 
-		Long idL = r.id;
+		Long idL = r.getID();
 
 		Room rr = db.getObjectById(idL);
 
@@ -201,4 +191,26 @@ public class RoomResource extends BaseResource {
 		return r;
 	}
 
+//	@GET
+//	@Path("{id}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Room getRoom(@PathParam("id") String id) {
+//
+//		// den ginetai me allo typo (string anti gia Long)
+//		// org.glassfish.jersey.server.model.ModelValidationException:
+//		// Validation of the application resource model has failed during
+//		// application initialization.
+//		// [[FATAL] A resource model has ambiguous (sub-)resource method for
+//		// HTTP method GET and input mime-types as defined by"@Consumes" and
+//		// "@Produces" annotations at Java methods public
+//		// gr.sperfect.djuqbox.webapp.shared.data.Room
+//		// gr.sperfect.djuqbox.webapp.server.rest.RoomResource.getRoom(java.lang.String)
+//		// and public gr.sperfect.djuqbox.webapp.shared.data.Room
+//		// gr.sperfect.djuqbox.webapp.server.rest.RoomResource.getRoom(java.lang.Long)
+//		// at matching regular expression /([^/]+). These two methods produces
+//		// and consumes exactly the same mime-types and therefore their
+//		// invocation as a resource methods will always fail.;
+//		// source='org.glassfish.jersey.server.model.RuntimeResource@1b2a81']
+//
+//	}
 }

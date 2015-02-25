@@ -1,10 +1,6 @@
 package gr.sperfect.djuqbox.webapp.client;
 
-import gr.sperfect.djuqbox.webapp.shared.FieldVerifier;
-import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
-
-import java.util.List;
 
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
@@ -14,30 +10,19 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class DJuQBox implements EntryPoint {
-	/**
-	 * The message displayed to the user when the server cannot be reached or
-	 * returns an error.
-	 */
-	private static final String SERVER_ERROR = "An error occurred while "
-			+ "attempting to contact the server. Please check your network " + "connection and try again.";
-
+	
 	// http://blog.javaforge.net/post/30469901979/gwt-rest
 	static {
 		// if you don't do this, on JSON response you'll get something like
@@ -94,9 +79,9 @@ public class DJuQBox implements EntryPoint {
 				RestApiService api = GWT.create(RestApiService.class);
 
 				User u = new User("test");
-				u.id = 2L;
+				u.setID(2L);
 
-				api.addUserToRoom("1", u, new MethodCallback<Void>() {
+				api.addUserToRoom(1L, u, new MethodCallback<Void>() {
 
 					@Override
 					public void onSuccess(Method method, Void response) {
@@ -135,16 +120,19 @@ public class DJuQBox implements EntryPoint {
 				+ method.builder.getUrl() + " " + method.builder.getRequestData());
 	}
 	
+	@SuppressWarnings("unused")
 	private void Log(String message, Method method) {
 		// TODO Auto-generated method stub
 		GWT.log("INFO: message=" + message + " METHOD= " + method.builder.getHTTPMethod() + " "
 				+ method.builder.getUrl() + " " + method.builder.getRequestData());
 	}
-
+	
+	@SuppressWarnings("unused")
 	private void Log(String message) {
 		GWT.log(message);
 	}
-
+	
+	@SuppressWarnings("unused")
 	private void Log(String message, Throwable ex) {
 
 		GWT.log(message, ex);
