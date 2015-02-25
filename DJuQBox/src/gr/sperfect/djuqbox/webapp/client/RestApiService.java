@@ -36,16 +36,16 @@ public interface RestApiService extends RestService {
 	
 	@PUT
 	@Path("rooms/{room_id}")  
-	public void updateRoom(@PathParam("room_id") @Attribute("ID") Room r, MethodCallback<Room> callback);
+	public void updateRoom(@PathParam("room_id") @Attribute("ID2") Room r, MethodCallback<Room> callback);
 	
 	@DELETE
 	@Path("rooms/{room_id}")  
-	public void deleteRoom(@PathParam("room_id") @Attribute("ID") Room r, MethodCallback<Void> callback );
+	public void deleteRoom(@PathParam("room_id") @Attribute("ID2") Room r, MethodCallback<Void> callback );
 	
 		
 	@GET
 	@Path("rooms/{room_id}/users")  
-	public void getRoomUsers(@PathParam("room_id") @Attribute("ID") Room r, MethodCallback<List<User>> callback );
+	public void getRoomUsers(@PathParam("room_id") @Attribute("ID2") Room r, MethodCallback<List<User>> callback );
 	
 	
 	

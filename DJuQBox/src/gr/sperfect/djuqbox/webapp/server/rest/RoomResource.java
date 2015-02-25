@@ -178,7 +178,7 @@ public class RoomResource extends BaseResource {
 		Room r = new Room("room0 " + id);
 		r = db.createObject(r);
 
-		Long idL = r.getID();
+		Long idL = r.id;
 
 		Room rr = db.getObjectById(idL);
 

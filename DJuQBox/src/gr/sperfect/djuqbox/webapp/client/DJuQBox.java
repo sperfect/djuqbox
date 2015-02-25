@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.TextBox;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class DJuQBox implements EntryPoint {
-	
+
 	// http://blog.javaforge.net/post/30469901979/gwt-rest
 	static {
 		// if you don't do this, on JSON response you'll get something like
@@ -79,7 +79,7 @@ public class DJuQBox implements EntryPoint {
 				RestApiService api = GWT.create(RestApiService.class);
 
 				User u = new User("test");
-				u.setID(2L);
+				u.id = 2L;
 
 				api.addUserToRoom(1L, u, new MethodCallback<Void>() {
 
@@ -116,22 +116,22 @@ public class DJuQBox implements EntryPoint {
 
 	private void Log(String message, Method method, Throwable ex) {
 		// TODO Auto-generated method stub
-		GWT.log("ERROR: "+ex.toString()+" message=" + message + " METHOD= " + method.builder.getHTTPMethod() + " "
+		GWT.log("ERROR: " + ex.toString() + " message=" + message + " METHOD= " + method.builder.getHTTPMethod() + " "
 				+ method.builder.getUrl() + " " + method.builder.getRequestData());
 	}
-	
+
 	@SuppressWarnings("unused")
 	private void Log(String message, Method method) {
 		// TODO Auto-generated method stub
 		GWT.log("INFO: message=" + message + " METHOD= " + method.builder.getHTTPMethod() + " "
 				+ method.builder.getUrl() + " " + method.builder.getRequestData());
 	}
-	
+
 	@SuppressWarnings("unused")
 	private void Log(String message) {
 		GWT.log(message);
 	}
-	
+
 	@SuppressWarnings("unused")
 	private void Log(String message, Throwable ex) {
 
