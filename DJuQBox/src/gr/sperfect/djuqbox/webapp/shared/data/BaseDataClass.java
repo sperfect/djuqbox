@@ -18,11 +18,16 @@ public class BaseDataClass {
 	private Date date_insert;
 	private Date date_update;
 	
+	private HATEOASLink link;
+	
 	public BaseDataClass() {
 		//needed by json converter
 		//id = "test";
 		
+		
 	}
+	
+	
 	
 	public BaseDataClass(String aName) {
 		name = aName;
@@ -67,6 +72,18 @@ public class BaseDataClass {
 	public void setDateUpdate(Date date) {
 		date_update = date;
 		
+	}
+
+
+
+	private HATEOASLink getLink() {
+		return link;
+	}
+
+
+
+	private void setLink(HATEOASLink link) {
+		this.link = link;
 	}
 	
 }
