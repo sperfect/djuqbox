@@ -43,6 +43,7 @@ public class DJuQBox implements EntryPoint {
 
 		// loading splash screen
 		// https://turbomanage.wordpress.com/2009/10/13/how-to-create-a-splash-screen-while-gwt-loads/
+		//http://jamestaylor2000.com/jukebox/spinningrecord.gif
 
 		final Button sendButton = new Button("Send test3");
 		final TextBox nameField = new TextBox();
@@ -79,7 +80,7 @@ public class DJuQBox implements EntryPoint {
 				RestApiService api = GWT.create(RestApiService.class);
 
 				User u = new User("test");
-				u.setID(2L);
+				u.setUid(2L);
 
 				api.addUserToRoom(1L, u, new MethodCallback<Void>() {
 
