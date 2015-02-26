@@ -6,6 +6,7 @@ import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
+import com.google.api.services.youtube.model.Video;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -99,6 +100,21 @@ public class DJuQBox implements EntryPoint {
 
 					}
 
+				});
+				
+				api.getYoutubeVideoInfo("ACUuFg9Y9dY", new MethodCallback<Video>() {
+					
+					@Override
+					public void onSuccess(Method method, Video v) {
+						Window.alert("OK " + v.getSnippet().getTitle());
+						
+					}
+					
+					@Override
+					public void onFailure(Method method, Throwable exception) {
+						Log("getYoutubeVideoInfo ", method, exception);
+						
+					}
 				});
 
 			}

@@ -16,6 +16,8 @@ import org.fusesource.restygwt.client.Attribute;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.RestService;
 
+import com.google.api.services.youtube.model.Video;
+
 public interface RestApiService extends RestService {
 
 
@@ -66,6 +68,17 @@ public interface RestApiService extends RestService {
 	@GET
 	@Path("users/{user_id}") 
 	public void getUser(@PathParam("user_id") Long aUserId,  MethodCallback<User> callback);
+	
+	
+	
+	//YOUTUBE
+	
+	//den paizei prepei na kanw kati inherit sto gwt.xml pou na exei to Video
+	@GET
+	@Path("/youtube/search/video/{video_id}") 
+	public void getYoutubeVideoInfo(@PathParam("video_id") String video_id,  MethodCallback<Video> callback);
+	
+	
 	
 }
 
