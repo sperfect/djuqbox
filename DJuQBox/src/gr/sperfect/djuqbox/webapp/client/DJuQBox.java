@@ -1,5 +1,7 @@
 package gr.sperfect.djuqbox.webapp.client;
 
+import java.util.List;
+
 import gr.sperfect.djuqbox.webapp.shared.data.User;
 import gr.sperfect.djuqbox.webapp.shared.data.YoutubeSong;
 
@@ -66,7 +68,7 @@ public class DJuQBox implements EntryPoint {
 		// Focus the cursor on the name field when the app loads
 		searchField.setFocus(true);
 		searchField.selectAll();
-		searchField.setText("kd4QMN_lErc");
+		searchField.setText("Belle and sebastian");
 
 		// Create a handler for the sendButton and nameField
 		class MyHandler implements ClickHandler, KeyUpHandler /* , MethodCallback */{
@@ -84,22 +86,23 @@ public class DJuQBox implements EntryPoint {
 			private void TestResty() {
 				RestApiService api = GWT.create(RestApiService.class);
 
-				
-				
-				api.getYoutubeVideoInfo(searchField.getText() , new MethodCallback<YoutubeSong>() {
+				api.searchYoutubeVideo(searchField.getText(), new MethodCallback<List<YoutubeSong>>() {
 					
 					@Override
-					public void onSuccess(Method method, YoutubeSong s) {
-						Window.alert("OK " + s.getTitle());
+					public void onSuccess(Method method, List<YoutubeSong> response) {
+						Window.alert("OK " + response.get(0).getTitle());
 						
 					}
 					
 					@Override
 					public void onFailure(Method method, Throwable exception) {
-						Log("getYoutubeVideoInfo ", method, exception);
+						Log("searchYoutubeVideo ", method, exception);
 						
 					}
 				});
+				
+				
+				
 
 			}
 

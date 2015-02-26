@@ -72,11 +72,14 @@ public interface RestApiService extends RestService {
 	
 	//YOUTUBE
 	
-	//den paizei prepei na kanw kati inherit sto gwt.xml pou na exei to Video
 	@GET
 	@Path("/youtube/search/video/{video_id}") 
 	public void getYoutubeVideoInfo(@PathParam("video_id") String video_id,  MethodCallback<YoutubeSong> callback);
 	
+	
+	@GET
+	@Path("/youtube/search/title/{q}") 
+	public void searchYoutubeVideo(@PathParam("q") String q,  MethodCallback<List<YoutubeSong>> callback);
 	
 	
 }

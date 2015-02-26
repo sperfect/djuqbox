@@ -11,9 +11,12 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.PlaylistItem;
 import com.google.api.services.youtube.model.PlaylistItemListResponse;
+import com.google.api.services.youtube.model.SearchListResponse;
+import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoListResponse;
 
+//http://developers.google.com/apis-explorer/?hl=en_US#p/youtube/v3/
 public class YoutubeApi {
 
 	//static 'h 8a xanetai???
@@ -55,6 +58,27 @@ public class YoutubeApi {
 		}
 				
 		return res.get(0);
+		
+	}
+
+
+	public static List<SearchResult> searchSong(String q) throws Exception {
+		
+		YouTube.Search.List search = youtubeInst.search().list("snippet");
+
+		
+
+		search.setKey(YoutubeApi.getKey()); // created on 25/02/2015
+		search.setQ(q);
+		
+		search.setType("video");
+		search.setVideoCategoryId("10");
+
+		search.setFields("items(id/kind,id/videoId,snippet(publishedAt,title,thumbnails/default/url))");
+		search.setMaxResults((long) 20);
+
+		return search.execute().getItems();
+
 		
 	}
 	
