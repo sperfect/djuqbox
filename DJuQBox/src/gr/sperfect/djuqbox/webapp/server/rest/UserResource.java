@@ -23,7 +23,6 @@ import javax.ws.rs.core.UriInfo;
 @Path("/users")
 public class UserResource extends BaseResource {
 
-	
 	static final IDB<User> db = DBHelper.getDB(User.class);
 
 	@Context
@@ -38,7 +37,6 @@ public class UserResource extends BaseResource {
 	public List<User> getUsers() {
 
 		List<User> ret = db.getAllObjects(null);
-		
 
 		return ret;
 	}
@@ -49,49 +47,52 @@ public class UserResource extends BaseResource {
 	public User createUser(User aUserParam) {
 		User newUser = db.createObject(aUserParam);
 		// save assign...
-		
+
 		response.status(201);
 		return newUser;
 	}
-	
+
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public User updateRoom(User aUserParam) {
-		
-		User newUser =  db.updateObject(aUserParam);
-		
+
+		User newUser = db.updateObject(aUserParam);
+
 		// save assign...
 		return newUser;
 	}
-	
+
 	@DELETE
-	//@Produces(MediaType.APPLICATION_JSON)
+	// @Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteRoom(User aUserParam) {
-		
+
 		db.deleteObject(aUserParam);
-		
+
 	}
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{user_id}")
 	public User getUser(@PathParam("user_id") Long aUserId) {
 
-		Log(aUserId.toString());
-		
-		User u = new User("testuser "+ aUserId);
-		u = db.createObject(u);
-		Long idL = u.getUID();
-		u  = db.getObjectById(idL);
-		u = db.updateObject(u);
+		try {
+			Log(aUserId.toString());
 
-		db.deleteObject(u);
-	
-		return u;
+			User u = new User("testuser " + aUserId);
+			u = db.createObject(u);
+			Long idL = u.getUID();
+			u = db.getObjectById(idL);
+			u = db.updateObject(u);
+
+			db.deleteObject(u);
+
+			return u;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
 	}
-
-	
 
 }

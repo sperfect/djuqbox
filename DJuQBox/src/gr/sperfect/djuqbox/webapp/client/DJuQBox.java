@@ -106,22 +106,35 @@ public class DJuQBox implements EntryPoint {
 			private void TestResty() {
 				RestApiService api = GWT.create(RestApiService.class);
 				
-				
-
-				api.getYoutubeMixForSong(searchField.getText(), new MethodCallback<YoutubePlayList>() {
-
+				api.getUser(1L, new MethodCallback<User>() {
+					
 					@Override
-					public void onSuccess(Method method, YoutubePlayList pl) {
-						Window.alert("OK " + pl.getSongs().get(2).getTitle());
-						Log("getYoutubeMixForSong size:" +pl.getSongs().size());
+					public void onSuccess(Method method, User u) {
+						Window.alert("OK " + u.getUID());
+						
 					}
-
+					
 					@Override
 					public void onFailure(Method method, Throwable exception) {
-						// TODO Auto-generated method stub
-						Log("getYoutubeMixForSong ", method, exception);
+						Log("getUser ", method, exception);
+						
 					}
 				});
+
+//				api.getYoutubeMixForSong(searchField.getText(), new MethodCallback<YoutubePlayList>() {
+//
+//					@Override
+//					public void onSuccess(Method method, YoutubePlayList pl) {
+//						Window.alert("OK " + pl.getSongs().get(2).getTitle());
+//						Log("getYoutubeMixForSong size:" +pl.getSongs().size());
+//					}
+//
+//					@Override
+//					public void onFailure(Method method, Throwable exception) {
+//						// TODO Auto-generated method stub
+//						Log("getYoutubeMixForSong ", method, exception);
+//					}
+//				});
 
 				// api.searchYoutubeVideo(searchField.getText(), new
 				// MethodCallback<List<YoutubeSong>>() {
