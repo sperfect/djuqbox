@@ -69,7 +69,18 @@ public interface RestApiService extends RestService {
 	@Path("users/{user_id}") 
 	public void getUser(@PathParam("user_id") Long aUserId,  MethodCallback<User> callback);
 	
+	@POST
+	@Path("users")  
+	public void createUser(User u, MethodCallback<User> callback);
 	
+	@PUT
+	@Path("users/{user_id}")  
+	public void updateUser(@PathParam("user_id") @Attribute("id") User u, MethodCallback<User> callback);
+	
+	
+	@DELETE
+	@Path("users/{user_id}")  
+	public void deleteUser(@PathParam("user_id") @Attribute("id") User u, MethodCallback<Void> callback );
 	
 	//YOUTUBE
 	
