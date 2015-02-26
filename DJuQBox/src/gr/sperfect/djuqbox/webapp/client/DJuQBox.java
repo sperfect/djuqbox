@@ -49,12 +49,12 @@ public class DJuQBox implements EntryPoint {
 
 		// loading splash screen
 		// https://turbomanage.wordpress.com/2009/10/13/how-to-create-a-splash-screen-while-gwt-loads/
-		//http://jamestaylor2000.com/jukebox/spinningrecord.gif
-		//http://www.ajaxload.info/
+		// http://jamestaylor2000.com/jukebox/spinningrecord.gif
+		// http://www.ajaxload.info/
 
 		final Button sendButton = new Button("Send test3");
 		final TextBox searchField = new TextBox();
-		//searchField.setText("GWT User");
+		// searchField.setText("GWT User");
 		final Label errorLabel = new Label();
 
 		// We can add style names to widgets
@@ -69,7 +69,26 @@ public class DJuQBox implements EntryPoint {
 		// Focus the cursor on the name field when the app loads
 		searchField.setFocus(true);
 		searchField.selectAll();
-		searchField.setText("Belle and sebastian");
+		searchField.setText("kd4QMN_lErc"); // kd4QMN_lErc //Belle and sebastian
+
+//		class MyRestHandler implements MethodCallback {
+//
+//			@Override
+//			public void onFailure(Method method, Throwable exception) {
+//				Log("", method, exception);
+//				
+//			}
+//
+//			@Override
+//			public void onSuccess(Method method, Object response) {
+//				
+//				//select what to do				
+//				Window.alert("OK " + response.toString());
+//				//douleuei, alla 8a 8elei poly iffff
+//			}
+//		}
+		
+		//final MyRestHandler restHandler = new MyRestHandler();
 
 		// Create a handler for the sendButton and nameField
 		class MyHandler implements ClickHandler, KeyUpHandler /* , MethodCallback */{
@@ -86,40 +105,41 @@ public class DJuQBox implements EntryPoint {
 
 			private void TestResty() {
 				RestApiService api = GWT.create(RestApiService.class);
+				
+				
 
-				api.getYoutubeMixForSong("kd4QMN_lErc", new MethodCallback<YoutubePlayList>() {
-					
+				api.getYoutubeMixForSong(searchField.getText(), new MethodCallback<YoutubePlayList>() {
+
 					@Override
 					public void onSuccess(Method method, YoutubePlayList pl) {
 						Window.alert("OK " + pl.getSongs().get(2).getTitle());
-						
+						Log("getYoutubeMixForSong size:" +pl.getSongs().size());
 					}
-					
+
 					@Override
 					public void onFailure(Method method, Throwable exception) {
 						// TODO Auto-generated method stub
 						Log("getYoutubeMixForSong ", method, exception);
 					}
 				});
-				
-//				api.searchYoutubeVideo(searchField.getText(), new MethodCallback<List<YoutubeSong>>() {
-//					
-//					@Override
-//					public void onSuccess(Method method, List<YoutubeSong> response) {
-//						Window.alert("OK " + response.get(0).getTitle());
-//						//kd4QMN_lErc
-//						
-//					}
-//					
-//					@Override
-//					public void onFailure(Method method, Throwable exception) {
-//						Log("searchYoutubeVideo ", method, exception);
-//						
-//					}
-//				});
-				
-				
-				
+
+				// api.searchYoutubeVideo(searchField.getText(), new
+				// MethodCallback<List<YoutubeSong>>() {
+				//
+				// @Override
+				// public void onSuccess(Method method, List<YoutubeSong>
+				// response) {
+				// Window.alert("OK " + response.get(0).getTitle());
+				// //kd4QMN_lErc
+				//
+				// }
+				//
+				// @Override
+				// public void onFailure(Method method, Throwable exception) {
+				// Log("searchYoutubeVideo ", method, exception);
+				//
+				// }
+				// });
 
 			}
 
@@ -135,7 +155,6 @@ public class DJuQBox implements EntryPoint {
 		sendButton.addClickHandler(handler);
 		searchField.addKeyUpHandler(handler);
 
-		
 		DOM.getElementById("loading").removeFromParent();
 	}
 
