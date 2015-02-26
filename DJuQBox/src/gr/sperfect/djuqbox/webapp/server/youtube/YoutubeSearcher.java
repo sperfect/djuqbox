@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +23,6 @@ import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.Thumbnail;
 
-
 //http://developers.google.com/apis-explorer/?hl=en_US#p/youtube/v3/
 public class YoutubeSearcher extends HttpServlet {
 
@@ -30,19 +31,20 @@ public class YoutubeSearcher extends HttpServlet {
 		resp.getWriter().println("Hello, world");
 
 		try {
-			YouTube youtube = new YouTube.Builder(UrlFetchTransport.getDefaultInstance(),
-					JacksonFactory.getDefaultInstance(), new HttpRequestInitializer() {
-						public void initialize(HttpRequest request) throws IOException {
-						}
-					}).setApplicationName("djuqbox").build();
+			// YouTube youtube = new YouTube.Builder(UrlFetchTransport.getDefaultInstance(),
+			// JacksonFactory.getDefaultInstance(), new HttpRequestInitializer() {
+			// public void initialize(HttpRequest request) throws IOException {
+			// }
+			// }).setApplicationName("djuqbox").build();
 
+			YouTube youtube = YoutubeApi.youtubeInst;
 			YouTube.Search.List search = youtube.search().list("id,snippet");
 
 			String queryTerm = "radiohead";
 
-			search.setKey("AIzaSyBUfgJRmOS7loeG1EPaK9gLxdSqXltCfGg"); //created on 25/02/2015
+			search.setKey(YoutubeApi.getKey()); // created on 25/02/2015
 			search.setQ(queryTerm);
-
+			
 			search.setType("video");
 			search.setVideoCategoryId("10");
 
@@ -60,13 +62,15 @@ public class YoutubeSearcher extends HttpServlet {
 
 					resp.getWriter().println("----");
 					resp.getWriter().println(searchResult.getSnippet().getTitle());
+					
+					YoutubeApi.getVideoInfo(searchResult.getId().getVideoId().toString());
 
 					List<PlaylistItem> playlistItemList = new ArrayList<PlaylistItem>();
 
 					YouTube.PlaylistItems.List playlistItemRequest = youtube.playlistItems().list(
 							"id,contentDetails,snippet");
 					playlistItemRequest.setPlaylistId("RD" + searchResult.getId().getVideoId());
-					playlistItemRequest.setKey("AIzaSyC1lpLnlmQjy7PO_YuOYhzxzPUq83pvi3k");
+					playlistItemRequest.setKey(YoutubeApi.getKey());
 					playlistItemRequest.setMaxResults((long) 50);
 
 					PlaylistItemListResponse playlistItemResult = playlistItemRequest.execute();
@@ -76,11 +80,13 @@ public class YoutubeSearcher extends HttpServlet {
 
 					while (playlistEntries.hasNext()) {
 						PlaylistItem playlistItem = playlistEntries.next();
-
+						
 						resp.getWriter().println(" video name  = " + playlistItem.getSnippet().getTitle());
 					}
 
 				}
+
+				Logger.getGlobal().log(Level.INFO, "OK");
 
 			}
 		} catch (Exception ex) {
