@@ -44,6 +44,7 @@ public class DJuQBox implements EntryPoint {
 		// loading splash screen
 		// https://turbomanage.wordpress.com/2009/10/13/how-to-create-a-splash-screen-while-gwt-loads/
 		//http://jamestaylor2000.com/jukebox/spinningrecord.gif
+		//http://www.ajaxload.info/
 
 		final Button sendButton = new Button("Send test3");
 		final TextBox nameField = new TextBox();

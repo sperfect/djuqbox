@@ -43,14 +43,18 @@ public class BaseDataClass {
 
 	 
 	//java.lang.IllegalAccessError: tried to access field gr.sperfect.djuqbox.webapp.shared.data.BaseDataClass.id from class gr.sperfect.djuqbox.webapp.server.rest.RoomResource
-	public Long getID() {
+
+	public Long getUID() {
 		return id;
 	}
 
 	
-	public void setID(Long id) {
+	public void setUid(Long id) {
 		this.id = id;
 	}
+	
+	
+	
 	
 	public String getName() {
 		return name;

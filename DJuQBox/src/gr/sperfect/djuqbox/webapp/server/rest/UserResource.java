@@ -50,7 +50,7 @@ public class UserResource extends BaseResource {
 		User newUser = db.createObject(aUserParam);
 		// save assign...
 		
-		servletResponse.setStatus(201);
+		response.status(201);
 		return newUser;
 	}
 	
@@ -83,7 +83,7 @@ public class UserResource extends BaseResource {
 		
 		User u = new User("testuser "+ aUserId);
 		u = db.createObject(u);
-		Long idL = u.getID();
+		Long idL = u.getUID();
 		u  = db.getObjectById(idL);
 		u = db.updateObject(u);
 

@@ -64,13 +64,13 @@ public class DbOjectify<T extends BaseDataClass> implements IDB<T> {
 
 		ofy().save().entity(o).now();
 
-		if (o.getID() == null) {
+		if (o.getUID() == null) {
 			LogError("id is null. Type " + o.getClass());
 			return null;
 		}
 
 		@SuppressWarnings("unchecked")
-		Result<T> result = (Result<T>) ofy().load().key(Key.create(o.getClass(), o.getID())); // Result is async
+		Result<T> result = (Result<T>) ofy().load().key(Key.create(o.getClass(), o.getUID())); // Result is async
 
 		T fetched1 = result.now();
 		return fetched1;
