@@ -22,7 +22,7 @@
 	<entry-point class='gr.sperfect.djuqbox.webapp.client.DJuQBox' />
 	
 	<!-- den paizei akoma https://code.google.com/p/gwt-youtube-api/wiki/GettingStarted -->
-	<inherits name="com.google.gdata.YouTubeAPI" />
+	<!-- <inherits name="com.google.gdata.YouTubeAPI" />  -->
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />

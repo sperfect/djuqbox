@@ -2,6 +2,7 @@ package gr.sperfect.djuqbox.webapp.client;
 
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
+import gr.sperfect.djuqbox.webapp.shared.data.YoutubeSong;
 
 import java.util.List;
 
@@ -15,8 +16,6 @@ import javax.ws.rs.PathParam;
 import org.fusesource.restygwt.client.Attribute;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.RestService;
-
-import com.google.api.services.youtube.model.Video;
 
 public interface RestApiService extends RestService {
 
@@ -76,7 +75,7 @@ public interface RestApiService extends RestService {
 	//den paizei prepei na kanw kati inherit sto gwt.xml pou na exei to Video
 	@GET
 	@Path("/youtube/search/video/{video_id}") 
-	public void getYoutubeVideoInfo(@PathParam("video_id") String video_id,  MethodCallback<Video> callback);
+	public void getYoutubeVideoInfo(@PathParam("video_id") String video_id,  MethodCallback<YoutubeSong> callback);
 	
 	
 	

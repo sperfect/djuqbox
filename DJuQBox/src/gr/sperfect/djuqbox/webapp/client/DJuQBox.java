@@ -1,6 +1,7 @@
 package gr.sperfect.djuqbox.webapp.client;
 
 import gr.sperfect.djuqbox.webapp.shared.data.User;
+import gr.sperfect.djuqbox.webapp.shared.data.YoutubeSong;
 
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
@@ -49,8 +50,8 @@ public class DJuQBox implements EntryPoint {
 		//http://www.ajaxload.info/
 
 		final Button sendButton = new Button("Send test3");
-		final TextBox nameField = new TextBox();
-		nameField.setText("GWT User");
+		final TextBox searchField = new TextBox();
+		//searchField.setText("GWT User");
 		final Label errorLabel = new Label();
 
 		// We can add style names to widgets
@@ -58,13 +59,14 @@ public class DJuQBox implements EntryPoint {
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
-		RootPanel.get("nameFieldContainer").add(nameField);
+		RootPanel.get("nameFieldContainer").add(searchField);
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
 
 		// Focus the cursor on the name field when the app loads
-		nameField.setFocus(true);
-		nameField.selectAll();
+		searchField.setFocus(true);
+		searchField.selectAll();
+		searchField.setText("kd4QMN_lErc");
 
 		// Create a handler for the sendButton and nameField
 		class MyHandler implements ClickHandler, KeyUpHandler /* , MethodCallback */{
@@ -82,31 +84,13 @@ public class DJuQBox implements EntryPoint {
 			private void TestResty() {
 				RestApiService api = GWT.create(RestApiService.class);
 
-				User u = new User("test");
-				u.setUid(2L);
-
-				api.addUserToRoom(1L, u, new MethodCallback<Void>() {
-
-					@Override
-					public void onSuccess(Method method, Void response) {
-						Window.alert("OK");
-
-					}
-
-					@Override
-					public void onFailure(Method method, Throwable exception) {
-
-						Log("test ", method, exception);
-
-					}
-
-				});
 				
-				api.getYoutubeVideoInfo("ACUuFg9Y9dY", new MethodCallback<Video>() {
+				
+				api.getYoutubeVideoInfo(searchField.getText() , new MethodCallback<YoutubeSong>() {
 					
 					@Override
-					public void onSuccess(Method method, Video v) {
-						Window.alert("OK " + v.getSnippet().getTitle());
+					public void onSuccess(Method method, YoutubeSong s) {
+						Window.alert("OK " + s.getTitle());
 						
 					}
 					
@@ -129,7 +113,7 @@ public class DJuQBox implements EntryPoint {
 		// Add a handler to send the name to the server
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
-		nameField.addKeyUpHandler(handler);
+		searchField.addKeyUpHandler(handler);
 
 		
 		DOM.getElementById("loading").removeFromParent();

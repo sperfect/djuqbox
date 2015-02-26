@@ -16,6 +16,7 @@ import com.google.api.services.youtube.model.VideoListResponse;
 
 public class YoutubeApi {
 
+	//static 'h 8a xanetai???
 	public static final YouTube youtubeInst = new YouTube.Builder(UrlFetchTransport.getDefaultInstance(),
 			JacksonFactory.getDefaultInstance(), new HttpRequestInitializer() {
 				public void initialize(HttpRequest request) throws IOException {
