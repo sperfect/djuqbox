@@ -25,6 +25,15 @@
 		<servlet-name>Jersey REST Service</servlet-name>
 		<url-pattern>/api/v1/*</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>youtube_search</servlet-name>
+		<servlet-class>gr.sperfect.djuqbox.webapp.server.youtube.YoutubeSearcher</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>youtube_search</servlet-name>
+		<url-pattern>/youtube/search</url-pattern>
+	</servlet-mapping>
 
 	<filter>
 		<filter-name>ObjectifyFilter</filter-name>
