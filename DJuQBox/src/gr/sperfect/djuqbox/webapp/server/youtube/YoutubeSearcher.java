@@ -34,7 +34,7 @@ public class YoutubeSearcher extends HttpServlet {
 					JacksonFactory.getDefaultInstance(), new HttpRequestInitializer() {
 						public void initialize(HttpRequest request) throws IOException {
 						}
-					}).setApplicationName("sperfect-juqbox-api").build();
+					}).setApplicationName("djuqbox").build();
 
 			YouTube.Search.List search = youtube.search().list("id,snippet");
 
