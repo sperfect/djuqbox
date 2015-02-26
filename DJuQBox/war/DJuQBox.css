@@ -32,3 +32,11 @@ h1 {
 #closeButton {
   margin: 15px 6px 6px;
 }
+
+
+#loading {
+    display: block;
+   
+    left: 50%;
+    text-align: center;
+}
