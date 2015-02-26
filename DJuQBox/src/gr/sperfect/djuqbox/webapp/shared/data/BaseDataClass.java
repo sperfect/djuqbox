@@ -9,7 +9,7 @@ public class BaseDataClass {
 
 	
 	@Id
-	private Long id;
+	public Long id;
 	//prepei na einai public gia na to balw san @Attribute("id") den ginetai me getter se klhsh tou Resty
 	
 	@Index
