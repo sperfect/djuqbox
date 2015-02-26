@@ -2,6 +2,7 @@ package gr.sperfect.djuqbox.webapp.client;
 
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
+import gr.sperfect.djuqbox.webapp.shared.data.YoutubePlayList;
 import gr.sperfect.djuqbox.webapp.shared.data.YoutubeSong;
 
 import java.util.List;
@@ -73,7 +74,7 @@ public interface RestApiService extends RestService {
 	//YOUTUBE
 	
 	@GET
-	@Path("/youtube/search/video/{video_id}") 
+	@Path("/youtube/video/{video_id}") 
 	public void getYoutubeVideoInfo(@PathParam("video_id") String video_id,  MethodCallback<YoutubeSong> callback);
 	
 	
@@ -81,6 +82,13 @@ public interface RestApiService extends RestService {
 	@Path("/youtube/search/title/{q}") 
 	public void searchYoutubeVideo(@PathParam("q") String q,  MethodCallback<List<YoutubeSong>> callback);
 	
+	@GET
+	@Path("/youtube/playlist/{pl_id}") 
+	public void getYoutubePlayList(@PathParam("pl_id") String aPlayListId,  MethodCallback<YoutubePlayList> callback);
 	
+	
+	@GET
+	@Path("/youtube/video/{video_id}/mix") 
+	public void getYoutubeMixForSong(@PathParam("video_id") String video_id,  MethodCallback<YoutubePlayList> callback);
 }
 

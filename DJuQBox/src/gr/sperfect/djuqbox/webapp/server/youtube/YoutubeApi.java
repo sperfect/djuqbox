@@ -82,6 +82,20 @@ public class YoutubeApi {
 		
 	}
 	
+	public static List<PlaylistItem> getPlayList(String aPlaylistId) throws Exception{
+		
+		YouTube.PlaylistItems.List playlistItemRequest = youtubeInst.playlistItems().list(
+				"id,contentDetails,snippet");
+		playlistItemRequest.setPlaylistId(aPlaylistId);//"RD" + searchResult.getId().getVideoId());
+		playlistItemRequest.setKey(getKey());
+		playlistItemRequest.setMaxResults((long) 50);
+		playlistItemRequest.setFields("items(snippet(resourceId(videoId),publishedAt,title,thumbnails/default/url))");
+		
+		return playlistItemRequest.execute().getItems();
+		
+	}
 	
+	
+
 	
 }

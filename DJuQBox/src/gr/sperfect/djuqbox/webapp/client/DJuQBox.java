@@ -3,6 +3,7 @@ package gr.sperfect.djuqbox.webapp.client;
 import java.util.List;
 
 import gr.sperfect.djuqbox.webapp.shared.data.User;
+import gr.sperfect.djuqbox.webapp.shared.data.YoutubePlayList;
 import gr.sperfect.djuqbox.webapp.shared.data.YoutubeSong;
 
 import org.fusesource.restygwt.client.Defaults;
@@ -86,20 +87,36 @@ public class DJuQBox implements EntryPoint {
 			private void TestResty() {
 				RestApiService api = GWT.create(RestApiService.class);
 
-				api.searchYoutubeVideo(searchField.getText(), new MethodCallback<List<YoutubeSong>>() {
+				api.getYoutubeMixForSong("kd4QMN_lErc", new MethodCallback<YoutubePlayList>() {
 					
 					@Override
-					public void onSuccess(Method method, List<YoutubeSong> response) {
-						Window.alert("OK " + response.get(0).getTitle());
+					public void onSuccess(Method method, YoutubePlayList pl) {
+						Window.alert("OK " + pl.getSongs().get(2).getTitle());
 						
 					}
 					
 					@Override
 					public void onFailure(Method method, Throwable exception) {
-						Log("searchYoutubeVideo ", method, exception);
-						
+						// TODO Auto-generated method stub
+						Log("getYoutubeMixForSong ", method, exception);
 					}
 				});
+				
+//				api.searchYoutubeVideo(searchField.getText(), new MethodCallback<List<YoutubeSong>>() {
+//					
+//					@Override
+//					public void onSuccess(Method method, List<YoutubeSong> response) {
+//						Window.alert("OK " + response.get(0).getTitle());
+//						//kd4QMN_lErc
+//						
+//					}
+//					
+//					@Override
+//					public void onFailure(Method method, Throwable exception) {
+//						Log("searchYoutubeVideo ", method, exception);
+//						
+//					}
+//				});
 				
 				
 				

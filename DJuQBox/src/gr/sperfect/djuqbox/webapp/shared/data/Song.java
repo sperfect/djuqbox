@@ -12,6 +12,10 @@ public class Song extends BaseDataClass {
 	private String uri;
 
 	private String title;
+	
+	private String artist;	
+	private String album;
+	private String track;
 
 	public String getTitle() {
 		return title;
