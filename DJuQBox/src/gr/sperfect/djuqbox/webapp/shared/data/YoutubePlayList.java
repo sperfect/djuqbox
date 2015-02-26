@@ -3,6 +3,9 @@ package gr.sperfect.djuqbox.webapp.shared.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.googlecode.objectify.annotation.Entity;
+
+@Entity
 public class YoutubePlayList extends PlayList implements IHasThumbnail{
 
 	public YoutubePlayList() {

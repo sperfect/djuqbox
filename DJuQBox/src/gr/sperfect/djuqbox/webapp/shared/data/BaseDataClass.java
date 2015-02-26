@@ -105,5 +105,16 @@ public class BaseDataClass {
 	public void setCode(String code) {
 		this.code = code;
 	}
+
+
+
+	public void generateHATEOASLink() {
+		link = new HATEOASLink();
+		link.rel = this.getClass().getSimpleName().toLowerCase();
+		link.href = this.getClass().getSimpleName().toLowerCase() + "/" + this.getUID();
+		link.rel_id = this.getUID();
+		
+		
+	}
 	
 }

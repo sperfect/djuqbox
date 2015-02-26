@@ -1,6 +1,9 @@
 package gr.sperfect.djuqbox.webapp.shared.data;
 
+import com.googlecode.objectify.annotation.Entity;
 
+
+@Entity
 public class YoutubeSong extends Song implements IHasThumbnail {
 
 	

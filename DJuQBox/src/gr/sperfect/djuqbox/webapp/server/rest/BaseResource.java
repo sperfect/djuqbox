@@ -32,14 +32,14 @@ public abstract class BaseResource {
 
 	protected void Log(String message) {
 		try {
-			logger.log(Level.INFO, req.getMethod() + " " + this.uri.getPath() + (message == null ? "" : ": " + message));
+			logger.log(Level.INFO, this.getClass().getSimpleName() + " "+ req.getMethod() + " " + this.uri.getPath() + (message == null ? "" : ": " + message));
 		} catch (Exception ex) {
 		}
 	}
 
 	protected void LogError(String message) {
 		try {
-			logger.log(Level.SEVERE, req.getMethod() + " " + this.uri.getPath()
+			logger.log(Level.SEVERE, this.getClass().getSimpleName() + " "+ req.getMethod() + " " + this.uri.getPath()
 					+ (message == null ? "" : ": " + message));
 		} catch (Exception ex) {
 		}

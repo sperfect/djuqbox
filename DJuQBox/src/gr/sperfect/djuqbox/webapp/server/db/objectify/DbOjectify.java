@@ -3,6 +3,7 @@ package gr.sperfect.djuqbox.webapp.server.db.objectify;
 import static gr.sperfect.djuqbox.webapp.server.db.objectify.OfyService.ofy;
 import gr.sperfect.djuqbox.webapp.server.db.IDB;
 import gr.sperfect.djuqbox.webapp.shared.data.BaseDataClass;
+import gr.sperfect.djuqbox.webapp.shared.data.HATEOASLink;
 
 import java.util.Date;
 import java.util.List;
@@ -84,6 +85,9 @@ public class DbOjectify<T extends BaseDataClass> implements IDB<T> {
 		o.setDateInsert(new Date());
 		ofy().save().entity(o).now();
 
+		o.generateHATEOASLink();
+		
+		ofy().save().entity(o).now();
 		return o;
 	}
 

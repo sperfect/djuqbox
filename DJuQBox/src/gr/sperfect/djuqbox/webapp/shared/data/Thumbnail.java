@@ -1,5 +1,8 @@
 package gr.sperfect.djuqbox.webapp.shared.data;
 
+import com.googlecode.objectify.annotation.Entity;
+
+@Entity
 public class Thumbnail extends BaseDataClass {
 
 	private Long width;

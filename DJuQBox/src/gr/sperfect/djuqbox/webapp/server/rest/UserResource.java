@@ -2,7 +2,10 @@ package gr.sperfect.djuqbox.webapp.server.rest;
 
 import gr.sperfect.djuqbox.webapp.server.db.DBHelper;
 import gr.sperfect.djuqbox.webapp.server.db.IDB;
+import gr.sperfect.djuqbox.webapp.shared.data.PlayList;
+import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
+import gr.sperfect.djuqbox.webapp.shared.data.YoutubePlayList;
 
 import java.util.List;
 
@@ -18,6 +21,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Path("/users")
@@ -48,7 +52,7 @@ public class UserResource extends BaseResource {
 		User newUser = db.createObject(aUserParam);
 		// save assign...
 
-		response.status(201);
+		Response.status(201);
 		return newUser;
 	}
 
@@ -77,22 +81,12 @@ public class UserResource extends BaseResource {
 	@Path("/{user_id}")
 	public User getUser(@PathParam("user_id") Long aUserId) {
 
-		try {
-			Log(aUserId.toString());
+		Log(aUserId.toString());
 
-			User u = new User("testuser " + aUserId);
-			u = db.createObject(u);
-			Long idL = u.getUID();
-			u = db.getObjectById(idL);
-			u = db.updateObject(u);
+		User u = db.getObjectById(aUserId);
+				
+		return u;		
 
-			db.deleteObject(u);
-
-			return u;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return null;
-		}
 	}
 
 }

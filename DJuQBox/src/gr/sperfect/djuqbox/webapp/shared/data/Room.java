@@ -47,28 +47,28 @@ public class Room extends BaseDataClass {
 		this.userCreator = userCreator;
 	}
 
-	public PlayList getCurrentPlayList() {
-		return currentPlayList;
-	}
-
-	public void setCurrentPlayList(PlayList currentPlayList) {
-		this.currentPlayList = currentPlayList;
-	}
-
-	public Song getCurrentSong() {
-		return currentSong;
-	}
-
-	public void setCurrentSong(Song currentSong) {
-		this.currentSong = currentSong;
-	}
-
-	public Long getCurrentSongPosition() {
-		return currentSongPosition;
-	}
-
-	public void setCurrentSongPosition(Long currentSongPosition) {
-		this.currentSongPosition = currentSongPosition;
-	}
+//	public PlayList getCurrentPlayList() { 
+//		return currentPlayList;
+//	}
+//
+//	public void setCurrentPlayList(PlayList currentPlayList) {
+//		this.currentPlayList = currentPlayList;
+//	}
+//
+//	public Song getCurrentSong() {
+//		return currentSong;
+//	}
+//
+//	public void setCurrentSong(Song currentSong) {
+//		this.currentSong = currentSong;
+//	}
+//
+//	public Long getCurrentSongPosition() {
+//		return currentSongPosition;
+//	}
+//
+//	public void setCurrentSongPosition(Long currentSongPosition) {
+//		this.currentSongPosition = currentSongPosition;
+//	}
 
 }

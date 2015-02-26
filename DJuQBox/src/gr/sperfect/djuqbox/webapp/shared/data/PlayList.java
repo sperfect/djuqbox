@@ -3,6 +3,9 @@ package gr.sperfect.djuqbox.webapp.shared.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.googlecode.objectify.annotation.Entity;
+
+@Entity
 public class PlayList extends BaseDataClass {
 
 	public PlayList() {
@@ -10,8 +13,10 @@ public class PlayList extends BaseDataClass {
 	}
 
 
-	private Room roomOwner;
-	private User userCreated;
+	private HATEOASLink roomOwnerLink; // OXI! looparei gia panta kata to OfyService.factory().register(Room.class);
+	private HATEOASLink userCreatedLink;
+	
+	
 	
 	protected List<Song> songs = null;
 
@@ -29,6 +34,16 @@ public class PlayList extends BaseDataClass {
 	public void addSong(Song s) {
 		getSongs().add(s);
 	}
+
+	public HATEOASLink getRoomOwner() {
+		return roomOwnerLink;
+	}
+
+	public void setRoomOwner(HATEOASLink link) {
+		this.roomOwnerLink = link;
+	}
+
+	
 
 
 }
