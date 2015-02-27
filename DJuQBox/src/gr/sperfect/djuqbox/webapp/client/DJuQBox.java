@@ -2,6 +2,7 @@ package gr.sperfect.djuqbox.webapp.client;
 
 import java.util.List;
 
+import gr.sperfect.djuqbox.webapp.client.api.RestApiService;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
 import gr.sperfect.djuqbox.webapp.shared.data.YoutubePlayList;
 import gr.sperfect.djuqbox.webapp.shared.data.YoutubeSong;

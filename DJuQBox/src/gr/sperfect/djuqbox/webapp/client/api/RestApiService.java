@@ -1,4 +1,4 @@
-package gr.sperfect.djuqbox.webapp.client;
+package gr.sperfect.djuqbox.webapp.client.api;
 
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
