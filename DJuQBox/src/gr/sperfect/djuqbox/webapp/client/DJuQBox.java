@@ -1,17 +1,19 @@
 package gr.sperfect.djuqbox.webapp.client;
 
+import java.util.Date;
 import java.util.List;
 
 import gr.sperfect.djuqbox.webapp.client.api.RestApiService;
+import gr.sperfect.djuqbox.webapp.client.ui.ControlHandler;
+import gr.sperfect.djuqbox.webapp.client.ui.PlayerControls;
+import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
-import gr.sperfect.djuqbox.webapp.shared.data.YoutubePlayList;
-import gr.sperfect.djuqbox.webapp.shared.data.YoutubeSong;
 
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
-import com.google.api.services.youtube.model.Video;
+import com.google.appengine.api.search.query.ExpressionParser.cmpExpr_return;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -19,6 +21,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
@@ -72,24 +75,24 @@ public class DJuQBox implements EntryPoint {
 		searchField.selectAll();
 		searchField.setText("kd4QMN_lErc"); // kd4QMN_lErc //Belle and sebastian
 
-//		class MyRestHandler implements MethodCallback {
-//
-//			@Override
-//			public void onFailure(Method method, Throwable exception) {
-//				Log("", method, exception);
-//				
-//			}
-//
-//			@Override
-//			public void onSuccess(Method method, Object response) {
-//				
-//				//select what to do				
-//				Window.alert("OK " + response.toString());
-//				//douleuei, alla 8a 8elei poly iffff
-//			}
-//		}
-		
-		//final MyRestHandler restHandler = new MyRestHandler();
+		// class MyRestHandler implements MethodCallback {
+		//
+		// @Override
+		// public void onFailure(Method method, Throwable exception) {
+		// Log("", method, exception);
+		//
+		// }
+		//
+		// @Override
+		// public void onSuccess(Method method, Object response) {
+		//
+		// //select what to do
+		// Window.alert("OK " + response.toString());
+		// //douleuei, alla 8a 8elei poly iffff
+		// }
+		// }
+
+		// final MyRestHandler restHandler = new MyRestHandler();
 
 		// Create a handler for the sendButton and nameField
 		class MyHandler implements ClickHandler, KeyUpHandler /* , MethodCallback */{
@@ -106,56 +109,53 @@ public class DJuQBox implements EntryPoint {
 
 			private void TestResty() {
 				final RestApiService api = GWT.create(RestApiService.class);
-				
-				
+
 				api.createUser(new User("test user"), new MethodCallback<User>() {
-					
+
 					@Override
 					public void onSuccess(Method method, User uRes) {
-						
+
 						Window.alert("OK " + uRes.getUID());
-						
+
 						api.getUser(uRes.getUID(), new MethodCallback<User>() {
-							
+
 							@Override
 							public void onSuccess(Method method, User u) {
 								Window.alert("OK2 " + u.getUID());
-								
+
 							}
-							
+
 							@Override
 							public void onFailure(Method method, Throwable exception) {
 								Log("getUser ", method, exception);
-								
+
 							}
 						});
-						
+
 					}
-					
+
 					@Override
 					public void onFailure(Method method, Throwable exception) {
 						Log("createUser ", method, exception);
-						
+
 					}
 				});
-				
-				
-				
 
-//				api.getYoutubeMixForSong(searchField.getText(), new MethodCallback<YoutubePlayList>() {
-//
-//					@Override
-//					public void onSuccess(Method method, YoutubePlayList pl) {
-//						Window.alert("OK " + pl.getSongs().get(2).getTitle());
-//						Log("getYoutubeMixForSong size:" +pl.getSongs().size());
-//					}
-//
-//					@Override
-//					public void onFailure(Method method, Throwable exception) {
-//						// TODO Auto-generated method stub
-//						Log("getYoutubeMixForSong ", method, exception);
-//					}
-//				});
+				// api.getYoutubeMixForSong(searchField.getText(), new
+				// MethodCallback<YoutubePlayList>() {
+				//
+				// @Override
+				// public void onSuccess(Method method, YoutubePlayList pl) {
+				// Window.alert("OK " + pl.getSongs().get(2).getTitle());
+				// Log("getYoutubeMixForSong size:" +pl.getSongs().size());
+				// }
+				//
+				// @Override
+				// public void onFailure(Method method, Throwable exception) {
+				// // TODO Auto-generated method stub
+				// Log("getYoutubeMixForSong ", method, exception);
+				// }
+				// });
 
 				// api.searchYoutubeVideo(searchField.getText(), new
 				// MethodCallback<List<YoutubeSong>>() {
@@ -183,13 +183,83 @@ public class DJuQBox implements EntryPoint {
 			}
 
 		}
+		
+		
+		RootPanel.get("playerContainer").add(playerOut);
+
+		class MyControlHandler implements ControlHandler {
+
+			@Override
+			public void onStop() {
+				playerOut.setText("Clicked Stop");
+			}
+
+			@Override
+			public void onPause() {
+				
+				playerOut.setText("Clicked Pause");
+				getRooms();
+			}
+
+			@Override
+			public void onPlay() {
+				
+				playerOut.setText("Clicked Play");
+				
+			}
+		}
 
 		// Add a handler to send the name to the server
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
 		searchField.addKeyUpHandler(handler);
 
+		MyControlHandler controlHandler = new MyControlHandler();
+
 		DOM.getElementById("loading").removeFromParent();
+
+		PlayerControls pc = new PlayerControls(controlHandler);
+		//pc.setText("test");
+		
+		RootPanel.get("playerControlsContainer").add(pc);
+		
+		
+		Timer t = new Timer() {
+			
+			@Override
+			public void run() {
+				
+				getRooms();
+				
+			}
+		};
+		
+		t.scheduleRepeating(5000);
+
+	}
+	
+	final Label playerOut = new Label();
+	
+	RestApiService api = GWT.create(RestApiService.class);
+
+	
+	protected void getRooms() {
+		
+		api.getRooms(new MethodCallback<List<Room>>() {
+			
+			@Override
+			public void onSuccess(Method method, List<Room> rooms) {
+				// TODO Auto-generated method stub
+				playerOut.setText("got " + rooms.size() + "rooms, updated " + new Date().toString());
+			}
+			
+			@Override
+			public void onFailure(Method method, Throwable exception) {
+				// TODO Auto-generated method stub
+				Log("getRooms ", method, exception);
+			}
+		});
+		
 	}
 
 	private void Log(String message, Method method, Throwable ex) {
