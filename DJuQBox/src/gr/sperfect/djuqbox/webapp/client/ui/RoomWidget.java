@@ -41,15 +41,49 @@ public class RoomWidget extends Composite implements HasText {
 
 	
 	private Room fRoom;
+	private PlayerControls playerControls;
 	
 	@UiField
 	Button button;
 	
 	
+	private void informClients(RoomStatus roomStatus) {
+		//send mqtt
+		
+	}
+	
+	class MyControlHandler implements ControlHandler {
+
+		@Override
+		public void onStop() {
+			getRoom().getRoomStatus().setPlayerStatus(0);
+			informClients(getRoom().getRoomStatus());
+		}
+
+		
+
+		@Override
+		public void onPause() {
+			getRoom().getRoomStatus().setPlayerStatus(2);
+			
+			informClients(getRoom().getRoomStatus());
+		}
+
+		@Override
+		public void onPlay() {
+			getRoom().getRoomStatus().setPlayerStatus(1);
+			informClients(getRoom().getRoomStatus());
+
+		}
+	}
+	
+	private MyControlHandler aControlHandler = new MyControlHandler() ;
+	
 
 	public RoomWidget(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
 		button.setText(firstName);
+		playerControls = new PlayerControls(aControlHandler);
 	}
 
 	@UiHandler("button")
@@ -68,11 +102,17 @@ public class RoomWidget extends Composite implements HasText {
 	public void updateRoomStatus(RoomStatus rs)
 	{
 		//check if needs reload
+		if (rs.isNeededReload()) {
+			//Window.reload kati tetoio
+		}
 		//update player
+		
 		//update playlist
 		//update users
 		//update chat/comments
 	}
+	
+	
 
 	public Room getRoom() {
 		return fRoom;

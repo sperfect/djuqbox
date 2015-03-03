@@ -50,7 +50,9 @@ public class PlayerControls extends Composite implements HasHTML {
 	@UiField
 	Button buttonStop;
 	
-	
+	/*
+	 * mhpws xreiazetai addListener
+	 */
 	private ControlHandler controlHandler;
 
 //	public PlayerControls(String text) {
@@ -78,6 +80,22 @@ public class PlayerControls extends Composite implements HasHTML {
 		controlHandler.onStop();
 	}
 
+	public void Play()
+	{
+		controlHandler.onPlay();
+		
+	}
+	public void Pause()
+	{
+		controlHandler.onPause();
+		
+	}
+	
+	public void Stop()
+	{
+		controlHandler.onStop();
+		
+	}
 	
 	/**
 	 * Gets invoked when the default constructor is called

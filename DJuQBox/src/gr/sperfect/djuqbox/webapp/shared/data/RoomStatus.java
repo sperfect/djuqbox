@@ -1,5 +1,8 @@
 package gr.sperfect.djuqbox.webapp.shared.data;
 
+import com.googlecode.objectify.annotation.Entity;
+
+@Entity
 public class RoomStatus extends BaseDataClass {
 	
 	public RoomStatus() {
@@ -10,7 +13,7 @@ public class RoomStatus extends BaseDataClass {
 	private boolean needsReload;
 	private Song currentSong;
 	private Long currentSongPosition;
-	private int playerStatus; // 1  playing, 2 stopped
+	private int playerStatus; // 0 stopped, 1 playing, 2 paused
 	private int volume; // 0-100
 	
 
@@ -38,10 +41,16 @@ public class RoomStatus extends BaseDataClass {
 		this.volume = volume;
 	}
 
+	/*
+	 * 0 stopped, 1 playing, 2 paused
+	 */
 	public int getPlayerStatus() {
 		return playerStatus;
 	}
 
+	/*
+	 * 0 stopped, 1 playing, 2 paused
+	 */
 	public void setPlayerStatus(int playerStatus) {
 		this.playerStatus = playerStatus;
 	}
