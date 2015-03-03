@@ -29,12 +29,7 @@ public class UserResource extends BaseResource {
 
 	static final IDB<User> db = DBHelper.getDB(User.class);
 
-	@Context
-	HttpHeaders headers;
-	@Context
-	Request req;
-	@Context
-	UriInfo uri;
+	
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -48,7 +43,19 @@ public class UserResource extends BaseResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public User createUser(User aUserParam) {
+	public User createUser(User aUserParam) throws Exception {
+		
+		if (aUserParam.getName() == null || aUserParam.getName() == "")
+		{
+			throw new Exception("name needed for user");
+		}
+		
+		//check if user exists
+		if(db.findObjectWithValue("name", aUserParam.getName()) != null)
+		{
+			throw new Exception("user "+ aUserParam.getName()+" already existrs");
+		}
+			
 		User newUser = db.createObject(aUserParam);
 		// save assign...
 
@@ -61,10 +68,10 @@ public class UserResource extends BaseResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public User updateRoom(User aUserParam) {
 
-		User newUser = db.updateObject(aUserParam);
+		User user = db.updateObject(aUserParam);
 
 		// save assign...
-		return newUser;
+		return user;
 	}
 
 	@DELETE
