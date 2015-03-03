@@ -57,6 +57,10 @@ public interface RestApiService extends RestService {
 	public void addUserToRoom(@PathParam("room_id") Long aRoomId, User r, MethodCallback<Void> callback );
 	
 	
+	@GET
+	@Path("/by/{field}/{value}") 
+	public void getRoomByValue(@PathParam("field") String aField, @PathParam("value") String aValue, MethodCallback<Room> callback);
+	
 	
 	
 	
