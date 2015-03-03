@@ -24,6 +24,9 @@ public class PlaylistWidget extends Composite implements HasText {
 
 	@UiField
 	Button button;
+	
+	//panel youtubeplayer
+	//panel controls
 
 	public PlaylistWidget(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
