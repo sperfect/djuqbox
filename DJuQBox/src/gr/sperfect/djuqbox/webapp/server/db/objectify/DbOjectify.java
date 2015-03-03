@@ -25,14 +25,14 @@ public class DbOjectify<T extends BaseDataClass> implements IDB<T> {
 	// inst = new DbOjectify<T>();
 	// return inst;
 	// }
-	
+
 	private static final Logger logger = java.util.logging.Logger.getLogger("DbOjectify");
 
 	private void LogError(String err) {
-		logger.log(Level.SEVERE, err);		
+		logger.log(Level.SEVERE, err);
 
 	}
-	
+
 	public DbOjectify(Class<T> type) {
 		typeGen = type;
 	}
@@ -50,8 +50,6 @@ public class DbOjectify<T extends BaseDataClass> implements IDB<T> {
 
 	// @Override
 	public T getObjectById(Long id) {
-
-		
 
 		Result<T> result = (Result<T>) ofy().load().key(Key.create(this.getGenType(), id));
 		// Result is async
@@ -71,13 +69,13 @@ public class DbOjectify<T extends BaseDataClass> implements IDB<T> {
 		}
 
 		@SuppressWarnings("unchecked")
-		Result<T> result = (Result<T>) ofy().load().key(Key.create(o.getClass(), o.getUID())); // Result is async
+		Result<T> result = (Result<T>) ofy().load().key(Key.create(o.getClass(), o.getUID())); // Result
+																								// is
+																								// async
 
 		T fetched1 = result.now();
 		return fetched1;
 	}
-
-	
 
 	@Override
 	public T createObject(T o) {
@@ -86,7 +84,7 @@ public class DbOjectify<T extends BaseDataClass> implements IDB<T> {
 		ofy().save().entity(o).now();
 
 		o.generateHATEOASLink();
-		
+
 		ofy().save().entity(o).now();
 		return o;
 	}
@@ -113,6 +111,26 @@ public class DbOjectify<T extends BaseDataClass> implements IDB<T> {
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	/*
+	 * aField: field name with operator (no operator means ==)
+	 * aValue the value
+	 * http://code.google.com/p/objectify-appengine/wiki/Queries
+	 * Executing Queries
+	 * @see gr.sperfect.djuqbox.webapp.server.db.IDB#findObjectWithValue(java.lang.String, java.lang.Object)
+	 */
+	public T findObjectWithValue(String aField, Object aValue) {
+
+		try {
+			 return ofy().load().type(this.getGenType()).filter(aField, aValue).first().now();
+		} catch (Exception e) {
+			LogError(e.toString());
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 }

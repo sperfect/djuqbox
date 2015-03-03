@@ -21,6 +21,6 @@ public interface IDB<T extends BaseDataClass> {
 
 	List<T> getAllObjects(String filters);
 
-	
+	T findObjectWithValue(String aField, Object aValue);
 
 }
