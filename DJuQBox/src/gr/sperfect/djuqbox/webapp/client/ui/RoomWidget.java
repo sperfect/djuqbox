@@ -1,5 +1,8 @@
 package gr.sperfect.djuqbox.webapp.client.ui;
 
+import gr.sperfect.djuqbox.webapp.shared.data.Room;
+import gr.sperfect.djuqbox.webapp.shared.data.RoomStatus;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -36,8 +39,13 @@ public class RoomWidget extends Composite implements HasText {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
+	
+	private Room fRoom;
+	
 	@UiField
 	Button button;
+	
+	
 
 	public RoomWidget(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -55,6 +63,23 @@ public class RoomWidget extends Composite implements HasText {
 
 	public String getText() {
 		return button.getText();
+	}
+	
+	public void updateRoomStatus(RoomStatus rs)
+	{
+		//check if needs reload
+		//update player
+		//update playlist
+		//update users
+		//update chat/comments
+	}
+
+	public Room getRoom() {
+		return fRoom;
+	}
+
+	public void setRoom(Room fRoom) {
+		this.fRoom = fRoom;
 	}
 	
 	
