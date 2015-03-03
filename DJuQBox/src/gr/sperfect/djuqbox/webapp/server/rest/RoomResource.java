@@ -46,23 +46,12 @@ public class RoomResource extends BaseResource {
 	@GET
 	@Path("{room_id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Room getRoom(@PathParam("room_id") Long id) {
+	public Room getRoom(@PathParam("room_id") Long aRoomId) {
 
-		Log();
+		Log();		
 
-		Room r = new Room("room0 " + id);
-		r = db.createObject(r);
-
-		Long idL = r.getUID();
-
-		Room rr = db.getObjectById(idL);
-
-		r = db.getObject(r);
-
-		r = db.updateObject(r);
-
-		db.deleteObject(r);
-
+		Room r = db.getObjectById(aRoomId);
+		
 		return r;
 	}
 

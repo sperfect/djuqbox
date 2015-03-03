@@ -69,9 +69,8 @@ public class DbOjectify<T extends BaseDataClass> implements IDB<T> {
 		}
 
 		@SuppressWarnings("unchecked")
-		Result<T> result = (Result<T>) ofy().load().key(Key.create(o.getClass(), o.getUID())); // Result
-																								// is
-																								// async
+		Result<T> result = (Result<T>) ofy().load().key(Key.create(o.getClass(), o.getUID())); 
+																								
 
 		T fetched1 = result.now();
 		return fetched1;
