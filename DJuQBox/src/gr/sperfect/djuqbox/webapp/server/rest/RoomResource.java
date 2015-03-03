@@ -69,9 +69,20 @@ public class RoomResource extends BaseResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Room createRoom(Room aRoomParam) {
+	public Room createRoom(Room aRoomParam) throws Exception {
 
 		Log();
+		
+		if (aRoomParam.getName() == null || aRoomParam.getName() == "")
+		{
+			throw new Exception("room needed for user");
+		}
+		
+		//check if room exists
+		if(db.findObjectWithValue("name", aRoomParam.getName()) != null)
+		{
+			throw new Exception("room "+ aRoomParam.getName()+" already existrs");
+		}
 
 		Room newRoom = db.createObject(aRoomParam);
 
