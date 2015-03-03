@@ -108,14 +108,14 @@ public class DJuQBox implements EntryPoint {
 
 				TestResty();
 
-				//TestCodeDecodeJson();
+				// TestCodeDecodeJson();
 
 			}
 
 			private void TestCodeDecodeJson() {
-				//https://resty-gwt.github.io/documentation/restygwt-user-guide.html
-				//JSON Encoder/Decoders
-					
+				// https://resty-gwt.github.io/documentation/restygwt-user-guide.html
+				// JSON Encoder/Decoders
+
 				RoomStatus r1 = new RoomStatus();
 				r1.setCode("tttt");
 
@@ -135,36 +135,56 @@ public class DJuQBox implements EntryPoint {
 			private void TestResty() {
 				final RestApiService api = GWT.create(RestApiService.class);
 
-				api.createUser(new User("test user"), new MethodCallback<User>() {
+				api.getRoomByValue("name", searchField.getText(), new MethodCallback<Room>() {
 
 					@Override
-					public void onSuccess(Method method, User uRes) {
+					public void onSuccess(Method method, Room r) {
 
-						Window.alert("OK " + uRes.getUID());
-
-						api.getUser(uRes.getUID(), new MethodCallback<User>() {
-
-							@Override
-							public void onSuccess(Method method, User u) {
-								Window.alert("OK2 " + u.getUID());
-
-							}
-
-							@Override
-							public void onFailure(Method method, Throwable exception) {
-								Log("getUser ", method, exception);
-
-							}
-						});
+						if (r == null) {
+							Window.alert("OK null");
+						} else {
+							Window.alert("OK " + r.getUID());
+						}
 
 					}
 
 					@Override
 					public void onFailure(Method method, Throwable exception) {
-						Log("createUser ", method, exception);
-
+						Log("getRoomByValue ", method, exception);
+						Window.alert("err " + exception.getMessage());
 					}
 				});
+
+//				api.createUser(new User("test user"), new MethodCallback<User>() {
+//
+//					@Override
+//					public void onSuccess(Method method, User uRes) {
+//
+//						Window.alert("OK " + uRes.getUID());
+//
+//						api.getUser(uRes.getUID(), new MethodCallback<User>() {
+//
+//							@Override
+//							public void onSuccess(Method method, User u) {
+//								Window.alert("OK2 " + u.getUID());
+//
+//							}
+//
+//							@Override
+//							public void onFailure(Method method, Throwable exception) {
+//								Log("getUser ", method, exception);
+//
+//							}
+//						});
+//
+//					}
+//
+//					@Override
+//					public void onFailure(Method method, Throwable exception) {
+//						Log("createUser ", method, exception);
+//
+//					}
+//				});
 
 				// api.getYoutubeMixForSong(searchField.getText(), new
 				// MethodCallback<YoutubePlayList>() {
@@ -247,17 +267,17 @@ public class DJuQBox implements EntryPoint {
 
 		RootPanel.get("playerControlsContainer").add(pc);
 
-		Timer t = new Timer() {
-
-			@Override
-			public void run() {
-
-				getRooms();
-
-			}
-		};
-
-		t.scheduleRepeating(5000);
+		// Timer t = new Timer() {
+		//
+		// @Override
+		// public void run() {
+		//
+		// getRooms();
+		//
+		// }
+		// };
+		//
+		// t.scheduleRepeating(5000);
 
 	}
 

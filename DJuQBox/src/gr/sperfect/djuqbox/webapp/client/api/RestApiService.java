@@ -58,8 +58,8 @@ public interface RestApiService extends RestService {
 	
 	
 	@GET
-	@Path("/by/{field}/{value}") 
-	public void getRoomByValue(@PathParam("field") String aField, @PathParam("value") String aValue, MethodCallback<Room> callback);
+	@Path("rooms/by/{field}/{value}") 
+	public void getRoomByValue(@PathParam("field") String aField, @PathParam("value") Object aValue, MethodCallback<Room> callback);
 	
 	
 	
