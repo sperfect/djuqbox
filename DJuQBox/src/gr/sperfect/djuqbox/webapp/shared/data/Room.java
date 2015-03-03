@@ -13,8 +13,9 @@ public class Room extends BaseDataClass {
 	private List<User> users;
 	private User userCreator;
 	private PlayList currentPlayList;
-	private Song currentSong;
-	private Long currentSongPosition;
+	
+	private RoomStatus roomStatus;
+	
 
 	public Room() {
 		// needed by json
@@ -47,6 +48,14 @@ public class Room extends BaseDataClass {
 		this.userCreator = userCreator;
 	}
 
+	public RoomStatus getRoomStatus() {
+		return roomStatus;
+	}
+
+	public void setRoomStatus(RoomStatus roomStatus) {
+		this.roomStatus = roomStatus;
+	}
+
 //	public PlayList getCurrentPlayList() { 
 //		return currentPlayList;
 //	}
@@ -54,21 +63,6 @@ public class Room extends BaseDataClass {
 //	public void setCurrentPlayList(PlayList currentPlayList) {
 //		this.currentPlayList = currentPlayList;
 //	}
-//
-//	public Song getCurrentSong() {
-//		return currentSong;
-//	}
-//
-//	public void setCurrentSong(Song currentSong) {
-//		this.currentSong = currentSong;
-//	}
-//
-//	public Long getCurrentSongPosition() {
-//		return currentSongPosition;
-//	}
-//
-//	public void setCurrentSongPosition(Long currentSongPosition) {
-//		this.currentSongPosition = currentSongPosition;
-//	}
+
 
 }
