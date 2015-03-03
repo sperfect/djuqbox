@@ -35,6 +35,8 @@ public class UserResource extends BaseResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getUsers() {
 
+		Log();
+		
 		List<User> ret = db.getAllObjects(null);
 
 		return ret;
@@ -44,6 +46,8 @@ public class UserResource extends BaseResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public User createUser(User aUserParam) throws Exception {
+		
+		Log();
 		
 		if (aUserParam.getName() == null || aUserParam.getName() == "")
 		{
@@ -68,6 +72,8 @@ public class UserResource extends BaseResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public User updateRoom(User aUserParam) {
 
+		Log();
+		
 		User user = db.updateObject(aUserParam);
 
 		// save assign...
@@ -79,6 +85,8 @@ public class UserResource extends BaseResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteRoom(User aUserParam) {
 
+		Log();
+		
 		db.deleteObject(aUserParam);
 
 	}
@@ -88,7 +96,7 @@ public class UserResource extends BaseResource {
 	@Path("/{user_id}")
 	public User getUser(@PathParam("user_id") Long aUserId) {
 
-		Log(aUserId.toString());
+		Log();
 
 		User u = db.getObjectById(aUserId);
 				
