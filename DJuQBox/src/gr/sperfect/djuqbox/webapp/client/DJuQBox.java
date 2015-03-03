@@ -1,25 +1,28 @@
 package gr.sperfect.djuqbox.webapp.client;
 
-import java.util.Date;
-import java.util.List;
-
 import gr.sperfect.djuqbox.webapp.client.api.RestApiService;
+import gr.sperfect.djuqbox.webapp.client.api.RoomStatusDataCodec;
 import gr.sperfect.djuqbox.webapp.client.ui.ControlHandler;
 import gr.sperfect.djuqbox.webapp.client.ui.PlayerControls;
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
+import gr.sperfect.djuqbox.webapp.shared.data.RoomStatus;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
+
+import java.util.Date;
+import java.util.List;
 
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
-import com.google.appengine.api.search.query.ExpressionParser.cmpExpr_return;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.json.client.JSONParser;
+import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
@@ -105,6 +108,28 @@ public class DJuQBox implements EntryPoint {
 
 				TestResty();
 
+				//TestCodeDecodeJson();
+
+			}
+
+			private void TestCodeDecodeJson() {
+				//https://resty-gwt.github.io/documentation/restygwt-user-guide.html
+				//JSON Encoder/Decoders
+					
+				RoomStatus r1 = new RoomStatus();
+				r1.setCode("tttt");
+
+				RoomStatusDataCodec codec = GWT.create(RoomStatusDataCodec.class);
+
+				JSONValue json = codec.encode(r1);
+				Window.alert(json.toString());
+
+				JSONValue jsonV = JSONParser.parseStrict(json.toString());
+
+				RoomStatus r2 = codec.decode(jsonV);
+
+				Window.alert(r2.getCode());
+
 			}
 
 			private void TestResty() {
@@ -183,8 +208,7 @@ public class DJuQBox implements EntryPoint {
 			}
 
 		}
-		
-		
+
 		RootPanel.get("playerContainer").add(playerOut);
 
 		class MyControlHandler implements ControlHandler {
@@ -196,16 +220,16 @@ public class DJuQBox implements EntryPoint {
 
 			@Override
 			public void onPause() {
-				
+
 				playerOut.setText("Clicked Pause");
 				getRooms();
 			}
 
 			@Override
 			public void onPlay() {
-				
+
 				playerOut.setText("Clicked Play");
-				
+
 			}
 		}
 
@@ -219,47 +243,45 @@ public class DJuQBox implements EntryPoint {
 		DOM.getElementById("loading").removeFromParent();
 
 		PlayerControls pc = new PlayerControls(controlHandler);
-		//pc.setText("test");
-		
+		// pc.setText("test");
+
 		RootPanel.get("playerControlsContainer").add(pc);
-		
-		
+
 		Timer t = new Timer() {
-			
+
 			@Override
 			public void run() {
-				
+
 				getRooms();
-				
+
 			}
 		};
-		
+
 		t.scheduleRepeating(5000);
 
 	}
-	
+
 	final Label playerOut = new Label();
-	
+
 	RestApiService api = GWT.create(RestApiService.class);
 
-	
 	protected void getRooms() {
-		
+
 		api.getRooms(new MethodCallback<List<Room>>() {
-			
+
 			@Override
 			public void onSuccess(Method method, List<Room> rooms) {
 				// TODO Auto-generated method stub
 				playerOut.setText("got " + rooms.size() + "rooms, updated " + new Date().toString());
 			}
-			
+
 			@Override
 			public void onFailure(Method method, Throwable exception) {
 				// TODO Auto-generated method stub
 				Log("getRooms ", method, exception);
 			}
 		});
-		
+
 	}
 
 	private void Log(String message, Method method, Throwable ex) {
