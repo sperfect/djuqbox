@@ -1,15 +1,13 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui"
-	xmlns:my="gr.sperfect.djuqbox.webapp.client.ui" >
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
 	.important {
 		font-weight: bold;
 	}
 	</ui:style>
 	<g:HTMLPanel>
-		player, controls, playlist, users, history, actions
+		Hello,
 		<g:Button styleName="{style.important}" ui:field="button" />
-		<my:PlayerWidget ui:field='player' />
 	</g:HTMLPanel>
 </ui:UiBinder> 

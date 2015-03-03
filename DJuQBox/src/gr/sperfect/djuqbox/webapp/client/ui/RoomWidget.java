@@ -47,6 +47,11 @@ public class RoomWidget extends Composite implements HasText {
 	Button button;
 	
 	
+	@UiField
+	PlayerWidget player;
+
+	
+	
 	private void informClients(RoomStatus roomStatus) {
 		//send mqtt
 		
