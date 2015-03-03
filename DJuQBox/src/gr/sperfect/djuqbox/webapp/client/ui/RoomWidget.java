@@ -51,6 +51,11 @@ public class RoomWidget extends Composite implements HasText {
 	PlayerWidget player;
 
 	
+	//xreaiazetai ??
+//	@UiFactory PlayerWidget makeCricketScores() { // method name is insignificant
+//	    return new PlayerWidget();
+//	  }
+	
 	
 	private void informClients(RoomStatus roomStatus) {
 		//send mqtt
