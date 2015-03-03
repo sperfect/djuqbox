@@ -28,11 +28,7 @@ public class RoomResource extends BaseResource {
 
 	}
 
-	// private static IDB db = DbOjectify.getInstance();
-	// IDB GetDB() {
-	// //make it super
-	// return DbOjectify.getInstance();
-	// }
+	
 
 	static final IDB<Room> db = DBHelper.getDB(Room.class);
 
@@ -189,6 +185,18 @@ public class RoomResource extends BaseResource {
 
 		ArrayList<UserRoomRole> ret = new ArrayList<UserRoomRole>();
 		ret.add(urr);
+		return ret;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/by/{field}/{value}") //mporei k to name na ginei
+	public Room getRoomByValue(@PathParam("field") String aField, @PathParam("value") String aValue) {
+
+		Log();
+
+		Room ret = db.findObjectWithValue(aField, aValue);
+
 		return ret;
 	}
 
