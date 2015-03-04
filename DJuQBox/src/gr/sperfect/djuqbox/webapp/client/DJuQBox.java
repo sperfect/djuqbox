@@ -4,6 +4,7 @@ import gr.sperfect.djuqbox.webapp.client.api.RestApiService;
 import gr.sperfect.djuqbox.webapp.client.api.RoomStatusDataCodec;
 import gr.sperfect.djuqbox.webapp.client.ui.ControlHandler;
 import gr.sperfect.djuqbox.webapp.client.ui.PlayerControls;
+import gr.sperfect.djuqbox.webapp.client.ui.RoomWidget;
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.RoomStatus;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
@@ -229,43 +230,22 @@ public class DJuQBox implements EntryPoint {
 
 		}
 
-		RootPanel.get("playerContainer").add(playerOut);
+		RootPanel.get("roomContainer").add(currentRoom);
+		
+		
 
-		class MyControlHandler implements ControlHandler {
-
-			@Override
-			public void onStop() {
-				playerOut.setText("Clicked Stop");
-			}
-
-			@Override
-			public void onPause() {
-
-				playerOut.setText("Clicked Pause");
-				getRooms();
-			}
-
-			@Override
-			public void onPlay() {
-
-				playerOut.setText("Clicked Play");
-
-			}
-		}
-
+		
 		// Add a handler to send the name to the server
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
 		searchField.addKeyUpHandler(handler);
 
-		MyControlHandler controlHandler = new MyControlHandler();
+		
 
 		DOM.getElementById("loading").removeFromParent();
 
-		PlayerControls pc = new PlayerControls(controlHandler);
-		// pc.setText("test");
-
-		RootPanel.get("playerControlsContainer").add(pc);
+		//PlayerControls pc = new PlayerControls(controlHandler);
+		//RootPanel.get("playerControlsContainer").add(pc);
 
 		// Timer t = new Timer() {
 		//
@@ -281,27 +261,28 @@ public class DJuQBox implements EntryPoint {
 
 	}
 
-	final Label playerOut = new Label();
+	final RoomWidget currentRoom = new RoomWidget();
 
 	RestApiService api = GWT.create(RestApiService.class);
 
-	protected void getRooms() {
+	protected void getcurrentRoom() {
 
-		api.getRooms(new MethodCallback<List<Room>>() {
-
+		api.getRoomByValue("name", "demoRoom", new MethodCallback<Room>() {
+			
 			@Override
-			public void onSuccess(Method method, List<Room> rooms) {
+			public void onSuccess(Method method, Room r) {
 				// TODO Auto-generated method stub
-				playerOut.setText("got " + rooms.size() + "rooms, updated " + new Date().toString());
+				currentRoom.setRoom(r);
 			}
-
+			
 			@Override
 			public void onFailure(Method method, Throwable exception) {
 				// TODO Auto-generated method stub
-				Log("getRooms ", method, exception);
+				Log("getRoom", method, exception);
 			}
 		});
 
+	
 	}
 
 	private void Log(String message, Method method, Throwable ex) {

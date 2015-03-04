@@ -131,6 +131,12 @@ public class RoomWidget extends Composite implements HasText {
 	public void setRoom(Room fRoom) {
 		this.fRoom = fRoom;
 	}
+
+	public void load(Room room) {
+		
+		this.fRoom = room;
+		
+	}
 	
 	
 	/*
