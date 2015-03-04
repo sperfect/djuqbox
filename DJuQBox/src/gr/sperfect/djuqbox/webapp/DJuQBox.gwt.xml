@@ -23,6 +23,9 @@
 	
 	<!-- den paizei akoma https://code.google.com/p/gwt-youtube-api/wiki/GettingStarted -->
 	<!-- <inherits name="com.google.gdata.YouTubeAPI" />  -->
+	
+	<!--<inherits name="com.bramosystems.gwt.player.BSTPlayer" /> -->
+	<inherits name="com.bramosystems.oss.player.youtube.YouTube" />
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />
