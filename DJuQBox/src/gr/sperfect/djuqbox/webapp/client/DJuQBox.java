@@ -44,6 +44,8 @@ public class DJuQBox implements EntryPoint {
 		// "Could not parse response: org.fusesource.restygwt.client.ResponseFormatException: Response was NOT a valid JSON document"
 		Defaults.setDateFormat(null);
 	}
+	
+	public static final RestApiService API = GWT.create(RestApiService.class);
 
 	/**
 	 * This is the entry point method.
@@ -258,21 +260,28 @@ public class DJuQBox implements EntryPoint {
 		// };
 		//
 		// t.scheduleRepeating(5000);
+		
+		GWT.log("before getCurrentRoom");
+		getCurrentRoom();
+		
+		GWT.log("after getCurrentRoom");
 
 	}
 
 	final RoomWidget currentRoom = new RoomWidget();
 
-	RestApiService api = GWT.create(RestApiService.class);
+	
 
-	protected void getcurrentRoom() {
+	protected void getCurrentRoom() {
 
-		api.getRoomByValue("name", "demoRoom", new MethodCallback<Room>() {
+		API.getRoomByValue("name", "demoRoom", new MethodCallback<Room>() {
 			
 			@Override
 			public void onSuccess(Method method, Room r) {
 				// TODO Auto-generated method stub
+				GWT.log("onSuccess getCurrentRoom");
 				currentRoom.setRoom(r);
+				currentRoom.load(r);
 			}
 			
 			@Override

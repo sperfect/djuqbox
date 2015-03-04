@@ -1,5 +1,9 @@
 package gr.sperfect.djuqbox.webapp.client.ui;
 
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
+
+import gr.sperfect.djuqbox.webapp.client.DJuQBox;
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.RoomStatus;
 
@@ -132,9 +136,31 @@ public class RoomWidget extends Composite implements HasText {
 		this.fRoom = fRoom;
 	}
 
+	public void closeRoom() {
+				
+		//invert load(Room)
+	}
+	
 	public void load(Room room) {
 		
 		this.fRoom = room;
+		
+		GWT.log("load Room");
+		
+		DJuQBox.API.getRoom(room.getUID(), new MethodCallback<Room>() {
+			
+			@Override
+			public void onSuccess(Method method, Room response) {
+				Window.alert("OK");
+				button.setText(response.getName());
+			}
+			
+			@Override
+			public void onFailure(Method method, Throwable exception) {
+				// TODO Auto-generated method stub
+				Window.alert("error");
+			}
+		});
 		
 	}
 	
