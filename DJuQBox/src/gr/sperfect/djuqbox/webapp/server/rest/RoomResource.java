@@ -77,7 +77,8 @@ public class RoomResource extends BaseResource {
 
 		// save assign...
 
-		response.status(201);
+		Response.status(201);
+		
 		return newRoom;
 	}
 
@@ -151,7 +152,7 @@ public class RoomResource extends BaseResource {
 
 		Log();
 		
-		response.status(Status.CREATED);
+		Response.status(Status.CREATED);
 
 		Room r = db.getObjectById(aRoomId);
 		if (r == null) {
@@ -162,12 +163,12 @@ public class RoomResource extends BaseResource {
 		// if not contains
 		if (r.getUsers().contains(aUser.getUID())) {
 			// javax.ws.rs.core.Response. Status
-			response.status(Status.NOT_MODIFIED);
+			Response.status(Status.NOT_MODIFIED);
 			return;
 		}
 		r.getUsers().add(aUser);
 		db.updateObject(r);
-		response.status(Status.CREATED);
+		Response.status(Status.CREATED);
 	}
 
 	@GET

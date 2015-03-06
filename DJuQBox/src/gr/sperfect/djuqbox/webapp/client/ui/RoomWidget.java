@@ -45,6 +45,7 @@ public class RoomWidget extends Composite implements HasText {
 
 	
 	private Room fRoom;
+	@SuppressWarnings("unused")
 	private PlayerControls playerControls;
 	
 	@UiField

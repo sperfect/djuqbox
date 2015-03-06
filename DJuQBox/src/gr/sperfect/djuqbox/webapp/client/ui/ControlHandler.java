@@ -1,6 +1,5 @@
 package gr.sperfect.djuqbox.webapp.client.ui;
 
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventHandler;
 
 /**

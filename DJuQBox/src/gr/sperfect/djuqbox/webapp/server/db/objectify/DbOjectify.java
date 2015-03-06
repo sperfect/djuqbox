@@ -3,7 +3,6 @@ package gr.sperfect.djuqbox.webapp.server.db.objectify;
 import static gr.sperfect.djuqbox.webapp.server.db.objectify.OfyService.ofy;
 import gr.sperfect.djuqbox.webapp.server.db.IDB;
 import gr.sperfect.djuqbox.webapp.shared.data.BaseDataClass;
-import gr.sperfect.djuqbox.webapp.shared.data.HATEOASLink;
 
 import java.util.Date;
 import java.util.List;

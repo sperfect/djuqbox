@@ -2,15 +2,9 @@ package gr.sperfect.djuqbox.webapp.client;
 
 import gr.sperfect.djuqbox.webapp.client.api.RestApiService;
 import gr.sperfect.djuqbox.webapp.client.api.RoomStatusDataCodec;
-import gr.sperfect.djuqbox.webapp.client.ui.ControlHandler;
-import gr.sperfect.djuqbox.webapp.client.ui.PlayerControls;
 import gr.sperfect.djuqbox.webapp.client.ui.RoomWidget;
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.RoomStatus;
-import gr.sperfect.djuqbox.webapp.shared.data.User;
-
-import java.util.Date;
-import java.util.List;
 
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
@@ -25,7 +19,6 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
@@ -33,10 +26,10 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.jooink.experiments.mqtt.Client;
 import com.jooink.experiments.mqtt.ConnectionLostEvent;
+import com.jooink.experiments.mqtt.ConnectionLostEvent.Handler;
 import com.jooink.experiments.mqtt.Destination;
 import com.jooink.experiments.mqtt.MessageArrivedEvent;
 import com.jooink.experiments.mqtt.Subscription;
-import com.jooink.experiments.mqtt.ConnectionLostEvent.Handler;
 import com.jooink.experiments.mqtt.lowlevel.ConnectionHandler;
 import com.jooink.experiments.mqtt.lowlevel.MqttMessage;
 import com.jooink.experiments.mqtt.lowlevel.SubscriptionHandler;
@@ -124,6 +117,7 @@ public class DJuQBox implements EntryPoint {
 
 			}
 
+			@SuppressWarnings("unused")
 			private void TestCodeDecodeJson() {
 				// https://resty-gwt.github.io/documentation/restygwt-user-guide.html
 				// JSON Encoder/Decoders

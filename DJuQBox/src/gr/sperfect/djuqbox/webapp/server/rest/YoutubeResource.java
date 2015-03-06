@@ -1,13 +1,11 @@
 package gr.sperfect.djuqbox.webapp.server.rest;
 
 import gr.sperfect.djuqbox.webapp.server.youtube.YoutubeApi;
-import gr.sperfect.djuqbox.webapp.shared.data.PlayList;
 import gr.sperfect.djuqbox.webapp.shared.data.Thumbnail;
 import gr.sperfect.djuqbox.webapp.shared.data.YoutubePlayList;
 import gr.sperfect.djuqbox.webapp.shared.data.YoutubeSong;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.GET;

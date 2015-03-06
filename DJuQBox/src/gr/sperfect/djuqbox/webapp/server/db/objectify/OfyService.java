@@ -1,6 +1,5 @@
 package gr.sperfect.djuqbox.webapp.server.db.objectify;
 
-import gr.sperfect.djuqbox.webapp.shared.data.HATEOASLink;
 import gr.sperfect.djuqbox.webapp.shared.data.PlayList;
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.Song;

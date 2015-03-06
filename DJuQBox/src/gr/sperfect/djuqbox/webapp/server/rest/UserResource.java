@@ -2,10 +2,7 @@ package gr.sperfect.djuqbox.webapp.server.rest;
 
 import gr.sperfect.djuqbox.webapp.server.db.DBHelper;
 import gr.sperfect.djuqbox.webapp.server.db.IDB;
-import gr.sperfect.djuqbox.webapp.shared.data.PlayList;
-import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.User;
-import gr.sperfect.djuqbox.webapp.shared.data.YoutubePlayList;
 
 import java.util.List;
 
@@ -17,12 +14,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 @Path("/users")
 public class UserResource extends BaseResource {
