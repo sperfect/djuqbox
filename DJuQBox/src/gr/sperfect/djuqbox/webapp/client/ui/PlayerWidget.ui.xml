@@ -9,5 +9,6 @@
 	<g:HTMLPanel>
 		Hello,
 		<g:Button styleName="{style.important}" ui:field="button" />
+		<g:SimplePanel ui:field="playerPanel"/>
 	</g:HTMLPanel>
 </ui:UiBinder> 
