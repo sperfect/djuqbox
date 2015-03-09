@@ -134,6 +134,10 @@ public class PlayerWidget extends Composite implements HasText {
 		MyPlayerEventsHandler myHandler = new MyPlayerEventsHandler();
 		
 		try {
+			if (player != null)
+			{
+				player.removeFromParent(); //swsta???
+			}
 			//player = new ChromelessPlayer(aVideoId, "100%", "100%"); //"JlYXp_3A64k"
 			player = new YouTubePlayer(aVideoId, "100%", "100%"); //"JlYXp_3A64k"
 			
