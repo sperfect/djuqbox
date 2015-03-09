@@ -14,6 +14,7 @@ import com.bramosystems.oss.player.core.event.client.MediaInfoHandler;
 import com.bramosystems.oss.player.core.event.client.PlayStateEvent;
 import com.bramosystems.oss.player.core.event.client.PlayStateHandler;
 import com.bramosystems.oss.player.core.event.client.PlayerStateEvent;
+import com.bramosystems.oss.player.core.event.client.PlayerStateEvent.State;
 import com.bramosystems.oss.player.core.event.client.PlayerStateHandler;
 import com.bramosystems.oss.player.youtube.client.ChromelessPlayer;
 import com.bramosystems.oss.player.youtube.client.YouTubePlayer;
@@ -82,13 +83,20 @@ public class PlayerWidget extends Composite implements HasText {
 
 		@Override
 		public void onPlayStateChanged(PlayStateEvent event) {
-			GWT.log(event.toDebugString());
+			GWT.log(event.toDebugString() + event.getPlayState().toString());
 			
 		}
 
 		@Override
 		public void onPlayerStateChanged(PlayerStateEvent event) {
-			GWT.log(event.toDebugString());
+			GWT.log(event.toDebugString() + event.getPlayerState().toString());
+			if (event.getPlayerState() == State.Ready){
+				try {
+					player.playMedia();
+				} catch (PlayException e) {
+					Window.alert(e.getMessage());
+				}
+			}
 			
 		}
 
@@ -106,7 +114,7 @@ public class PlayerWidget extends Composite implements HasText {
 
 		@Override
 		public void onDebug(DebugEvent event) {
-			GWT.log(event.toDebugString());
+			GWT.log(event.toDebugString() + event.getMessage());
 			
 		}
 
@@ -122,6 +130,7 @@ public class PlayerWidget extends Composite implements HasText {
 
 	public void initPlayer(String aVideoId) {
 
+		
 		MyPlayerEventsHandler myHandler = new MyPlayerEventsHandler();
 		
 		try {
