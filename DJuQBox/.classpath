@@ -44,5 +44,6 @@
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="con" path="com.google.gdt.eclipse.managedapis.MANAGED_API_CONTAINER/urlshortener-v1r39lv1.18.0-rc"/>
 	<classpathentry kind="con" path="com.google.gdt.eclipse.managedapis.MANAGED_API_CONTAINER/youtube-v3r128lv1.18.0-rc"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (3)"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
