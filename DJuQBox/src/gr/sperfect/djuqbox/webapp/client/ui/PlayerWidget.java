@@ -45,30 +45,35 @@ public class PlayerWidget extends Composite implements HasText {
 
 	public PlayerWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		initPlayer("");//keno gia na katebase to iframe
 	}
 
-	@UiField
-	Button button;
+	//@UiField
+	//Button button;
 	@UiField
 	SimplePanel playerPanel;
 	
 
 	public PlayerWidget(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
-		button.setText(firstName);
+		//button.setText(firstName);
+		
+		initPlayer("");//keno gia na katebase to iframe
 	}
 
-	@UiHandler("button")
-	void onClick(ClickEvent e) {
-		Window.alert("Hello!");
-	}
+//	@UiHandler("button")
+//	void onClick(ClickEvent e) {
+//		Window.alert("Hello!");
+//	}
 
 	public void setText(String text) {
-		button.setText(text);
+		//button.setText(text);
 	}
 
 	public String getText() {
-		return button.getText();
+		//return button.getText();
+		return "";
 	}
 	
 	private AbstractMediaPlayer player = null;

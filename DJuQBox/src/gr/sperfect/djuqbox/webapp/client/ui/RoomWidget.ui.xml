@@ -8,8 +8,9 @@
 	}
 	</ui:style>
 	<g:HTMLPanel>
-		player, controls, playlist, users, history, actions
+		roomL player, controls, playlist, users, history, actions ......
 		<g:Button styleName="{style.important}" ui:field="button" />
 		<my:PlayerWidget ui:field='player' />
+		<my:PlaylistWidget ui:field="playList" />
 	</g:HTMLPanel>
 </ui:UiBinder> 
