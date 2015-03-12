@@ -6,13 +6,18 @@
 		font-weight: bold;
 	}
 	</ui:style>
-	<g:HTMLPanel>
-		SearchSongWidget
-		<g:HTMLPanel>
-			<g:TextBox ui:field="textSearch" />
-			<g:Button styleName="{style.important}" ui:field="buttonSearch"
-				text="Search" />
-		</g:HTMLPanel>
-		<g:LayoutPanel ui:field="searchResults" />
-	</g:HTMLPanel>
+	<g:DockLayoutPanel unit='EM'>
+		<g:north size='4'>
+			<g:FlowPanel>
+				<g:TextBox ui:field="textSearch" width="80%"/>
+				<g:Button styleName="{style.important}" ui:field="buttonSearch"
+					text="Search" />
+			</g:FlowPanel>
+		</g:north>
+		<g:center>
+			<g:ScrollPanel>
+				<g:FlexTable ui:field="searchResults" /><!-- SearchResultsWidget -->
+			</g:ScrollPanel>
+		</g:center>
+	</g:DockLayoutPanel>
 </ui:UiBinder> 
