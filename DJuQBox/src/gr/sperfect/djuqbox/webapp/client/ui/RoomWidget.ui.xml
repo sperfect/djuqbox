@@ -11,8 +11,8 @@
 		<g:Button styleName="{style.important}" ui:field="button" />
 		<my:PlayerWidget ui:field='player' />
 		<my:SearchSongWidget ui:field='searchSong' />
-		<g:ScrollPanel>
-			<my:PlaylistWidget ui:field="playList" />
-		</g:ScrollPanel>
+
+		<my:PlaylistWidget ui:field="playList" />
+
 	</g:HTMLPanel>
 </ui:UiBinder> 

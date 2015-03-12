@@ -8,7 +8,6 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -30,7 +29,7 @@ public class SearchSongWidget extends Composite implements HasText {
 	@UiField
 	TextBox textSearch;
 	@UiField
-	FlexTable  searchResults;
+	SearchResultsWidget  searchResults;
 
 	public SearchSongWidget(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
