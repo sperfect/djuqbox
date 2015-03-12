@@ -57,6 +57,9 @@ public class RoomWidget extends Composite implements HasText {
 	@UiField
 	PlayerWidget player;
 
+	@UiField
+	SearchSongWidget searchSong;
+
 	// xreaiazetai ??
 	// @UiFactory PlayerWidget makeCricketScores() { // method name is
 	// insignificant

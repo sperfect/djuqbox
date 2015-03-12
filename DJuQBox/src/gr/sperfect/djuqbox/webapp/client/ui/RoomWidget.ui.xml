@@ -11,6 +11,7 @@
 		roomL player, controls, playlist, users, history, actions ......
 		<g:Button styleName="{style.important}" ui:field="button" />
 		<my:PlayerWidget ui:field='player' />
+		<my:SearchSongWidget ui:field='searchSong' />		
 		<my:PlaylistWidget ui:field="playList" />
 	</g:HTMLPanel>
 </ui:UiBinder> 
