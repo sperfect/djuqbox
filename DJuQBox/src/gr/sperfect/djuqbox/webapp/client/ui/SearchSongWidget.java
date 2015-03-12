@@ -9,6 +9,8 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class SearchSongWidget extends Composite implements HasText {
@@ -23,24 +25,29 @@ public class SearchSongWidget extends Composite implements HasText {
 	}
 
 	@UiField
-	Button button;
+	Button buttonSearch;
+	
+	@UiField
+	TextBox textSearch;
+	@UiField
+	LayoutPanel searchResults;
 
 	public SearchSongWidget(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
-		button.setText(firstName);
+		buttonSearch.setText(firstName);
 	}
 
-	@UiHandler("button")
+	@UiHandler("buttonSearch")
 	void onClick(ClickEvent e) {
 		Window.alert("Hello!");
 	}
 
 	public void setText(String text) {
-		button.setText(text);
+		buttonSearch.setText(text);
 	}
 
 	public String getText() {
-		return button.getText();
+		return buttonSearch.getText();
 	}
 
 }

@@ -9,10 +9,10 @@
 	<g:HTMLPanel>
 		SearchSongWidget
 		<g:HTMLPanel>
-			<g:TextBox></g:TextBox>
-			<g:Button styleName="{style.important}" ui:field="button"
+			<g:TextBox ui:field="textSearch" />
+			<g:Button styleName="{style.important}" ui:field="buttonSearch"
 				text="Search" />
 		</g:HTMLPanel>
-
+		<g:LayoutPanel ui:field="searchResults" />
 	</g:HTMLPanel>
 </ui:UiBinder> 
