@@ -100,7 +100,7 @@ public class RoomWidget extends Composite implements HasText {
 
 	@UiHandler("button")
 	void onClick(ClickEvent e) {
-		Window.alert("Hello!");
+		//Window.alert("Hello!");
 		button.setText("OK");
 		player.initPlayer("JlYXp_3A64k");
 	}
@@ -148,8 +148,9 @@ public class RoomWidget extends Composite implements HasText {
 
 			@Override
 			public void onSuccess(Method method, Room response) {
-				Window.alert("OK");
+				//Window.alert("OK");
 				button.setText(response.getName());
+				player.initPlayer("JlYXp_3A64k");
 			}
 
 			@Override
