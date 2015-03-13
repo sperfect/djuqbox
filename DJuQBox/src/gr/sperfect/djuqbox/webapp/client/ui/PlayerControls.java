@@ -12,6 +12,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHTML;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -41,6 +42,12 @@ public class PlayerControls extends Composite implements HasHTML {
 		
 		controlHandler = aControlHandler;
 	}
+	
+	public PlayerControls() {
+		initWidget(uiBinder.createAndBindUi(this));
+		
+		
+	}
 
 	@UiField
 	Button buttonPlay;
@@ -48,6 +55,14 @@ public class PlayerControls extends Composite implements HasHTML {
 	Button buttonPause;
 	@UiField
 	Button buttonStop;
+	
+	
+	@UiField
+	TextBox volField;
+	@UiField
+	Button buttonSetVol;
+
+
 	
 	/*
 	 * mhpws xreiazetai addListener

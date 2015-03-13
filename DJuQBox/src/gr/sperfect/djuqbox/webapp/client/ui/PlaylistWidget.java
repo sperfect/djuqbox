@@ -23,27 +23,27 @@ public class PlaylistWidget extends Composite implements HasText {
 	}
 
 	@UiField
-	Button button;
+	Button button2;
 	
 	//panel youtubeplayer
 	//panel controls
 
 	public PlaylistWidget(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
-		button.setText(firstName);
+		button2.setText(firstName);
 	}
 
-	@UiHandler("button")
+	@UiHandler("button2")
 	void onClick(ClickEvent e) {
 		Window.alert("Hello!");
 	}
 
 	public void setText(String text) {
-		button.setText(text);
+		button2.setText(text);
 	}
 
 	public String getText() {
-		return button.getText();
+		return button2.getText();
 	}
 
 }

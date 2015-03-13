@@ -10,7 +10,7 @@
 	<g:DockLayoutPanel unit='EM'>
 		<g:north size='4'>
 			<g:FlowPanel>
-				<g:TextBox ui:field="textSearch" width="80%"/>
+				<g:TextBox ui:field="textSearch" />
 				<g:Button styleName="{style.important}" ui:field="buttonSearch"
 					text="Search" />
 			</g:FlowPanel>

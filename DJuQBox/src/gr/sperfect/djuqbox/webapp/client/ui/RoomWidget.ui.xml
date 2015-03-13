@@ -10,9 +10,14 @@
 		roomL player, controls, playlist, users, history, actions ......
 		<g:Button styleName="{style.important}" ui:field="button" />
 		<my:PlayerWidget ui:field='player' />
-		<my:SearchSongWidget ui:field='searchSong' />
+		<my:PlayerControls ui:field='playerControls' />
+		<g:DecoratedStackPanel width="100%" height="100%">
+			<my:SearchSongWidget ui:field='searchSong' width="100%"
+				height="100%" g:StackPanel-text="search" />
+			<my:PlaylistWidget ui:field="playList" width="100%"
+				height="100%" g:StackPanel-text="playlist" />
+		</g:DecoratedStackPanel>
 
-		<my:PlaylistWidget ui:field="playList" />
 
 	</g:HTMLPanel>
 </ui:UiBinder> 

@@ -14,6 +14,9 @@
 		<!-- Hello, -->
 		<g:Button styleName="{style.important}" ui:field="buttonPlay" text="Play"/>
 		<g:Button styleName="{style.important}" ui:field="buttonPause" text="Pause" />
-		<g:Button styleName="{style.important}" ui:field="buttonStop" text="Stop"/>
+		<g:Button styleName="{style.important}" ui:field="buttonStop" text="Stop"/>		
+		<g:Label text="Volume" />
+		<g:TextBox styleName="{style.important}" ui:field="volField" />
+		<g:Button styleName="{style.important}" ui:field="buttonSetVol" text="Set"/>
 	</g:HTMLPanel>
 </ui:UiBinder> 

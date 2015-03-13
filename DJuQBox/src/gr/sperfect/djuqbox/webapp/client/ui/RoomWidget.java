@@ -39,17 +39,19 @@ public class RoomWidget extends Composite implements HasText {
 
 	public RoomWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
+		playerControls = new PlayerControls(aControlHandler);
 	}
 
 	public RoomWidget(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
 		button.setText(firstName);
-		playerControls = new PlayerControls(aControlHandler);
+		// playerControls = new PlayerControls(aControlHandler);
 	}
 
 	private Room fRoom;
-	@SuppressWarnings("unused")
-	private PlayerControls playerControls;
+
+	@UiField
+	PlayerControls playerControls;
 
 	@UiField
 	Button button;
@@ -161,11 +163,10 @@ public class RoomWidget extends Composite implements HasText {
 	/*
 	 * //listen to room status changes with mqtt
 	 * 
-	 * //send Client client ;//= new Client("test.mosquitto.org", 8080,
-	 * "testClientId" + counter );
+	 * //send Client client ;//= new Client("test.mosquitto.org", 8080, "testClientId" + counter );
 	 * 
-	 * MqttMessage m = MqttMessage.create(nameField.getText());
-	 * m.setDestinationName("testtt"); m.setQos(0); m.setRetained(false);
+	 * MqttMessage m = MqttMessage.create(nameField.getText()); m.setDestinationName("testtt"); m.setQos(0);
+	 * m.setRetained(false);
 	 * 
 	 * client.send(m);
 	 * 
@@ -182,11 +183,10 @@ public class RoomWidget extends Composite implements HasText {
 	 * 
 	 * ConnectionHandler ca = new ConnectionHandler() {
 	 * 
-	 * @Override public void onSuccess() { // update the header status
-	 * Window.alert("onSuccess"); // can go ... it is connected
+	 * @Override public void onSuccess() { // update the header status Window.alert("onSuccess"); // can go ... it is
+	 * connected
 	 * 
-	 * Destination topic = new Destination("testtt"); final Subscription
-	 * subscription = new Subscription(client, topic);
+	 * Destination topic = new Destination("testtt"); final Subscription subscription = new Subscription(client, topic);
 	 * 
 	 * subscription.subscribe(new SubscriptionHandler() {
 	 * 
@@ -201,18 +201,16 @@ public class RoomWidget extends Composite implements HasText {
 	 * @Override public void onMessageArrived(MessageArrivedEvent e) {
 	 * 
 	 * //Window.alert("onMessageArrived" + e.getMessage().getDestinationName());
-	 * listBox.addItem(e.getMessage().getDestinationName() + ": " +
-	 * e.getMessage().getPayloadString());
+	 * listBox.addItem(e.getMessage().getDestinationName() + ": " + e.getMessage().getPayloadString());
 	 * 
 	 * } }); }
 	 * 
-	 * @Override public void onSubscriptionFailure(int errorCode, String
-	 * errorText) {
+	 * @Override public void onSubscriptionFailure(int errorCode, String errorText) {
 	 * 
 	 * Window.alert("onSubscriptionFailure " + errorText); } }); }
 	 * 
-	 * @Override public void onFailure(int errorCode, String errorText) { //
-	 * update the header status Window.alert("onFailure " + errorText);
+	 * @Override public void onFailure(int errorCode, String errorText) { // update the header status
+	 * Window.alert("onFailure " + errorText);
 	 * 
 	 * } };
 	 * 
