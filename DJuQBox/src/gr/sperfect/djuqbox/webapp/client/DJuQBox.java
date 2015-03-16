@@ -12,6 +12,7 @@ import org.fusesource.restygwt.client.MethodCallback;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -21,7 +22,12 @@ import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.jooink.experiments.mqtt.Client;
@@ -50,7 +56,7 @@ public class DJuQBox implements EntryPoint {
 	public static final RestApiService API = GWT.create(RestApiService.class);
 
 	final RoomWidget currentRoom = new RoomWidget();
-	
+
 	/**
 	 * This is the entry point method.
 	 */
@@ -66,23 +72,34 @@ public class DJuQBox implements EntryPoint {
 		// http://jamestaylor2000.com/jukebox/spinningrecord.gif
 		// http://www.ajaxload.info/
 
-		
-		
-
-		
 		// Focus the cursor on the name field when the app loads
-		//searchField.setFocus(true);
-		//searchField.selectAll();
-		//searchField.setText("kd4QMN_lErc"); // kd4QMN_lErc //Belle and sebastian
+		// searchField.setFocus(true);
+		// searchField.selectAll();
+		// searchField.setText("kd4QMN_lErc"); // kd4QMN_lErc //Belle and sebastian
 
-
-		
-
-		RootPanel.get("roomContainer").add(currentRoom);
+		// RootPanel.get("roomContainer").add(currentRoom);
 
 		
+		//RootLayoutPanel.get().add(new HTML("<h1>DJuQbox2</h1>"));
 		
+		//FlowPanel fp = new FlowPanel();
+		//fp.setSize("10em","10em");
+		DockLayoutPanel p = new DockLayoutPanel(Unit.EM);
+		//p.setHeight("100%");
+		p.addNorth(new HTML("<h2>DJuQbox2</h2>"), 5);
+		p.addSouth(new HTML("south"), 5);
+		p.addEast(new HTML("east"), 5);
+		p.addWest(new HTML("west"), 5);
+		p.add(currentRoom);
 
+		// Attach the LayoutPanel to the RootLayoutPanel. The latter will listen for
+		// resize events on the window to ensure that its children are informed of
+		// possible size changes.
+		//fp.add(p);
+		RootLayoutPanel.get().add(p);
+		//RootPanel.get("roomContainer").add(fp);
+		//RootLayoutPanel.get().add(currentRoom);
+		
 		
 
 		// PlayerControls pc = new PlayerControls(controlHandler);
@@ -105,22 +122,19 @@ public class DJuQBox implements EntryPoint {
 
 		GWT.log("after getCurrentRoom");
 
-		//testMqtt();
+		// testMqtt();
 
-		
-
-		
 		DOM.getElementById("loading").removeFromParent();
 	}
 
 	static int counter = 0;
-	
+
 	@SuppressWarnings("unused")
 	private void testMqtt() {
 
-		counter = ((int) (Math.random() *100));
-		client  = new Client("test.mosquitto.org", 8080, "testClientId" + counter );
-		
+		counter = ((int) (Math.random() * 100));
+		client = new Client("test.mosquitto.org", 8080, "testClientId" + counter);
+
 		client.addConnectionLostHandler(new Handler() {
 
 			@Override
@@ -176,7 +190,7 @@ public class DJuQBox implements EntryPoint {
 				};
 
 				Window.alert("wait sub ");
-			
+
 				subscription.addMessageArrivedHandler(myh);
 				subscription.subscribe(sh);
 			}
@@ -192,10 +206,8 @@ public class DJuQBox implements EntryPoint {
 		client.connect(ca, "", "", 60);
 
 	}
-	
-	Client client ;//=
 
-	
+	Client client;// =
 
 	protected void getCurrentRoom() {
 
@@ -241,7 +253,7 @@ public class DJuQBox implements EntryPoint {
 
 		GWT.log(message, ex);
 	}
-	
+
 	@SuppressWarnings("unused")
 	private void TestCodeDecodeJson() {
 		// https://resty-gwt.github.io/documentation/restygwt-user-guide.html
