@@ -16,20 +16,15 @@ import com.bramosystems.oss.player.core.event.client.PlayStateHandler;
 import com.bramosystems.oss.player.core.event.client.PlayerStateEvent;
 import com.bramosystems.oss.player.core.event.client.PlayerStateEvent.State;
 import com.bramosystems.oss.player.core.event.client.PlayerStateHandler;
-import com.bramosystems.oss.player.youtube.client.ChromelessPlayer;
 import com.bramosystems.oss.player.youtube.client.YouTubePlayer;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.event.dom.client.MouseDownHandler;
-import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasText;
@@ -142,9 +137,14 @@ public class PlayerWidget extends Composite implements HasText {
 			if (player != null)
 			{
 				player.removeFromParent(); //swsta???
+				//kanei leaks? prepei na nullisw ki alla pramata?
 			}
+			
 			//player = new ChromelessPlayer(aVideoId, "100%", "100%"); //"JlYXp_3A64k"
 			player = new YouTubePlayer(aVideoId, "100%", "100%"); //"JlYXp_3A64k"
+			//player = new YouTubeIPlayer(aVideoId, "100%", "100%"); //"JlYXp_3A64k"
+			
+			
 			
 			
 			
