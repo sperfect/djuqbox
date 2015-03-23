@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/gwt-2.7.0"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jaxb-api-2.2.7.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/javax.annotation-api-1.2.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jersey-common.jar"/>
