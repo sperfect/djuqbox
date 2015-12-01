@@ -9,6 +9,7 @@ import gr.sperfect.djuqbox.webapp.shared.data.UserRoomRole;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -17,6 +18,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -29,7 +31,7 @@ public class RoomResource extends BaseResource {
 		
 	}
 
-	
+
 
 	static final IDB<Room> db = DBHelper.getDB(Room.class);
 
@@ -38,7 +40,9 @@ public class RoomResource extends BaseResource {
 	public List<Room> getRooms() {
 
 		
-		Log();
+		    
+		init();
+		//Log();
 
 		List<Room> ret = db.getAllObjects(null);
 
@@ -51,7 +55,7 @@ public class RoomResource extends BaseResource {
 	public Room getRoom(@PathParam("room_id") Long aRoomId) {
 		
 	
-		Log();		
+		init();		
 
 		Room r = db.getObjectById(aRoomId);
 		
@@ -63,7 +67,7 @@ public class RoomResource extends BaseResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Room createRoom(Room aRoomParam) throws Exception {
 
-		Log();
+		init();
 		
 		if (aRoomParam.getName() == null || aRoomParam.getName() == "")
 		{
@@ -91,7 +95,7 @@ public class RoomResource extends BaseResource {
 	@Path("{room_id}")
 	public Room updateRoom(Room aRoomParam) {
 
-		Log();
+		init();
 
 		Room newRoom = db.updateObject(aRoomParam);
 
@@ -103,7 +107,7 @@ public class RoomResource extends BaseResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteRoom(Room aRoomParam) {
 
-		Log();
+		init();
 
 		db.deleteObject(aRoomParam);
 
@@ -112,7 +116,7 @@ public class RoomResource extends BaseResource {
 	@DELETE
 	public void deleteRoom() throws Exception {
 
-		Log();
+		init();
 
 		throw new Exception("not allowed");
 
@@ -122,7 +126,7 @@ public class RoomResource extends BaseResource {
 	@Path("{room_id}")
 	public void deleteRoom(@PathParam("room_id") Long aRoomId) {
 
-		Log();
+		init();
 
 		db.deleteObject(db.getObjectById(aRoomId));
 
@@ -131,10 +135,10 @@ public class RoomResource extends BaseResource {
 	// /users
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("{room_id}/users")
+	@Path("{room_id}/users")	
 	public List<User> getRoomUsers(@PathParam("room_id") Long aRoomId) {
 
-		Log();
+		init();
 
 		return getRoom(aRoomId).getUsers();
 		// List<User> ret = new ArrayList<User>();
@@ -153,7 +157,7 @@ public class RoomResource extends BaseResource {
 	@Path("{room_id}/users")
 	public void addUserToRoom(@PathParam("room_id") Long aRoomId, User aUser) throws Exception {
 
-		Log();
+		init();
 		
 		Response.status(Status.CREATED);
 
@@ -180,7 +184,7 @@ public class RoomResource extends BaseResource {
 	@Path("{room_id}/users/{user_id}/roles")
 	public List<UserRoomRole> getUserRoomRoles(@PathParam("room_id") Long aRoomId, @PathParam("user_id") Long aUserId) {
 
-		Log();
+		init();
 
 		UserRoomRole urr = new UserRoomRole();
 		urr.setRoomId(aRoomId);
@@ -197,8 +201,10 @@ public class RoomResource extends BaseResource {
 	@Path("/by/{field}/{value}") //mporei k to name na ginei
 	public Room getRoomByValue(@PathParam("field") String aField, @PathParam("value") String aValue) {
 
-		Log();
-
+		//Log();
+		init();
+		
+	
 		Room ret = db.findObjectWithValue(aField, aValue);
 
 		return ret;

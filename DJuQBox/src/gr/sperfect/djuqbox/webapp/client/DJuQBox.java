@@ -67,8 +67,8 @@ public class DJuQBox implements EntryPoint {
 	public void onModuleLoad() {
 
 		
-		if (1==1)
-			return;
+		//if (1==1)
+		//	return;
 		
 		// set RestyGWT root url
 		Defaults.setServiceRoot(GWT.getHostPageBaseURL() + "api/v1/");
