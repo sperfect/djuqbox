@@ -26,6 +26,7 @@ public class RoomResource extends BaseResource {
 
 	public RoomResource() {
 
+		
 	}
 
 	
@@ -36,6 +37,7 @@ public class RoomResource extends BaseResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Room> getRooms() {
 
+		
 		Log();
 
 		List<Room> ret = db.getAllObjects(null);
@@ -47,7 +49,8 @@ public class RoomResource extends BaseResource {
 	@Path("{room_id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Room getRoom(@PathParam("room_id") Long aRoomId) {
-
+		
+	
 		Log();		
 
 		Room r = db.getObjectById(aRoomId);

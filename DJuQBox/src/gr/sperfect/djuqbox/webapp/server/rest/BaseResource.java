@@ -23,6 +23,8 @@ public abstract class BaseResource {
 	protected Response response;
 
 	private static final Logger logger = java.util.logging.Logger.getLogger("BaseResource");
+	
+	
 
 	protected void Log() {
 		Log(null);
