@@ -52,6 +52,10 @@ public class DJuQBox implements EntryPoint {
 		// "Could not parse response: org.fusesource.restygwt.client.ResponseFormatException: Response was NOT a valid JSON document"
 		Defaults.setDateFormat(null);
 	}
+	
+	//gia download apo youtube
+	//http://jaimemf.github.io/youtube-dl-web/
+	//https://youtube-dl.appspot.com/api/info?url=https://www.youtube.com/watch?v=a77SlW5QI_g&flatten=False
 
 	public static final RestApiService API = GWT.create(RestApiService.class);
 
@@ -62,7 +66,11 @@ public class DJuQBox implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 
-		// set RestyGWT roor url
+		
+		if (1==1)
+			return;
+		
+		// set RestyGWT root url
 		Defaults.setServiceRoot(GWT.getHostPageBaseURL() + "api/v1/");
 		// Defaults.setDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		Defaults.setDateFormat(null);
@@ -122,7 +130,7 @@ public class DJuQBox implements EntryPoint {
 
 		GWT.log("after getCurrentRoom");
 
-		// testMqtt();
+		testMqtt();
 
 		DOM.getElementById("loading").removeFromParent();
 	}
