@@ -122,7 +122,7 @@ public class DJuQBox implements EntryPoint {
 
 		GWT.log("after getCurrentRoom");
 
-		// testMqtt();
+		testMqtt();
 
 		DOM.getElementById("loading").removeFromParent();
 	}
