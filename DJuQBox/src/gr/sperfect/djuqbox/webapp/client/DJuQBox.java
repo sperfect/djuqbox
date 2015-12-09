@@ -3,6 +3,7 @@ package gr.sperfect.djuqbox.webapp.client;
 import gr.sperfect.djuqbox.webapp.client.api.RestApiService;
 import gr.sperfect.djuqbox.webapp.client.api.RoomStatusDataCodec;
 import gr.sperfect.djuqbox.webapp.client.ui.RoomWidget;
+import gr.sperfect.djuqbox.webapp.client.ui.TestRoom;
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.RoomStatus;
 
@@ -36,6 +37,7 @@ import com.jooink.experiments.mqtt.ConnectionLostEvent.Handler;
 import com.jooink.experiments.mqtt.Destination;
 import com.jooink.experiments.mqtt.MessageArrivedEvent;
 import com.jooink.experiments.mqtt.Subscription;
+import com.jooink.experiments.mqtt.lowlevel.ConnectOptions;
 import com.jooink.experiments.mqtt.lowlevel.ConnectionHandler;
 import com.jooink.experiments.mqtt.lowlevel.MqttMessage;
 import com.jooink.experiments.mqtt.lowlevel.SubscriptionHandler;
@@ -55,7 +57,13 @@ public class DJuQBox implements EntryPoint {
 
 	public static final RestApiService API = GWT.create(RestApiService.class);
 
-	final RoomWidget currentRoom = new RoomWidget();
+	//final RoomWidget currentRoom = new RoomWidget();
+	final TestRoom testRoom = new TestRoom();
+	
+	//gia download apo youtube
+	//http://jaimemf.github.io/youtube-dl-web/
+	//https://youtube-dl.appspot.com/api/info?url=https://www.youtube.com/watch?v=a77SlW5QI_g&flatten=False
+	
 
 	/**
 	 * This is the entry point method.
@@ -84,23 +92,23 @@ public class DJuQBox implements EntryPoint {
 		
 		//FlowPanel fp = new FlowPanel();
 		//fp.setSize("10em","10em");
-		DockLayoutPanel p = new DockLayoutPanel(Unit.EM);
-		//p.setHeight("100%");
-		p.addNorth(new HTML("<h2>DJuQbox2</h2>"), 5);
-		p.addSouth(new HTML("south"), 5);
-		p.addEast(new HTML("east"), 5);
-		p.addWest(new HTML("west"), 5);
-		p.add(currentRoom);
+//		DockLayoutPanel p = new DockLayoutPanel(Unit.EM);
+//		//p.setHeight("100%");
+//		p.addNorth(new HTML("<h2>DJuQbox2</h2>"), 5);
+//		p.addSouth(new HTML("south"), 5);
+//		p.addEast(new HTML("east"), 5);
+//		p.addWest(new HTML("west"), 5);
+//		p.add(currentRoom);
 
 		// Attach the LayoutPanel to the RootLayoutPanel. The latter will listen for
 		// resize events on the window to ensure that its children are informed of
 		// possible size changes.
 		//fp.add(p);
-		RootLayoutPanel.get().add(p);
+//		RootLayoutPanel.get().add(p);
 		//RootPanel.get("roomContainer").add(fp);
 		//RootLayoutPanel.get().add(currentRoom);
 		
-		
+		RootLayoutPanel.get().add(testRoom);
 
 		// PlayerControls pc = new PlayerControls(controlHandler);
 		// RootPanel.get("playerControlsContainer").add(pc);
@@ -122,7 +130,7 @@ public class DJuQBox implements EntryPoint {
 
 		GWT.log("after getCurrentRoom");
 
-		testMqtt();
+		//testMqtt();
 
 		DOM.getElementById("loading").removeFromParent();
 	}
@@ -135,6 +143,8 @@ public class DJuQBox implements EntryPoint {
 		counter = ((int) (Math.random() * 100));
 		client = new Client("test.mosquitto.org", 8080, "testClientId" + counter);
 
+	
+		
 		client.addConnectionLostHandler(new Handler() {
 
 			@Override
@@ -149,7 +159,8 @@ public class DJuQBox implements EntryPoint {
 			@Override
 			public void onMessageArrived(MessageArrivedEvent e) {
 				// TODO Auto-generated method stub
-				Window.alert("2onMessageArrived" + e.getMessage().getDestinationName());
+				Window.alert("2onMessageArrived: " + e.getMessage().getDestinationName());
+				
 			}
 
 		};
@@ -163,6 +174,7 @@ public class DJuQBox implements EntryPoint {
 				// can go ... it is connected
 
 				Destination topic = new Destination("testtt");
+				
 				final Subscription subscription = new Subscription(client, topic);
 
 				SubscriptionHandler sh = new SubscriptionHandler() {
@@ -204,12 +216,40 @@ public class DJuQBox implements EntryPoint {
 		};
 
 		client.connect(ca, "", "", 60);
-
+		
 	}
 
-	Client client;// =
+	static Client client;// =
+	
+	
+	public static void SendMqtt(String dest, String message )
+	{
+		MqttMessage m = MqttMessage.create(message);
+		m.setDestinationName(dest);
+		m.setQos(0);
+		m.setRetained(false);
+
+		client.send(m);
+	}
 
 	protected void getCurrentRoom() {
+
+//		API.getRoomByValue("name", "demoRoom", new MethodCallback<Room>() {
+//
+//			@Override
+//			public void onSuccess(Method method, Room r) {
+//				// TODO Auto-generated method stub
+//				GWT.log("onSuccess getCurrentRoom");
+//				currentRoom.setRoom(r);
+//				currentRoom.load(r);
+//			}
+//
+//			@Override
+//			public void onFailure(Method method, Throwable exception) {
+//				// TODO Auto-generated method stub
+//				Log("getRoom", method, exception);
+//			}
+//		});
 
 		API.getRoomByValue("name", "demoRoom", new MethodCallback<Room>() {
 
@@ -217,8 +257,8 @@ public class DJuQBox implements EntryPoint {
 			public void onSuccess(Method method, Room r) {
 				// TODO Auto-generated method stub
 				GWT.log("onSuccess getCurrentRoom");
-				currentRoom.setRoom(r);
-				currentRoom.load(r);
+				
+				testRoom.load(r);
 			}
 
 			@Override

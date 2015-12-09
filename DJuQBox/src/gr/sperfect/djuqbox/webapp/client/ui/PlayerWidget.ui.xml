@@ -8,7 +8,6 @@
 	}
 	</ui:style>
 	<g:HTMLPanel>
-		player
 		<g:SimplePanel ui:field="playerPanel"/>		
 	</g:HTMLPanel>
 </ui:UiBinder> 
