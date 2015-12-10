@@ -29,6 +29,7 @@ import com.jooink.experiments.mqtt.MessageArrivedEvent;
 import com.jooink.experiments.mqtt.Subscription;
 import com.jooink.experiments.mqtt.ConnectionLostEvent.Handler;
 import com.jooink.experiments.mqtt.lowlevel.ConnectionHandler;
+import com.jooink.experiments.mqtt.lowlevel.MessageDeliveredHandler;
 import com.jooink.experiments.mqtt.lowlevel.MqttMessage;
 import com.jooink.experiments.mqtt.lowlevel.SubscriptionHandler;
 
@@ -181,7 +182,8 @@ public class TestRoom extends Composite implements HasText , PlayStateHandler{
 						// TODO Auto-generated method stub
 						LogMqtt("onSubscriptionSuccess");
 
-						sendMqttPresense();
+						sendMqttAskPresense();
+						//sendMqttPresense();
 
 					}
 
@@ -224,13 +226,40 @@ public class TestRoom extends Composite implements HasText , PlayStateHandler{
 			player.initPlayer(mqttMsg.getPayloadString(), this);
 		}
 		
+		if(mqttMsg.getDestinationName() == mqttRoomDest + "clients/")
+		{
+			if(mqttMsg.getPayloadString() == "report")
+			{				
+				sendMqttPresense();
+			}
+		}
+		
+		if(mqttMsg.getDestinationName().startsWith(mqttRoomDest + "clients/")  && mqttMsg.getDestinationName().endsWith("/presense/") )
+		{
+			if(mqttMsg.getPayloadString() == "1")
+			{
+				String _clId = mqttMsg.getDestinationName();
+				_clId = _clId.replace(mqttRoomDest + "clients/", "");
+				_clId = _clId.replace("/presense/", "");
+				clientsList.add( new Label(_clId));		
+			}
+				
+		}
+		
 	}
+	
+	private void sendMqttAskPresense() {
+		
+		clientsList.clear();
+		sendMqttMessage(mqttRoomDest + "clients/", "report", true, 0);		
+	
+	}
+
 
 	private void sendMqttPresense() {
 
 		sendMqttMessage(mqttRoomDest + "clients/" + mqttClientId.toString()
-				+ "/presense/", "1", true, 0);
-
+				+ "/presense/", "1", false, 0);
 	}
 
 	private void sendMqttMessage(String dest, String msg, boolean retain,
@@ -246,8 +275,8 @@ public class TestRoom extends Composite implements HasText , PlayStateHandler{
 		MqttMessage m = MqttMessage.create(msg);
 		m.setDestinationName(dest);
 		m.setQos(qos);
-		m.setRetained(false);
-
+		m.setRetained(retain);
+	
 		mqttClient.send(m);
 
 	}
