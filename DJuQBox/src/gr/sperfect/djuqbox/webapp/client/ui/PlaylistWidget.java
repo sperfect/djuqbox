@@ -49,6 +49,9 @@ public class PlaylistWidget extends Composite implements HasText {
 
 	public void loadPlayList(PlayList playList) {
 
+		
+		playListPanel.clear();
+		
 		GWT.log("count" + playList.getSongs().size());
 		// Window.alert("count" + playList.getSongs().size());
 
