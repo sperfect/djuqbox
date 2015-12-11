@@ -6,7 +6,7 @@
 		font-weight: bold;
 		}
 	</ui:style>
-	<g:HTMLPanel>
+<!-- 	<g:HTMLPanel> -->
 
 
 
@@ -72,5 +72,5 @@
 
 
 		</g:DockLayoutPanel>
-	</g:HTMLPanel>
+<!-- 	</g:HTMLPanel> -->
 </ui:UiBinder> 
