@@ -40,6 +40,11 @@ public class YoutubeResource extends BaseResource {
 		//t.setWidth(v.getSnippet().getThumbnails().getDefault().getWidth());
 		//t.setHeight(v.getSnippet().getThumbnails().getDefault().getHeight());
 		s.getThumbs().add(t);
+		
+		Thumbnail t2 = new Thumbnail();
+		t2.setUrl(v.getSnippet().getThumbnails().getMaxres().getUrl());
+		s.getThumbs().add(t2);
+		
 
 		return s;
 

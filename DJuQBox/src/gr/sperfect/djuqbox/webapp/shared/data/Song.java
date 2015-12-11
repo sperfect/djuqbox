@@ -36,6 +36,10 @@ public class Song extends BaseDataClass {
 		}
 		return thumbs;
 	}
+	
+	public void setThumbs(List<Thumbnail>  thumbs) {
+		this.thumbs = thumbs;
+	}
 
 	public String getUri() {
 		return uri;

@@ -4,13 +4,17 @@ import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
 import gr.sperfect.djuqbox.webapp.client.DJuQBox;
+import gr.sperfect.djuqbox.webapp.client.api.ClientDataCodec;
 import gr.sperfect.djuqbox.webapp.shared.data.Room;
 import gr.sperfect.djuqbox.webapp.shared.data.RoomStatus;
 
 import com.bramosystems.oss.player.core.event.client.PlayStateEvent;
 import com.bramosystems.oss.player.core.event.client.PlayStateHandler;
+import com.google.api.client.json.Json;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -51,13 +55,16 @@ public class TestRoom extends Composite implements HasText , PlayStateHandler{
 	Button button;
 
 	@UiField
-	PlayerWidget player;
+	static PlayerWidget player;
 
 	@UiField
 	VerticalPanel mqttLog;
 
 	@UiField
 	VerticalPanel clientsList;
+	
+	@UiField
+	SearchSongWidget searchSong;
 
 	public TestRoom(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -75,7 +82,7 @@ public class TestRoom extends Composite implements HasText , PlayStateHandler{
 
 		// player.loadByURL();
 		
-		sendMqttMessage(mqttRoomDest +"now/" , "3gxNW2Ulpwk", true, 2);
+		sendMqttMessage(mqttRoomDest + "now/" , "3gxNW2Ulpwk", true, 2);
 		
 		
 	}
@@ -223,7 +230,7 @@ public class TestRoom extends Composite implements HasText , PlayStateHandler{
 		if(mqttMsg.getDestinationName() == mqttRoomDest + "now/")
 		{
 			GWT.log(mqttMsg.getPayloadString());
-			player.initPlayer(mqttMsg.getPayloadString(), this);
+			//player.initPlayer(mqttMsg.getPayloadString(), this);
 		}
 		
 		if(mqttMsg.getDestinationName() == mqttRoomDest + "clients/")
@@ -258,8 +265,19 @@ public class TestRoom extends Composite implements HasText , PlayStateHandler{
 
 	private void sendMqttPresense() {
 
+		gr.sperfect.djuqbox.webapp.shared.data.Client c = new gr.sperfect.djuqbox.webapp.shared.data.Client();
+		c.setClientId(mqttClientId);
+//		c.setCurrentSongPosition(player.getPostition());
+//		c.setVolume(player.getVolume());
+//		c.setCurrentSong((player.getSong());
+//		c.setPlayerStatus(player.getPlayerState());
+		
+		ClientDataCodec codec  = GWT.create(ClientDataCodec.class);
+		
+		JSONValue json = codec.encode(c);
+		
 		sendMqttMessage(mqttRoomDest + "clients/" + mqttClientId.toString()
-				+ "/presense/", "1", false, 0);
+				+ "/presense/", json.toString() , false, 0);
 	}
 
 	private void sendMqttMessage(String dest, String msg, boolean retain,
@@ -285,8 +303,16 @@ public class TestRoom extends Composite implements HasText , PlayStateHandler{
 	public void onPlayStateChanged(PlayStateEvent event) {
 		
 		sendMqttMessage(mqttRoomDest + "clients/" + mqttClientId.toString()
-				+ "/player/", event.getPlayState().name(), true, 0);
+				+ "/player/", event.getPlayState().name(), false, 0);
 		
 	}
+	
+	
+	public static void setSong(String v)
+	{
+		//la8os....
+		player.initPlayer(v);
+	}
+	
 
 }

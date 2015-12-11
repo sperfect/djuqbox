@@ -1,24 +1,33 @@
 package gr.sperfect.djuqbox.webapp.shared.data;
 
+import java.util.Date;
+
 import com.googlecode.objectify.annotation.Entity;
 
 @Entity
-public class RoomStatus extends BaseDataClass {
+public class Client extends BaseDataClass {
+
+	public Client() {
 	
-	public RoomStatus() {
-		// needed by json
-		// needed by Objectify
 	}
 	
-	private boolean needsReload;
+	private String clientId;
+	private Date clientDateTime;
+	private User user;
 	private Song currentSong;
-	private Long currentSongPosition;
+	private int currentSongPosition;
 	private int playerStatus; // 0 stopped, 1 playing, 2 paused
 	private int volume; // 0-100
 	
-	private PlayList roomPlayList;
-	
+	public String getClientId() {
+		return clientId;
+	}
 
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+	
+	
 	public Song getCurrentSong() {
 		return currentSong;
 	}
@@ -27,11 +36,11 @@ public class RoomStatus extends BaseDataClass {
 		this.currentSong = currentSong;
 	}
 
-	public Long getCurrentSongPosition() {
+	public int getCurrentSongPosition() {
 		return currentSongPosition;
 	}
 
-	public void setCurrentSongPosition(Long currentSongPosition) {
+	public void setCurrentSongPosition(int currentSongPosition) {
 		this.currentSongPosition = currentSongPosition;
 	}
 
@@ -42,7 +51,7 @@ public class RoomStatus extends BaseDataClass {
 	public void setVolume(int volume) {
 		this.volume = volume;
 	}
-
+	
 	/*
 	 * 0 stopped, 1 playing, 2 paused
 	 */
@@ -57,20 +66,5 @@ public class RoomStatus extends BaseDataClass {
 		this.playerStatus = playerStatus;
 	}
 
-	public boolean isNeededReload() {
-		return needsReload;
-	}
-
-	public void setNeedsReload(boolean needsReload) {
-		this.needsReload = needsReload;
-	}
-
-	public PlayList getRoomPlayList() {
-		return roomPlayList;
-	}
-
-	public void setRoomPlayList(PlayList roomPlayList) {
-		this.roomPlayList = roomPlayList;
-	}
 	
 }
