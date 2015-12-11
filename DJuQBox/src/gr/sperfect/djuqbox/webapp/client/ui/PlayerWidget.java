@@ -184,6 +184,8 @@ public class PlayerWidget extends Composite implements HasText {
 			player.addPlayerStateHandler(myHandler);
 			player.addPlayStateHandler(myHandler);
 			player.addMediaInfoHandler(myHandler);
+			
+			
 
 			playerPanel.setWidget(player);
 		} catch (PluginVersionException e) {

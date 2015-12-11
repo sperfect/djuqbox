@@ -5,6 +5,7 @@ import gr.sperfect.djuqbox.webapp.client.DJuQBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -45,6 +46,8 @@ public class ResultEntry extends Composite implements HasText, ClickHandler {
 	VerticalPanel vp;
 	
 	String url;
+	
+	ResultEntrySelectedHandler handler;
 
 	public ResultEntry(String caption, String aUrl, String thumbUrl) {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -75,11 +78,18 @@ public class ResultEntry extends Composite implements HasText, ClickHandler {
 	@Override
 	public void onClick(ClickEvent event) {
 		 
-		 TestRoom.setSong(url);
+		//handler.onClick(this);
+		 //TestRoom.setSong(url);
+		
+		DJuQBox.testRoom.setVideoFromSearch(url);;
 		
 	}
 
 	
+//	public void setHandler(ResultEntrySelectedHandler h) {
+//		handler = h;
+//	}
+//	
 
 	public void setText(String text) {
 		// hlink.setText(text);
@@ -91,5 +101,8 @@ public class ResultEntry extends Composite implements HasText, ClickHandler {
 
 
 	
+
+
+
 
 }

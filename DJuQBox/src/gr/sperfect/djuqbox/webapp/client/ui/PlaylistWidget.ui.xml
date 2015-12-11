@@ -6,8 +6,8 @@
 		font-weight: bold;
 	}
 	</ui:style>
-	<g:HTMLPanel>
-		playlist
-		<g:Button styleName="{style.important}" ui:field="button2" />
-	</g:HTMLPanel>
+	<g:ScrollPanel>
+		<g:VerticalPanel ui:field='playListPanel' width="100%"
+			height="100%" />
+	</g:ScrollPanel>
 </ui:UiBinder> 

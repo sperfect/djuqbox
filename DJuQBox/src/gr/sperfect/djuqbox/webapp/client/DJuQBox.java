@@ -58,7 +58,7 @@ public class DJuQBox implements EntryPoint {
 	public static final RestApiService API = GWT.create(RestApiService.class);
 
 	//final RoomWidget currentRoom = new RoomWidget();
-	final TestRoom testRoom = new TestRoom();
+	public static final TestRoom testRoom = new TestRoom();
 	
 	//gia download apo youtube
 	//http://jaimemf.github.io/youtube-dl-web/

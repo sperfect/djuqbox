@@ -39,7 +39,7 @@ public class SearchResultsWidget extends Composite {
 
 	}
 
-	public void add(List<YoutubeSong> response) {
+	public void add(List<YoutubeSong> response ) {
 
 		for (YoutubeSong youtubeSong : response) {
 			
@@ -52,7 +52,8 @@ public class SearchResultsWidget extends Composite {
 			
 			
 			ResultEntry re = new ResultEntry(youtubeSong.getTitle(), youtubeSong.getCode(), _thumbUrl);
-			resultList.add(re );
+			
+			resultList.add(re);
 			
 
 		}
