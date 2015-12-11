@@ -1,5 +1,13 @@
 package gr.sperfect.djuqbox.webapp.client.ui;
 
+import java.util.List;
+
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
+
+import gr.sperfect.djuqbox.webapp.client.DJuQBox;
+import gr.sperfect.djuqbox.webapp.shared.data.YoutubeSong;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -38,7 +46,31 @@ public class SearchSongWidget extends Composite implements HasText {
 
 	@UiHandler("buttonSearch")
 	void onClick(ClickEvent e) {
-		Window.alert("Hello!");
+		
+		if (textSearch.getText().trim() == "")
+		{
+			Window.alert("empty search!");
+			return;
+		}
+		
+		DJuQBox.API.searchYoutubeVideo(textSearch.getText(), new MethodCallback<List<YoutubeSong>>() {
+			
+			@Override
+			public void onSuccess(Method method, List<YoutubeSong> response) {
+				
+				GWT.log("searct got " + response.size() );
+				searchResults.clearResults();
+				
+				searchResults.add(response);
+			}
+			
+			@Override
+			public void onFailure(Method method, Throwable exception) {
+				
+				GWT.log(exception.getMessage(), exception);
+				//8elei mia global sthn DJuqbox
+			}
+		});
 	}
 
 	public void setText(String text) {
