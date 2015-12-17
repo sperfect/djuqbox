@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.StackLayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -118,6 +119,17 @@ public class TestRoom extends Composite implements HasText, PlayStateHandler {
 				// player.initPlayer("JlYXp_3A64k");
 
 				connectMqtt();
+				
+				//mqttLog.getElement().setPropertyString("background-image", "url(\"http://jamestaylor2000.com/jukebox/spinningrecord.gif\")");
+				RootPanel.get().getElement().setPropertyString("background-image", "url(\"http://jamestaylor2000.com/jukebox/spinningrecord.gif\")");
+				
+				RootPanel.get().getElement().setPropertyString("background-size", "cover");
+				/*
+				  opacity: 0.3;
+				  background-image: url("http://jamestaylor2000.com/jukebox/spinningrecord.gif");
+				  background-size: cover;
+				  */   
+				
 			}
 
 			@Override
@@ -315,6 +327,9 @@ public class TestRoom extends Composite implements HasText, PlayStateHandler {
 
 	public void setVideoFromSearch(String v) {
 		player.initPlayer(v);
+		
+		//mqttLog.getElement().setPropertyString("src", "images?img=http://jamestaylor2000.com/jukebox/spinningrecord.gif");
+		//RootPanel.get().getElement().setPropertyString("src", "images?img=http://jamestaylor2000.com/jukebox/spinningrecord.gif");
 		
 		//load related
 		DJuQBox.API.getYoutubeMixForSong(v, new MethodCallback<YoutubePlayList>() {

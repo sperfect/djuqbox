@@ -16,6 +16,8 @@ public class Room extends BaseDataClass {
 	
 	private RoomStatus roomStatus;
 	
+	private Thumbnail roomThumb;
+	
 
 	public Room() {
 		// needed by json

@@ -16,7 +16,7 @@ public class PlayList extends BaseDataClass {
 	private HATEOASLink roomOwnerLink; // OXI! looparei gia panta kata to OfyService.factory().register(Room.class);
 	private HATEOASLink userCreatedLink;
 	
-	
+	//private bool playlistLocked; 8a einai sthn playlist 'h sto room? 
 	
 	protected List<Song> songs = null;
 
